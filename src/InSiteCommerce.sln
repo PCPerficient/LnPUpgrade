@@ -1,7 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsiteCommerce.Web", "InsiteCommerce.Web\InsiteCommerce.Web.csproj", "{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee", "InSiteCommerce.Web\Themes\Employee\Employee.csproj", "{593ca546-2490-42b0-b03f-e0441eeeddfe}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -18,3 +24,4 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
+
