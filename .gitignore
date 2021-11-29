@@ -11,3 +11,14 @@
 /src/.vs/InSiteCommerce
 /install.log
 /.rnd
+/src/InsiteCommerce.Web/.sass-cache
+/src/InsiteCommerce.Web/node_modules
+/src/InsiteCommerce.Web/Themes/Employee/obj/Debug
+/src/InsiteCommerce.Web/Themes/Employee/Styles/base.css
+/src/InsiteCommerce.Web/Themes/Employee/Styles/base.css.map
+
+/src/InsiteCommerce.Web/Themes/Employee/Styles/template/*.css
+/src/InsiteCommerce.Web/Themes/Employee/Styles/template/*.css.map
+
+/src/InsiteCommerce.Web/Themes/Employee/Employee.csproj.user
+/src/InsiteCommerce.Web/package-lock.json
