@@ -1,0 +1,1 @@
+msiexec /I CommerceIntegrationServiceSetup.msi REINSTALL=ALL REINSTALLMODE=vomus

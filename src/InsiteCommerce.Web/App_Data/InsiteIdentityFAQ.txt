@@ -1,0 +1,6 @@
+Identity Server requires a certificate in order to encrypt/decrypt data. Insite Commerce uses the file /AppData/insiteidentity.pfx. If you do not have that file here, the SDK has a generator in /InsiteCommerceSource\Tools.
+
+Steps to generate a new certificate.
+1. Run {SDK Folder}\tools\InsiteIdentityPfxGenerator.exe - this generates two files, insiteidentity.pfx and InsiteIdentityPassword.txt
+2. Copy the generated insiteidentity.pfx to this folder ({Web Project Folder}/AppData/insiteidentity.pfx)
+3. Copy the password in InsiteIdentityPassword.txt into the IdentityServerCertificatePassword node in {Web Project Folder}/config/AppSettings.config

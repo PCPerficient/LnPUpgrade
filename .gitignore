@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/InsiteCommerce.Web/bin
+/src/InsiteCommerce.Web/obj/Debug
+/src/InSiteCommerce.Web/_SystemResources/Themes/**/*.js
+/src/InSiteCommerce.Web/_SystemResources/Themes/**/*.js.map
+/src/packages
+/src/.vs/InSiteCommerce
+/install.log
+/.rnd
