@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Order Confirmation</title>
+    <style>
+        /* Reset all elements to help ensure cross-browser consistency */
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        address, caption, cite, code, dfn, em, strong, th, var {
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        caption, th {
+            text-align: left;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+            font-weight: normal;
+        }
+
+        q:before, q:after {
+            content: '';
+        }
+
+        abbr, acronym {
+            border: 0;
+        }
+
+        body {
+            font: 12px Arial, Helvetica, sans-serif;
+        }
+
+        a:link, a:visited, a:active {
+            color: #666;
+            text-decoration: none;
+        }
+
+        a:hover, a:focus {
+            color: #666;
+        }
+
+        h1 {
+            font-size: 18px;
+            padding: 12px 0;
+        }
+
+        h2 {
+            font-size: 15px;
+            padding: 8px 0;
+            font-weight: bold;
+        }
+
+        h4 {
+            font-weight: bold;
+            padding: 8px 0;
+        }
+
+        .email-wrapper {
+            width: 850px;
+            margin: 20px auto 0 auto;
+        }
+
+        .order-info {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table td {
+            padding: 4px;
+        }
+
+        .bill-ship {
+            vertical-align: top;
+        }
+
+        .items {
+            margin-top: 20px;
+        }
+
+        .subtotal table td {
+            padding: 2px 0;
+            white-space: nowrap;
+        }
+
+        .rp-totals-lft {
+            width: 120px;
+            text-align: left;
+        }
+
+        .address-tbl th {
+            vertical-align: middle;
+        }
+
+        .order-subtotal {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .order-total {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .billing-info {
+            padding-bottom: 100px;
+            display: block;
+        }
+
+        .summury-label {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .summury-value {
+            white-space: nowrap;
+        }
+
+
+
+        .info-tbl td {
+            white-space: nowrap;
+        }
+
+        .info-tbl th {
+            white-space: nowrap;
+        }
+
+        .info-tbl th {
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+        }
+
+        .info-tbl .item {
+            text-align: left;
+        }
+
+        .info-tbl .description {
+            text-align: left;
+        }
+
+        .info-tbl .qty {
+            text-align: left;
+        }
+
+        .info-tbl .cost {
+            text-align: right;
+        }
+
+        .info-tbl .extended {
+            text-align: right;
+        }
+
+        .info-tbl .right {
+            text-align: right;
+        }
+
+        .order-notes {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <table border="0" cellpadding="0" cellspacing="0" width="850" style="width:850px; max-width:850px; margin:0 auto; text-align:center;">
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="850">
+                    <tr>
+                        <td style="color:#cd3943;font-size:13px;margin-bottom:10px;font-weight:bold; text-align:center;">
+                            This email has been generated automatically
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#cd3943;font-size:13px;margin-bottom:10px;font-weight:bold; text-align:center;">
+                            Please do not reply to this email
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left;">
+                <img src="[[Model.ContentBaseUrl]]/UserFiles/Images/drift-logo-email.jpg" height="76" width="187" alt="Drift" style="text-align:left;" />
+            </td>
+        </tr>
+        <tr>
+            <td style="height:10px"></td>
+        </tr>
+        <tr>
+            <td>
+                <h2>ORDER CONFIRMATION</h2>
+            </td>
+        </tr>
+        <tr>
+            <td style="height:8px"></td>
+        </tr>
+        <tr>
+            <td style="padding-left:0;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="vertical-align:text-top; width:100%;">
+                    <tr>
+                        <td style="vertical-align:text-top;width:283px;padding:0; margin:0;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="padding:0; margin:0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <th style="font-size:15px; font-weight:bold; padding:0 0 15px 0">FROM:</th>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 15px 0;font-size:15px;">[[Model.FromName]]</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 15px 0;font-size:15px;">[[Model.FromAddress1]], [[Model.FromAddress2]]</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 15px 0;font-size:15px;">[[Model.FromCity]], [[Model.FromToState]] [[Model.FromPostalCode]]</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="vertical-align:text-top;width:283px;padding:0; margin:0;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <th style="font-size:15px; font-weight:bold;padding:0 0 20px 0">SHIP TO:</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 0 15px 0; font-size:15px;">[[Model.ShipToFirstName]] [[Model.ShipToLastName]]</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 0 15px 0; font-size:15px;">[[Model.ShipToAddress1]], [[Model.ShipToAddress2]]</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0 0 15px 0; font-size:15px;">[[Model.ShipToCity]], [[Model.ShipToState]] [[Model.ShipToPostalCode]]</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="vertical-align:text-top;width:284px;padding:0; margin:0;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <th style="font-size:15px; font-weight:bold; padding:0 0 20px 0">BILL TO:</th>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 15px 0;font-size:15px;">[[Model.BillToFirstName]] [[Model.BillToLastName]]</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 15px 0;font-size:15px;">[[Model.BillToAddress1]], [[Model.BillToAddress2]]</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 15px 0;font-size:15px;">[[Model.BillToCity]], [[Model.BillToState]] [[Model.BillToPostalCode]]</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:0; margin:0;width:850px; text-align:left">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="vertical-align:text-top; width:100%;">
+                    <tr>
+                        <td class="order-conf-label" style="font-weight:bold; font-size:14px;;padding-left:0;padding-bottom:15px;">ORDER NUMBER: <span style="font-size:14px;font-weight:normal;">[[Model.OrderNumber]]</span></td>
+                    </tr>
+                    <tr>
+                        <td class="order-date-label" style="font-weight:bold; font-size:14px;;padding-left:0;padding-bottom:15px;">ORDER DATE: <span style="font-size:14px; font-weight:normal;">[[Model.OrderDate]]</span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:0; margin:0;width:850px;">
+                <table border="1" cellpadding="0" cellspacing="0" width="100%" id="orderSummary" class="info-tbl" style="vertical-align:text-top; width:100%;">
+                    <tr>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">SEQ NO</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">PART NO</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">UM</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">DESCRIPTION</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">ORDER QTY</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">ITEM PRICE</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">PRICING UM</th>
+                        <th style="padding:10px 4px 10px 4px;border-right:1px solid #000;">TAX</th>
+                        <th style="padding:10px 4px 10px 4px;">ORDER VALUE</th>
+                    </tr>
+                    [% for orderLine in Model.OrderLines -%]
+                    <tr>
+                        <td style="padding:10px 4px 10px 4px;">[[orderLine.OrderLineNumber]]</td>
+                        <td style="padding:10px 4px 10px 4px;">[[orderLine.OrderLineProduct]]</td>
+                        <td style="padding:10px 4px 10px 4px;">[[orderLine.OrderLineUnitOfMeasure]]</td>
+                        <td style="padding:10px 4px 10px 4px;">[[orderLine.OrderLineDescription]]</td>
+                        <td style="text-align:right; padding:10px 4px 10px 4px;">[[orderLine.OrderLineQtyOrdered]]</td>
+                        <td style="text-align:right; padding:10px 4px 10px 4px;">[[orderLine.OrderLineUnitNetPriceDisplay]]</td>
+                        <td style="text-align:right; padding:10px 4px 10px 4px;">[[orderLine.orderLineExtendedUnitNetPriceDisplay]]</td>
+                        <td style="text-align:right; padding:10px 4px 10px 4px;">[[orderLine.OrderLineTax]]</td>
+                        <td style="text-align:right; padding:10px 4px 10px 4px;">[[orderLine.OrderLineTotal]]</td>
+                    </tr>
+                    [% endfor -%]
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="vertical-align:text-top; width:100%;">
+                    <tr>
+                        <td style="width:400px">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                                <tr>
+                                    <td style="height:20px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:400px; padding:0;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                                <tr>
+                                    <td class="summury-label" style="font-weight:bold;font-size:14px; padding:0 4px 15px 0;width:200px; text-align:center;">[[Model.MailSentDate]]</td>
+                                    <td class="summury-value" style="font-weight:bold;font-size:14px; padding:0 0 15px 0;text-align:right;margin-right:0;width:200px"></td>
+                                </tr>
+                                <tr>
+                                    <td class="summury-label" style="font-weight:bold;font-size:14px; padding:0 4px 15px 0;width:200px; text-align:center;">Grand Shipping:</td>
+                                    <td class="summury-value" style="font-weight:bold;font-size:14px; padding:0 0 15px 0;text-align:right;margin-right:0;width:200px">[[Model.FullShippingChargeDisplay]]</td>
+                                </tr>
+                                <tr>
+                                    <td class="summury-label" style="font-weight:bold;font-size:14px; padding:0 4px 15px 0;width:200px; text-align:center;">Grand Tax:</td>
+                                    <td class="summury-value" style="font-weight:bold;font-size:14px; padding:0 0 15px 0;text-align:right;margin-right:0;width:200px">[[Model.TotalTaxDisplay]]</td>
+                                </tr>
+                                <tr>
+                                    <td class="summury-label" style="font-weight:bold;font-size:14px;padding:0 4px 15px 0;width:250px; text-align:center;">Grand Total:</td>
+                                    <td class="summury-value" style="font-weight:bold;font-size:14px;padding:0 0 15px 0;text-align:right;margin-right:0;width:200px">[[Model.OrderGrandTotalDisplay]]</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="height:15px;"></td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold;font-size:14px;width:850px; margin:0 auto 20px; text-align:center;">
+                ** END OF ORDER CONFIRMATION **
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:11px;margin-bottom:15px;width:850px; margin:0 auto 10px; text-align:left;">
+                <p style="font-size:11px;margin:0 auto 10px; text-align:left;">Acceptance of all orders is conditioned on the standard terms and conditions for acceptance of purchase orders found at <a href="http://www.leggett.com/important-links.htm" style="color:#3a91d7;">http://www.leggett.com/important-links.htm</a> as updated on July 8, 2015</p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

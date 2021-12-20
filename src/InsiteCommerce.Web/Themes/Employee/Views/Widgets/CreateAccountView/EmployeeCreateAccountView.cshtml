@@ -1,0 +1,84 @@
+﻿<div class="ma-settings" ng-controller="CreateEmployeeAccountController as vm" ng-cloak home-page-url="[% urlForPage 'HomePage' %]">
+    <div class="row">
+        <div class="medium-6 large-6 columns ca-form">
+            <form id="createAccountForm">
+                <div class="required-msg">
+                    <span class="redTxt">*</span> [% translate 'Required' %]
+                </div>
+                <div class="row ca-form-FirstName">
+                    <div class="medium-5 large-5 columns">
+                        <label for="CreateNewAccountInfo_FirstName">[% translate 'First Name' %] <span class="redTxt">*</span></label>
+                    </div>
+                    <div class="medium-7 large-7 columns">
+                        <input type="text" id="CreateNewAccountInfo_FirstName" name="CreateNewAccountInfo.FirstName"
+                               data-rule-required="true"
+                               data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'First Name' EscapeSingleQuotes %]') }}"
+                               ng-model="vm.firstName">
+                        <span class="field-validation-valid" data-valmsg-for="CreateNewAccountInfo.FirstName" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="row ca-form-LastName">
+                    <div class="medium-5 large-5 columns">
+                        <label for="CreateNewAccountInfo_LastName">[% translate 'Last Name' %] <span class="redTxt">*</span></label>
+                    </div>
+                    <div class="medium-7 large-7 columns">
+                        <input type="text" id="CreateNewAccountInfo_LastName" name="CreateNewAccountInfo.LastName"
+                               data-rule-required="true"
+                               data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Last Name' EscapeSingleQuotes %]') }}"
+                               ng-model="vm.lastName">
+                        <span class="field-validation-valid" data-valmsg-for="CreateNewAccountInfo.LastName" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="row ca-form-email">
+                    <div class="medium-5 large-5 columns">
+                        <label for="CreateNewAccountInfo_EmailAddress">[% translate 'Email Address' %] <span class="redTxt">*</span></label>
+                    </div>
+                    <div class="medium-7 large-7 columns">
+                        <input type="text" id="CreateNewAccountInfo_EmailAddress" name="CreateNewAccountInfo.EmailAddress"
+                               data-rule-required="true"
+                               data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Email Address' EscapeSingleQuotes %]') }}"
+                               data-rule-email="true"
+                               data-msg-email="{{ '[% siteMessage 'Field_Invalid' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Email Address' EscapeSingleQuotes %]') }}"
+                               ng-model="vm.email">
+                        <span class="field-validation-valid" data-valmsg-for="CreateNewAccountInfo.EmailAddress" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="row ca-form-LastName">
+                    <div class="medium-5 large-5 columns">
+                        <label for="CreateNewAccountInfo_ClockOrUnique">[% translate 'Unique ID' %] <span class="redTxt">*</span></label>
+                        <div class="hover-tooltip-wrapper">
+                            <i data-dropdown="qtip-share-list" class="hover-tooltip">How do I find this?</i>
+                            <span id="qtip-share-list" class="f-dropdown content hover-tooltip-content" data-dropdown-content>
+                                <span>
+                                    <strong>I work at a Branch.</strong><br /> Your local payroll processor will be able to get this for you if you aren't familiar with your Unique ID.<br /><br /><br />
+                                    <strong>I work at Corporate.</strong><br />
+                                    If you use the paystub portal, your login number is your Unique ID.<br /><br />
+                                    If you don't know this, payroll can get this information for you.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="medium-7 large-7 columns">
+                        <input type="text" id="CreateNewAccountInfo_ClockOrUnique" name="CreateNewAccountInfo.ClockOrUnique"
+                               data-rule-required="true"
+                               maxlength="7"
+                               ng-trim="false"
+                               pattern="[a-zA-Z0-9]+"
+                               data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Unique ID' EscapeSingleQuotes %]') }}"
+                               ng-model="vm.clockOrUnique">
+                        <span class="field-validation-valid" data-valmsg-for="CreateNewAccountInfo.ClockOrUnique" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="error">
+                    <span class="field-validation-error" ng-if="vm.createError" ng-bind="vm.createError"></span>
+                </div>
+                <div class="error">
+                    <span class="field-validation-error" ng-if="vm.clockOrUniqueError">[% siteMessage 'LNP_Account_ClockNumberOrUniqueIDInvalidMsg'%]</span>
+                </div>
+                <div class="btns">
+                    <button type="submit" class="btn primary" ng-click="vm.createAccount()">[% translate 'REGISTER' %]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

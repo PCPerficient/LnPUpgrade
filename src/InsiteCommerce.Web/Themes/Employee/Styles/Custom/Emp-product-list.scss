@@ -1,0 +1,18 @@
+@import "variable";
+.product-list .n-filtered li a:link, 
+.product-list .n-filtered li a:visited, 
+.product-list .n-filtered li a:active{color:$primary-color;}
+.product-list .vm-grid .viewmode-selector a.vms-grid:before, .product-list .vm-list .viewmode-selector a.vms-list:before, .product-list .vm-table .viewmode-selector a.vms-table:before,
+.product-list .viewmode-selector a:hover:before, .product-list .viewmode-selector a:focus:before{color:$primary-color;}
+.product-list .search-within-search label{color:$text-color;}
+.product-list .ln2-wrap .nav-head h2{font-weight:300}
+.product-list .left-nav-2 {width: 245px;}
+
+@media (min-width: 768px){
+    .product-list .left-nav-2 {background:$primary-color;}
+    .product-list .left-nav-2 a {color: $white;}
+    .product-list .n-filter .accordion ul li a {color:$primary-color;}
+    .product-list .ln2-wrap h3, .product-list .ln2-wrap .nav-head h2{color:$white !important;}
+    .product-list .vm-table .tv-table .actions-block .add-to-cart-block .item-qty input {height:37px;}
+    .product-list .cl1-wrapper .cat-block{ width: 49%; margin-left: 4px;}
+}

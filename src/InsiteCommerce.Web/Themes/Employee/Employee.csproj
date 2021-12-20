@@ -60,8 +60,50 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Custom\Account\employee.account.service.js" />
+    <Content Include="Scripts\Custom\Account\employee.create-account.controller.js" />
+    <Content Include="Scripts\Custom\Account\employee.my-account-address.controller.js" />
+    <Content Include="Scripts\Custom\Account\employee.sign-in.controller.js" />
+    <Content Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.controller.js" />
+    <Content Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.directive.js" />
+    <Content Include="Scripts\Custom\AddressValidation\employee.addressvalidation.service.js" />
+    <Content Include="Scripts\Custom\Cart\employee.checkout-address.controller.js" />
+    <Content Include="Scripts\Custom\Cart\employee.elavon.service.js" />
+    <Content Include="Scripts\Custom\Cart\employee.review-and-pay.controller.js" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-image-carousel.controller.js" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-image-carousel.directive.js" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-images.controller.js" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-images.directive.js" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-search.controller.js" />
+    <Content Include="Scripts\Custom\Common\Employee.customproperty.service.js" />
+    <Content Include="Scripts\Custom\Email\employee.email-subscription.controller.js" />
+    <Content Include="Scripts\Custom\Layout\employee.header.controller.js" />
+    <Content Include="Scripts\Custom\Layout\employee.top-nav.controller.js" />
+    <Content Include="Scripts\Custom\Orders\employee.order-detail.controller.js" />
+    <Content Include="Styles\Custom\Emp-base.css" />
+    <Content Include="Styles\Custom\Emp-product-list.css" />
     <Content Include="tsconfig.json" />
     <Content Include="theme.json" />
+    <TypeScriptCompile Include="Scripts\Custom\Account\employee.account.service.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Account\employee.create-account.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Account\employee.my-account-address.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Account\employee.sign-in.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.directive.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\AddressValidation\employee.addressvalidation.service.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Cart\employee.checkout-address.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Cart\employee.elavon.service.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Cart\employee.review-and-pay.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-image-carousel.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-image-carousel.directive.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-images.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-images.directive.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-search.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Common\Employee.customproperty.service.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Email\employee.email-subscription.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Layout\employee.header.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Layout\employee.top-nav.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Orders\employee.order-detail.controller.ts" />
     <TypeScriptCompile Include="Scripts\insite.config.ts" />
     <TypeScriptCompile Include="Scripts\insite.content-pager.controller.ts" />
     <TypeScriptCompile Include="Scripts\insite.content.directives.ts" />
@@ -289,6 +331,7 @@
     <TypeScriptCompile Include="Scripts\Wishlists\insite.upload-to-list-popup.controller.ts" />
     <TypeScriptCompile Include="Scripts\Wishlists\insite.wishlist.controller.ts" />
     <TypeScriptCompile Include="Scripts\Wishlists\insite.wishlist.service.ts" />
+    <TypeScriptCompile Include="Scripts\_typelite\custom.models.d.ts" />
     <TypeScriptCompile Include="Scripts\_typelite\insite.models.d.ts" />
     <Content Include="Styles\base.scss" />
     <Content Include="Styles\flexslider.css" />
@@ -529,6 +572,158 @@
     <Content Include="Views\Widgets\Wishlists\Standard.cshtml" />
     <Content Include="Views\Widgets\WishListView\Standard.cshtml" />
     <Content Include="Views\Widgets\Zone\Standard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\Custom\Emp-base.scss" />
+    <Content Include="Styles\Custom\Emp-product-list.scss" />
+    <Content Include="Styles\Custom\Fonts\roboto-bold-webfont.woff" />
+    <Content Include="Styles\Custom\Fonts\roboto-bold-webfont.woff2" />
+    <Content Include="Styles\Custom\Fonts\Roboto-Bold.ttf" />
+    <Content Include="Styles\Custom\Fonts\roboto-italic-webfont.ttf" />
+    <Content Include="Styles\Custom\Fonts\roboto-italic-webfont.woff" />
+    <Content Include="Styles\Custom\Fonts\roboto-italic-webfont.woff2" />
+    <Content Include="Styles\Custom\Fonts\roboto-light-webfont.woff" />
+    <Content Include="Styles\Custom\Fonts\roboto-light-webfont.woff2" />
+    <Content Include="Styles\Custom\Fonts\Roboto-Light.ttf" />
+    <Content Include="Styles\Custom\Fonts\roboto-medium-webfont.woff" />
+    <Content Include="Styles\Custom\Fonts\roboto-medium-webfont.woff2" />
+    <Content Include="Styles\Custom\Fonts\Roboto-Medium.ttf" />
+    <Content Include="Styles\Custom\Fonts\roboto-regular-webfont.woff" />
+    <Content Include="Styles\Custom\Fonts\roboto-regular-webfont.woff2" />
+    <Content Include="Styles\Custom\Fonts\Roboto-Regular.ttf" />
+    <Content Include="Styles\Custom\_variable.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\Custom\Account\employee.account.service.js.map" />
+    <Content Include="Scripts\Custom\Account\employee.create-account.controller.js.map" />
+    <Content Include="Scripts\Custom\Account\employee.my-account-address.controller.js.map" />
+    <Content Include="Scripts\Custom\Account\employee.sign-in.controller.js.map" />
+    <Content Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.controller.js.map" />
+    <Content Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.directive.js.map" />
+    <Content Include="Scripts\Custom\AddressValidation\employee.addressvalidation.service.js.map" />
+    <Content Include="Scripts\Custom\Cart\employee.checkout-address.controller.js.map" />
+    <Content Include="Scripts\Custom\Cart\employee.elavon.service.js.map" />
+    <Content Include="Scripts\Custom\Cart\employee.review-and-pay.controller.js.map" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-image-carousel.controller.js.map" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-image-carousel.directive.js.map" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-images.controller.js.map" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-images.directive.js.map" />
+    <Content Include="Scripts\Custom\Catalog\employee.product-search.controller.js.map" />
+    <Content Include="Scripts\Custom\Common\Employee.customproperty.service.js.map" />
+    <Content Include="Scripts\Custom\Email\employee.email-subscription.controller.js.map" />
+    <Content Include="Scripts\Custom\Layout\employee.header.controller.js.map" />
+    <Content Include="Scripts\Custom\Layout\employee.top-nav.controller.js.map" />
+    <Content Include="Scripts\Custom\Orders\employee.order-detail.controller.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Account\EmployeeAddressDisplay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Cart\EmployeeAddToCartPopup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Cart\EmployeeCartLines.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Cart\EmployeeCartTotalDisplay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Catalog\EmployeeCrossSellCarousel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Catalog\EmployeeProductImageCarousel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Catalog\EmployeeProductImages.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Common\EmployeeShareEntityModal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\History\EmployeeRecentOrders.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\AddressValidationPopup\AddressSuggestionPopup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\CartView\EmployeeCartView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\CheckoutAddressView\EmployeeCheckoutAddressView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\CreateAccountView\EmployeeCreateAccountView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\EmailSubscription\EmployeeEmailSubscription.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\HeaderView\EmployeeHeaderView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\MyAccountAddressView\EmployeeMyAccountAddressView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\MyAccountView\EmployeeMyAccountView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\OrderConfirmationView\EmployeeOrderConfirmationView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\OrderDetailView\EmployeeOrderDetailView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\OrdersView\EmployeeOrdersView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\ProductDetailView\EmployeeProductDetailView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\ProductListView\EmployeeProductListView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\RelatedProducts\EmployeeRelatedProducts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\ReviewAndPayView\EmployeeReviewAndPayView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\SavedOrderDetailView\EmployeeSavedOrderDetailView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\SavedOrderListView\EmployeeSavedOrderListView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\SignInView\EmployeeSignInView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

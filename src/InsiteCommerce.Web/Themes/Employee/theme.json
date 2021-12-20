@@ -127,23 +127,50 @@
     "Styles/template/product-detail.css",
     "Styles/template/ma-frequently-purchased.css",
     "Styles/template/ma-recently-purchased.css",
-    "Styles/template/select-pick-up-location.css"
+    "Styles/template/select-pick-up-location.css",
+    "Styles/Custom/*"
   ],
   "Widgets": {
     // override the default template used for a widget. Standard will be used unless one is specified here.
     // This will make a view that lives at ~/Themes/MyTheme/Views/Widgets/HeaderView/MyCustomView.cshtml be set as the default
     // "HeaderView": "MyCustomView"
+    "CreateAccountView": "EmployeeCreateAccountView",
+    "OrdersView": "EmployeeOrdersView",
+    "SavedOrderListView": "EmployeeSavedOrderListView",
+    "OrderDetailView": "EmployeeOrderDetailView",
+    "ProductDetailView": "EmployeeProductDetailView",
+    "MyAccountView": "EmployeeMyAccountView",
+    "ProductListView": "EmployeeProductListView",
+    "SavedOrderDetailView": "EmployeeSavedOrderDetailView",
+    "CartView": "EmployeeCartView",
+    "ReviewAndPayView": "EmployeeReviewAndPayView",
+    "CheckoutAddressView": "EmployeeCheckoutAddressView",
+    "MyAccountAddressView": "EmployeeMyAccountAddressView",
+    "SignInView": "EmployeeSignInView",
+    "RelatedProducts": "EmployeeRelatedProducts",
+    "HeaderView": "EmployeeHeaderView",
+    "OrderConfirmationView": "EmployeeOrderConfirmationView",
+    "EmailSubscription": "EmployeeEmailSubscription"
   },
   "Views": {
     // override the view for an alias by specifiying the file location. This will use MyCustomCartLines.cshtml when the the Cart-CartLines view is needed.
     // "Cart-CartLines": "Views/Directives/Cart/MyCustomCartLines.cshtml"
     // "Cart-CartLines": "~/Themes/MyTheme/Views/Directives/Cart/MyCustomCartLines.cshtml"
+    "History-RecentOrders": "~/Themes/Employee/Views/Directives/History/EmployeeRecentOrders.cshtml",
+    "Account-AddressDisplay": "~/Themes/Employee/Views/Directives/Account/EmployeeAddressDisplay.cshtml",
+    "Cart-CartLines": "~/Themes/Employee/Views/Directives/Cart/EmployeeCartLines.cshtml",
+    "Cart-AddToCartPopup": "~/Themes/Employee/Views/Directives/Cart/EmployeeAddToCartPopup.cshtml",
+    "Common-ShareEntityModal": "~/Themes/Employee/Views/Directives/Common/EmployeeShareEntityModal.cshtml",
+    "Cart-CartTotalDisplay": "~/Themes/Employee/Views/Directives/Cart/EmployeeCartTotalDisplay.cshtml",
+    "Catalog-CrossSellCarousel": "~/Themes/Employee/Views/Directives/Catalog/EmployeeCrossSellCarousel.cshtml",
+    "Catalog-EmployeeProductImageCarousel": "~/Themes/Employee/Views/Directives/Catalog/EmployeeProductImageCarousel.cshtml",
+    "Catalog-EmployeeProductImages": "~/Themes/Employee/Views/Directives/Catalog/EmployeeProductImages.cshtml"
   },
   // This is the default template used by pages that are flagged as "Use Default Template" in CMS
   // This setting is ignored by Header and Footer
   // This will make the view that lives at ~/Themes/MyTheme/Pages/Standard.cshtml be the default
-  "DefaultPageTemplate": "Standard",
-  // This determines which layout will be used when rendering pages
-  "LayoutTemplate": "Standard"
+  //"DefaultPageTemplate": "Standard",
+  //// This determines which layout will be used when rendering pages
+  //"LayoutTemplate": "Standard"
 }
 

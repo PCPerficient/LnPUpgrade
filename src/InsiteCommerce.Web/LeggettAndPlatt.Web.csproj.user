@@ -9,7 +9,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <ToolsVersionPromptShown>3.7</ToolsVersionPromptShown>
+    <ToolsVersionPromptShown>4.1</ToolsVersionPromptShown>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

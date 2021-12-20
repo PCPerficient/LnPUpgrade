@@ -1,0 +1,52 @@
+﻿<div id="{{containerId}}" class="reveal-modal pop-allpurpose address-popup" data-reveal data-reveal-init
+     data-options="close_on_background_click:false; close_on_esc: false;">
+    <div class="modal-wrap ">
+        <h4>[% siteMessage 'LNP_AddressValidationPopup_Title_Msg' %]</h4>
+        <div ng-transclude>
+        </div>
+        <div>
+            <div ng-init="addressModel=1">
+                <ul>
+                    <li><label>[% siteMessage 'LNP_AddressValidationPopup_CorrectedAddress_Msg' %]</label> </li>
+                    <li ng-repeat="address in suggestedModel.addressSuggestions">
+                        <input type="radio" id="radioCorrected{{$index}}"
+                               ng-model="addressModel"
+                               ng-value="{{$index + 1}}"
+                               ng-click="vm.setAddress(address)"
+                               name="addresssuggestion"/>
+                        <div class="address-details">
+                            <label for="radioCorrected{{$index}}">
+                                <span ng-if="address.streetAddress1">{{address.streetAddress1}},</span>
+                                <span ng-if="address.city">{{address.city}},</span>
+                                <span ng-if="address.state.abbreviation">{{address.state.abbreviation}}</span>
+                                <span ng-if="address.postalCode">{{address.postalCode}}</span>
+                                <span ng-if="address.country.abbreviation">{{address.country.abbreviation}}</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <ul ng-show="suggestedModel.requestAddress">
+                    <li><label>[% siteMessage 'LNP_AddressValidationPopup_RequestedAddress_Msg' %]</label> </li>
+                    <li>
+                        <input id="requestedAddress" type="radio"
+                               ng-model="addressModel"
+                               ng-value="0"
+                               ng-click="vm.setAddress(suggestedModel.requestAddress)"
+                               name="addresssuggestion" />
+                        <div class="address-details">
+                            <label for="requestedAddress">
+                                <span ng-if="suggestedModel.requestAddress.streetAddress1">{{suggestedModel.requestAddress.streetAddress1}},</span>
+                                <span ng-if="suggestedModel.requestAddress.city">{{suggestedModel.requestAddress.city}},</span>
+                                <span ng-if="suggestedModel.requestAddress.state.abbreviation">{{suggestedModel.requestAddress.state.abbreviation}}</span>
+                                <span ng-if="suggestedModel.requestAddress.postalCode">{{suggestedModel.requestAddress.postalCode}}</span>
+                                <span ng-if="suggestedModel.requestAddress.country.abbreviation">{{suggestedModel.requestAddress.country.abbreviation}}</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <button id="btn" class="btn primary" ng-click="selectedAddress({selectedAddressModel: vm.selectedModel?vm.selectedModel:suggestedModel.addressSuggestions[0]})">Submit</button>
+        </div>
+    </div>
+</div>
