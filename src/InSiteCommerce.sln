@@ -1,27 +1,80 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsiteCommerce.Web", "InsiteCommerce.Web\InsiteCommerce.Web.csproj", "{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1500
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.Web", "InsiteCommerce.Web\LeggettAndPlatt.Web.csproj", "{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ED8EB601-9E5E-475D-9530-AE431A2340AA} = {ED8EB601-9E5E-475D-9530-AE431A2340AA}
+		{D3BF5E25-2E23-4276-BE58-449ADF1A0C74} = {D3BF5E25-2E23-4276-BE58-449ADF1A0C74}
+		{088753FE-05F0-4421-ABD8-BFF2A394141C} = {088753FE-05F0-4421-ABD8-BFF2A394141C}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee", "InSiteCommerce.Web\Themes\Employee\Employee.csproj", "{593ca546-2490-42b0-b03f-e0441eeeddfe}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.Extensions", "LeggettAndPlatt.Extensions\LeggettAndPlatt.Extensions.csproj", "{ED8EB601-9E5E-475D-9530-AE431A2340AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.Test", "LeggettAndPlatt.Test\LeggettAndPlatt.Test.csproj", "{3FFFFFF2-0FBF-4CD4-8D02-04BE86847ACF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.PinPointe", "LeggettAndPlatt.PinPointe\LeggettAndPlatt.PinPointe.csproj", "{D4E73A7E-9AC2-4517-AC9C-4EDADC2B37D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employee", "InSiteCommerce.Web\Themes\Employee\Employee.csproj", "{593CA546-2490-42B0-B03F-E0441EEEDDFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.Integration", "LeggettAndPlatt.Integration\LeggettAndPlatt.Integration.csproj", "{D3BF5E25-2E23-4276-BE58-449ADF1A0C74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.Vertex", "LeggettAndPlatt.Vertex\LeggettAndPlatt.Vertex.csproj", "{4B0D09BD-BC34-4E66-8F85-393C55D38086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.FTP", "LeggettAndPlatt.FTP\LeggettAndPlatt.FTP.csproj", "{83FEA5C1-4C93-4356-AAA1-6ADC987396BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeggettAndPlatt.IntegrationProcessor", "LeggettAndPlatt.IntegrationProcessor\LeggettAndPlatt.IntegrationProcessor.csproj", "{088753FE-05F0-4421-ABD8-BFF2A394141C}"
+EndProject
+
+
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{593ca546-2490-42b0-b03f-e0441eeeddfe}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE0FFFD9-65A7-4D40-9A5B-A8C9800E6FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{593CA546-2490-42B0-B03F-E0441EEEDDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{593CA546-2490-42B0-B03F-E0441EEEDDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{593CA546-2490-42B0-B03F-E0441EEEDDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{593CA546-2490-42B0-B03F-E0441EEEDDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8EB601-9E5E-475D-9530-AE431A2340AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8EB601-9E5E-475D-9530-AE431A2340AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8EB601-9E5E-475D-9530-AE431A2340AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8EB601-9E5E-475D-9530-AE431A2340AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83FEA5C1-4C93-4356-AAA1-6ADC987396BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83FEA5C1-4C93-4356-AAA1-6ADC987396BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83FEA5C1-4C93-4356-AAA1-6ADC987396BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83FEA5C1-4C93-4356-AAA1-6ADC987396BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BF5E25-2E23-4276-BE58-449ADF1A0C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BF5E25-2E23-4276-BE58-449ADF1A0C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BF5E25-2E23-4276-BE58-449ADF1A0C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BF5E25-2E23-4276-BE58-449ADF1A0C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088753FE-05F0-4421-ABD8-BFF2A394141C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088753FE-05F0-4421-ABD8-BFF2A394141C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088753FE-05F0-4421-ABD8-BFF2A394141C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088753FE-05F0-4421-ABD8-BFF2A394141C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E73A7E-9AC2-4517-AC9C-4EDADC2B37D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E73A7E-9AC2-4517-AC9C-4EDADC2B37D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E73A7E-9AC2-4517-AC9C-4EDADC2B37D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E73A7E-9AC2-4517-AC9C-4EDADC2B37D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFFFFF2-0FBF-4CD4-8D02-04BE86847ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFFFFF2-0FBF-4CD4-8D02-04BE86847ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFFFFF2-0FBF-4CD4-8D02-04BE86847ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFFFFF2-0FBF-4CD4-8D02-04BE86847ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0D09BD-BC34-4E66-8F85-393C55D38086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0D09BD-BC34-4E66-8F85-393C55D38086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0D09BD-BC34-4E66-8F85-393C55D38086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0D09BD-BC34-4E66-8F85-393C55D38086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DF23EB9-CDA5-43AE-AAD3-C426B11C025F}
+	EndGlobalSection
 EndGlobal
-

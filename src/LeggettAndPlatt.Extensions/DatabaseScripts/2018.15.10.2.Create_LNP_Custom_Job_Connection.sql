@@ -1,0 +1,295 @@
+IF((SELECT COUNT(1) FROM [dbo].[IntegrationConnection] WHERE Name='DriftFtpConnection')=0)
+BEGIN
+INSERT INTO [dbo].[IntegrationConnection]
+           ([Id]
+           ,[Name]
+           ,[TypeName]
+           ,[DataSource]
+           ,[RunsOn]
+           ,[DebuggingEnabled]
+           ,[Delimiter]
+           ,[Url]
+           ,[LogOn]
+           ,[Password]
+           ,[ConnectionString]
+           ,[ArchiveFolder]
+           ,[ArchiveRetentionDays]
+           ,[CreatedOn]
+           ,[CreatedBy]
+           ,[ModifiedOn]
+           ,[ModifiedBy]
+           ,[IntegratedSecurity]
+           ,[SystemNumber]
+           ,[Client]
+           ,[Language]
+           ,[ConnectionsLimit]
+           ,[ConnectionTimeout]
+           ,[AppServerHost]
+           ,[AppServerService]
+           ,[MessageServerHost]
+           ,[MessageServerService]
+           ,[GatewayHost]
+           ,[GatewayService]
+           ,[SystemId]
+           ,[SystemIds]
+           ,[LogonGroup]
+           ,[SourceServerTimeZone])
+     VALUES
+           (NEWID()
+           ,'DriftFtpConnection'
+           ,'ApiEndpoint'
+           ,''
+           ,''
+           ,1
+           ,''
+           ,'10.21.9.82'
+           ,'insite2btdev'
+           ,'JTNKgj+5tYolQoSdpLsBfw=='
+           ,''
+           ,''
+           ,30
+           ,GETUTCDATE()
+           ,'admin_admin'
+			,GETUTCDATE()
+           ,'admin_admin'
+           ,0
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,'Central Standard Time')
+END
+
+
+
+IF((SELECT COUNT(1) FROM [dbo].[IntegrationConnection] WHERE Name='FlatFileConnectionOrderStatus')=0)
+BEGIN
+INSERT INTO [dbo].[IntegrationConnection]
+           ([Id]
+           ,[Name]
+           ,[TypeName]
+           ,[DataSource]
+           ,[RunsOn]
+           ,[DebuggingEnabled]
+           ,[Delimiter]
+           ,[Url]
+           ,[LogOn]
+           ,[Password]
+           ,[ConnectionString]
+           ,[ArchiveFolder]
+           ,[ArchiveRetentionDays]
+           ,[CreatedOn]
+           ,[CreatedBy]
+           ,[ModifiedOn]
+           ,[ModifiedBy]
+           ,[IntegratedSecurity]
+           ,[SystemNumber]
+           ,[Client]
+           ,[Language]
+           ,[ConnectionsLimit]
+           ,[ConnectionTimeout]
+           ,[AppServerHost]
+           ,[AppServerService]
+           ,[MessageServerHost]
+           ,[MessageServerService]
+           ,[GatewayHost]
+           ,[GatewayService]
+           ,[SystemId]
+           ,[SystemIds]
+           ,[LogonGroup]
+           ,[SourceServerTimeZone])
+     VALUES
+           (NEWID()
+           ,'FlatFileConnectionOrderStatus'
+           ,'FlatFile'
+           ,''
+           ,''
+           ,1
+           ,','
+           ,'E:\FlatFile\Import\'
+           ,''
+           ,''
+           ,''
+           ,'E:\FlatFile\Archive\'
+           ,30
+           ,GETUTCDATE()
+           ,'admin_admin'
+			,GETUTCDATE()
+           ,'admin_admin'
+           ,0
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,'Central Standard Time')
+END
+
+
+IF((SELECT COUNT(1) FROM [dbo].[IntegrationConnection] WHERE Name='FlatFileConnectionOrderNotification')=0)
+BEGIN
+INSERT INTO [dbo].[IntegrationConnection]
+           ([Id]
+           ,[Name]
+           ,[TypeName]
+           ,[DataSource]
+           ,[RunsOn]
+           ,[DebuggingEnabled]
+           ,[Delimiter]
+           ,[Url]
+           ,[LogOn]
+           ,[Password]
+           ,[ConnectionString]
+           ,[ArchiveFolder]
+           ,[ArchiveRetentionDays]
+           ,[CreatedOn]
+           ,[CreatedBy]
+           ,[ModifiedOn]
+           ,[ModifiedBy]
+           ,[IntegratedSecurity]
+           ,[SystemNumber]
+           ,[Client]
+           ,[Language]
+           ,[ConnectionsLimit]
+           ,[ConnectionTimeout]
+           ,[AppServerHost]
+           ,[AppServerService]
+           ,[MessageServerHost]
+           ,[MessageServerService]
+           ,[GatewayHost]
+           ,[GatewayService]
+           ,[SystemId]
+           ,[SystemIds]
+           ,[LogonGroup]
+           ,[SourceServerTimeZone])
+     VALUES
+           (NEWID()
+           ,'FlatFileConnectionOrderNotification'
+           ,'FlatFile'
+           ,''
+           ,''
+           ,1
+           ,','
+           ,'C:\PerficientData\Developers\FlatFile\Dev_Import\OrderNotification\'
+           ,''
+           ,''
+           ,''
+           ,'C:\PerficientData\Developers\FlatFile\Dev_Archive\OrderNotification\'
+           ,30
+           ,GETUTCDATE()
+           ,'admin_admin'
+			,GETUTCDATE()
+           ,'admin_admin'
+           ,0
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,'Central Standard Time')
+END
+
+
+
+IF((SELECT COUNT(1) FROM [dbo].[IntegrationConnection] WHERE Name='FlatFileConnectionPricing')=0)
+BEGIN
+INSERT INTO [dbo].[IntegrationConnection]
+           ([Id]
+           ,[Name]
+           ,[TypeName]
+           ,[DataSource]
+           ,[RunsOn]
+           ,[DebuggingEnabled]
+           ,[Delimiter]
+           ,[Url]
+           ,[LogOn]
+           ,[Password]
+           ,[ConnectionString]
+           ,[ArchiveFolder]
+           ,[ArchiveRetentionDays]
+           ,[CreatedOn]
+           ,[CreatedBy]
+           ,[ModifiedOn]
+           ,[ModifiedBy]
+           ,[IntegratedSecurity]
+           ,[SystemNumber]
+           ,[Client]
+           ,[Language]
+           ,[ConnectionsLimit]
+           ,[ConnectionTimeout]
+           ,[AppServerHost]
+           ,[AppServerService]
+           ,[MessageServerHost]
+           ,[MessageServerService]
+           ,[GatewayHost]
+           ,[GatewayService]
+           ,[SystemId]
+           ,[SystemIds]
+           ,[LogonGroup]
+           ,[SourceServerTimeZone])
+     VALUES
+           (NEWID()
+           ,'FlatFileConnectionPricing'
+           ,'FlatFile'
+           ,''
+           ,''
+           ,1
+           ,','
+           ,'C:\PerficientData\Developers\FlatFile\Dev_Import\Pricing\'
+           ,''
+           ,''
+           ,''
+           ,'C:\PerficientData\Developers\FlatFile\Dev_Archive\Pricing\'
+           ,30
+           ,GETUTCDATE()
+           ,'admin_admin'
+			,GETUTCDATE()
+           ,'admin_admin'
+           ,0
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,''
+           ,'Central Standard Time')
+END
+
+
+

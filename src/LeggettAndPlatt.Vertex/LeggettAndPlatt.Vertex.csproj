@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B0D09BD-BC34-4E66-8F85-393C55D38086}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeggettAndPlatt.Vertex</RootNamespace>
+    <AssemblyName>LeggettAndPlatt.Vertex</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Insite.Core.Interfaces">
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Core.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestModels\VertexAddressValidationRequestModel.cs" />
+    <Compile Include="RequestModels\VertexLoginRequestModel.cs" />
+    <Compile Include="RequestModels\VertexTaxRateRequestModel.cs" />
+    <Compile Include="ResponseModels\VertexAddressValidationResponseModel.cs" />
+    <Compile Include="ResponseModels\VertexTaxRateResponseModel.cs" />
+    <Compile Include="Service References\CalculateTax70Service\Reference.cs" />
+    <Compile Include="Service References\CalculateTax70Service\Reference1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\LookupTaxAreas70Service\Reference.cs" />
+    <Compile Include="Service References\LookupTaxAreas70Service\Reference1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Interfaces\IVertexAddressValidationService.cs" />
+    <Compile Include="Services\Interfaces\IVertexTaxRateService.cs" />
+    <Compile Include="Services\VertexAddressValidationService.cs" />
+    <Compile Include="Services\VertexTaxRateService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\CalculateTax70Service\CalculateTax70.wsdl" />
+    <None Include="Service References\CalculateTax70Service\LeggettAndPlatt.Vertex.CalculateTax70Service.calculateTaxResponse.datasource" />
+    <None Include="Service References\CalculateTax70Service\LeggettAndPlatt.Vertex.CalculateTax70Service.VertexEnvelope.datasource" />
+    <None Include="Service References\CalculateTax70Service\VertexInc-Accrual.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-AccrualSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-APInvoiceSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-ARBillingSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-AssetMovement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-BuyerInputTax.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-ChangedTaxAreaRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-ChangedTaxAreaResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-CodeList-DeliveryTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-CodeList-JurisdictionLevel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-CodeList-TaxingLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-CodeList-TaxingType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Core.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Delete.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-DistributeTax.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-DistributeTaxProcurement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-ERS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Exists.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-FindChangedTaxAreaRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-FindChangedTaxAreaResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-FindTaxAreasRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-FindTaxAreasResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-InventoryRemoval.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Invoice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-InvoiceVerification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-PurchaseOrder.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Quotation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Reversal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Rollback.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-TaxAreaRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-TaxAreaResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc-Version.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CalculateTax70Service\VertexInc_Envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\LeggettAndPlatt.Vertex.LookupTaxAreas70Service.lookupTaxAreasResponse.datasource" />
+    <None Include="Service References\LookupTaxAreas70Service\LeggettAndPlatt.Vertex.LookupTaxAreas70Service.VertexEnvelope.datasource" />
+    <None Include="Service References\LookupTaxAreas70Service\LookupTaxAreas70.wsdl" />
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Accrual.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-AccrualSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-APInvoiceSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-ARBillingSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-AssetMovement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-BuyerInputTax.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-ChangedTaxAreaRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-ChangedTaxAreaResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-CodeList-DeliveryTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-CodeList-JurisdictionLevel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-CodeList-TaxingLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-CodeList-TaxingType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Core.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Delete.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-DistributeTax.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-DistributeTaxProcurement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-ERS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Exists.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-FindChangedTaxAreaRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-FindChangedTaxAreaResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-FindTaxAreasRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-FindTaxAreasResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-InventoryRemoval.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Invoice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-InvoiceVerification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-PurchaseOrder.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Quotation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Reversal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Rollback.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-TaxAreaRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-TaxAreaResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc-Version.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LookupTaxAreas70Service\VertexInc_Envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Service References\CalculateTax70Service\configuration.svcinfo" />
+    <Content Include="Service References\CalculateTax70Service\configuration91.svcinfo" />
+    <Content Include="Service References\CalculateTax70Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Service References\LookupTaxAreas70Service\configuration.svcinfo" />
+    <Content Include="Service References\LookupTaxAreas70Service\configuration91.svcinfo" />
+    <Content Include="Service References\LookupTaxAreas70Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
