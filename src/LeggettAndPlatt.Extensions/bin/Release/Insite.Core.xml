@@ -1,0 +1,1737 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insite.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Insite.Core.Attributes.RememberUserAuthorizeAttribute">
+            <summary>The remember user authorize attribute.</summary>
+        </member>
+        <member name="M:Insite.Core.Attributes.RememberUserAuthorizeAttribute.IsAuthorized(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>The is authorized.</summary>
+            <param name="actionContext">The action context.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.TypeInformation.Type">
+            <summary>Gets or sets the type.</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.TypeInformation.Order">
+            <summary>Gets or sets the order.</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.TypeInformation.Name">
+            <summary>Gets or sets the name.</summary>
+        </member>
+        <member name="F:Insite.Core.BootStrapper.BootStrapper.DependencyRegistrar">
+            <summary>The dependency registrar.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.BootStrapper.#ctor(Insite.Core.BootStrapper.IDependencyRegistrar)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.BootStrapper.BootStrapper"/> class. Dependency Injection Constructor.</summary>
+            <param name="dependencyRegistrar"><see cref="T:Insite.Core.BootStrapper.IDependencyRegistrar"/></param>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.BootStrapper.DllPath">
+            <summary>Gets the dll path.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.BootStrapper.Boot(Owin.IAppBuilder,System.Web.Http.HttpConfiguration)">
+            <summary>
+            Method that gets run when the application starts, goes through assemblies to find implementations of <see cref="T:Insite.Core.BootStrapper.IStartupTask"/> and
+            then goes through them by <see cref="T:Insite.Core.Interfaces.BootStrapper.BootStrapperOrder"/> and calls their Run method.
+            </summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.BootStrapper.GetSystemSetting(System.String,System.String,System.String)">
+            <summary>The get system setting.</summary>
+            <param name="groupType">The setting group type</param>
+            <param name="name">The name.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.BootStrapper.GetDbConnectionStringName">
+            <summary>The get db connection string name.</summary>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.CoreMapperStartupTask">
+            <summary>The core mapper startup task.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.CoreMapperStartupTask.Run(Owin.IAppBuilder,System.Web.Http.HttpConfiguration)">
+            <summary>The run.</summary>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.DependencyRegistrar">
+            <summary>Run by the BootStrapper to register the dependencies in the IOC Container.</summary>
+        </member>
+        <member name="F:Insite.Core.BootStrapper.DependencyRegistrar.IocContainer">
+            <summary>The ioc container.</summary>
+        </member>
+        <member name="F:Insite.Core.BootStrapper.DependencyRegistrar.GetSystemSettingFunc">
+            <summary>The Func used to get <see cref="T:Insite.Data.Entities.SystemSetting" />s.  Defaults to BootStrapper.GetSystemSetting if not set.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.#ctor(Insite.Core.BootStrapper.IIocContainer,System.Type)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.BootStrapper.DependencyRegistrar"/> class. Dependency Injection Constructor</summary>
+            <param name="iocContainer"><see cref="T:Insite.Core.BootStrapper.IIocContainer"/></param>
+            <param name="controllerInterface">The controller interface</param>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.RegisterDependencies">
+            <summary>Get all the dlls, go through them and register all dependencies in IOC Container.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.GetDependencies">
+            <summary>Goes through the dll files and finds <see cref="T:Insite.Core.Interfaces.Dependency.IDependency"/>s.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.GetDependency(System.Type)">
+            <summary>Looks at the <see cref="T:Insite.Core.Interfaces.Dependency.IDependency"/> and checks for <see cref="T:Insite.Core.Interfaces.Dependency.DependencyExclude"/> to skip it, if
+            none, then looks at <see cref="T:Insite.Core.Interfaces.Dependency.DependencyOrder"/> and <see cref="T:Insite.Core.Interfaces.Dependency.DependencyName"/> to return along
+            with the Type.</summary>
+            <param name="dependencyType">The <see cref="T:System.Type"/> to examine for the dependency attributes.</param>
+            <returns>The <see cref="T:Insite.Core.BootStrapper.DependencyRegistrar.Dependency"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.RegisterDependencies(System.Collections.Generic.IEnumerable{Insite.Core.BootStrapper.DependencyRegistrar.Dependency})">
+            <summary>Goes through all of the <see cref="T:Insite.Core.Interfaces.Dependency.IDependency"/>s found by order and registers them in Unity.</summary>
+            <param name="dependencies"><see cref="T:System.Collections.Generic.IEnumerable`1"/></param>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.RegisterDependency(Insite.Core.BootStrapper.DependencyRegistrar.Dependency)">
+            <summary>Registers the <see cref="T:Insite.Core.Interfaces.Dependency.IDependency"/> in Unity, if it has <see cref="T:Insite.Core.Interfaces.Dependency.ISingletonLifetime"/> it
+            registers it as a Singleton, if <see cref="T:Insite.Core.Interfaces.Dependency.ITransientLifetime"/>
+            it registers as a Transient (new instance per resolve), if neither of these interfaces, it defaults
+            to register as a Per Web Request instance.  If the <see cref="T:Insite.Core.Interfaces.Dependency.IDependency"/> has the<see cref="T:Insite.Core.Interfaces.Dependency.IInterceptable"/> interface, it registers it with to allow AOP.</summary>
+            <param name="dependency"><see cref="T:Insite.Core.BootStrapper.DependencyRegistrar.Dependency"/></param>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.DependencyRegistrar.Dependency">
+            <summary>Helper class to store the Order, Registration Name and Type to register in Unity.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.DependencyRegistrar.Dependency.#ctor(System.Int32,System.String,System.Type)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.BootStrapper.DependencyRegistrar.Dependency"/> class.</summary>
+            <param name="order">The order.</param>
+            <param name="name">The name.</param>
+            <param name="type">The type.</param>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.DependencyRegistrar.Dependency.Order">
+            <summary>The Order to register in to IOC by.</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.DependencyRegistrar.Dependency.Name">
+            <summary>The Name to register with in to IOC, null will be a default registration.</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.DependencyRegistrar.Dependency.Type">
+            <summary>The <see cref="P:Insite.Core.BootStrapper.DependencyRegistrar.Dependency.Type" /> to register in to IOC.</summary>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.HierarchicalGenericTypeLocator">
+            <summary>The hierarchical generic type locator.</summary>
+        </member>
+        <member name="F:Insite.Core.BootStrapper.HierarchicalGenericTypeLocator.CacheManager">
+            <summary>The cache manager.</summary>
+        </member>
+        <member name="F:Insite.Core.BootStrapper.HierarchicalGenericTypeLocator.IocContainer">
+            <summary>The ioc container.</summary>
+        </member>
+        <member name="F:Insite.Core.BootStrapper.HierarchicalGenericTypeLocator.DependencyLocator">
+            <summary>The dependency locator.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.HierarchicalGenericTypeLocator.#ctor(Insite.Core.Interfaces.Plugins.Caching.ICacheManager,Insite.Core.BootStrapper.IIocContainer,Insite.Common.Dependencies.IDependencyLocator)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.BootStrapper.HierarchicalGenericTypeLocator"/> class. </summary>
+            <param name="cacheManager">The cache Manager.</param>
+            <param name="iocContainer">The ioc Container.</param>
+            <param name="dependencyLocator">The dependency locator.</param>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.IDependencyRegistrar">
+            <summary>Run by the BootStrapper to register the dependencies in the IOC Container.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IDependencyRegistrar.RegisterDependencies">
+            <summary>Get all the dlls, go through them and register all dependencies in IOC Container.</summary>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.IIocContainer">
+            <summary>Interface to implement for IOC Containers.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IIocContainer.Configure">
+            <summary>Called on startup to perform any configuration necessary for the IOC Container.  Must set up DependencyLocator.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IIocContainer.SetHttpContextWrapper">
+            <summary>Sets up the <see cref="T:System.Web.HttpContextBase"/> to use <see cref="T:System.Web.HttpContextWrapper"/>.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IIocContainer.RegisterType(System.Type,System.Type,System.String)">
+            <summary>Registers a type mapping in the IOC Container.</summary>
+            <param name="from">Type you are mapping from, usually an interface.</param>
+            <param name="to">Type you are mapping resolves to the from type to.</param>
+            <param name="name">Name to register by, null for default registration, defaults to null.</param>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IIocContainer.FinalizeContainer">
+            <summary>Finalizes the IOC Container.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IIocContainer.IsRegistered(System.Type,System.String)">
+            <summary>Checks the IOC Container to see if the specified type is registered.</summary>
+            <param name="type">Type to check for.</param>
+            <param name="name">Name for the Type to check for, defaults to null.</param>
+            <returns>True if the type is found, false if not.</returns>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.IIocContainer.GetRegistrations">
+            <summary>A list of the <see cref="T:Insite.Core.BootStrapper.IocRegistration"/>s in the IOC Container.</summary>
+            <returns>A List of <see cref="T:Insite.Core.BootStrapper.IocRegistration"/>s.</returns>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.IIocRegistration">
+            <summary>The IocRegistration interface.</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IIocRegistration.FromType">
+            <summary>The Type being mapped from (usually an interface).</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IIocRegistration.ToType">
+            <summary>The Type being mapped to (what implementation to use for the FromType interface).</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IIocRegistration.Name">
+            <summary>The Name the Registration was mapped as (will be blank for default registration).</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IIocRegistration.Lifetime">
+            <summary>The Lifetime of this object when gotten from the IOC Container (Singleton, PerRequest, Transient).</summary>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.IocRegistration">
+            <summary>A representation of what is registered in the IOC Container.</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IocRegistration.FromType">
+            <summary>The Type being mapped from (usually an interface).</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IocRegistration.ToType">
+            <summary>The Type being mapped to (what implementation to use for the FromType interface).</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IocRegistration.Name">
+            <summary>The Name the Registration was mapped as (will be blank for default registration).</summary>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.IocRegistration.Lifetime">
+            <summary>The Lifetime of this object when gotten from the IOC Container (Singleton, PerRequest, Transient).</summary>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.RunDatabaseScripts">
+            <summary>StartupTask that loads database change scripts normally for upgrade purposes.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.CreateDbConnection">
+            <summary>Creates a new <see cref="T:System.Data.IDbConnection"/></summary>
+            <returns>The <see cref="T:System.Data.IDbConnection"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.GetExecutedSqlScripts(System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>Method to return a list of already executed SQL scripts.</summary>
+            <param name="connection"><see cref="T:System.Data.IDbConnection"/></param>
+            <param name="transaction"><see cref="T:System.Data.IDbTransaction"/></param>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.ExecuteCustomSqlScripts(System.Collections.Generic.List{System.String},System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>Method to execute sql scripts found in custom DLL'S.</summary>
+            <param name="scriptsAlreadyExecuted">The scripts already executed</param>
+            <param name="connection"><see cref="T:System.Data.IDbConnection"/></param>
+            <param name="transaction"><see cref="T:System.Data.IDbTransaction"/></param>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.ExecuteSqlScripts(System.Reflection.Assembly,System.Collections.Generic.List{System.String},System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>Method to execute a sql script and log its entries to the DatabaseScript table.</summary>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> to scan for embedded resources with the file extension of .sql</param>
+            <param name="scriptsAlreadyExecuted">The scripts already executed</param>
+            <param name="connection"><see cref="T:System.Data.IDbConnection"/></param>
+            <param name="transaction"><see cref="T:System.Data.IDbTransaction"/></param>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.GetSql(System.Reflection.Assembly,System.String)">
+            <summary>The get sql.</summary>
+            <param name="assembly">The assembly.</param>
+            <param name="name">The name.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.DatabaseScript.#ctor(System.String,System.Reflection.Assembly)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.BootStrapper.RunDatabaseScripts.DatabaseScript"/> class.</summary>
+            <param name="name">The name.</param>
+            <param name="assembly">The assembly.</param>
+        </member>
+        <member name="P:Insite.Core.BootStrapper.RunDatabaseScripts.DatabaseScript.Name">
+            <summary>Gets the name.</summary>
+        </member>
+        <member name="M:Insite.Core.BootStrapper.RunDatabaseScripts.DatabaseScript.GetSql">
+            <summary>The get sql.</summary>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.InitializeAuditLogsStartupTask">
+            <summary>StartupTask that initializes the <see cref="T:Insite.Data.Entities.Audit"/> logs.</summary>
+        </member>
+        <member name="T:Insite.Core.BootStrapper.LoadDefaultDataStartupTask">
+            <summary>StartupTask that loads default data normally for upgrade purposes.</summary>
+        </member>
+        <member name="T:Insite.Core.Plugins.Caching.EntityCacheManager">
+            <summary>The Entity Cache Manager.</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.CacheInvalidationInterval">
+            <summary>Gets the cache invalidation interval.</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.DatabaseRetryInterval">
+            <summary>Gets the database retry interval.</summary>
+        </member>
+        <member name="F:Insite.Core.Plugins.Caching.EntityCacheManager.CacheManager">
+            <summary>The cache manager.</summary>
+        </member>
+        <member name="F:Insite.Core.Plugins.Caching.EntityCacheManager.UnitOfWorkFactory">
+            <summary>The unit of work factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Plugins.Caching.EntityCacheManager.Timers">
+            <summary>The timers</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.CacheableEntities">
+            <summary>The cacheable entities.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.#ctor(Insite.Core.Interfaces.Plugins.Caching.ICacheManager,Insite.Core.Interfaces.Data.IUnitOfWorkFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Plugins.Caching.EntityCacheManager"/> class.</summary>
+            <param name="cacheManager">The cache manager.</param>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.GetEntityCacheValue(System.String,System.String)">
+            <summary>Gets the entity cache value for the supplied entity name.</summary>
+            <param name="entityName">Name of the entity.</param>
+            <param name="key">The key.</param>
+            <returns>The cached value or null if not found.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.GetEntityCacheValue``1(System.String)">
+            <summary>Gets the entity cache value by the type.</summary>
+            <param name="key">The key.</param>
+            <returns>The cached value or null if not found.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.GetEntityListCacheValue``2">
+            <summary>Gets the entity list cache value.</summary>
+            <returns>The cached entity list or null if not found.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.InvalidateCache(System.String)">
+            <summary>Invalidates the cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.RefreshEntityCache">
+            <summary>Refresh the entity cache for all entities.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.RefreshEntityCache(System.String)">
+            <summary>Refresh the entity cache for the specified entity.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.StartEntityCache">
+            <summary>Starts the entity cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.StopEntityCache">
+            <summary>Stops the entity cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.Clear">
+            <summary>Clear the cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.GetCacheableEntities">
+            <summary>Gets the cacheable entities.</summary>
+            <returns>The dictionary of cacheable entities.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.GetEntityListFromDatabase``2">
+            <summary>Runs the statement used to cache the entities and returns the result.</summary>
+            <returns>The entity list from the database.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.InitializeCacheState">
+            <summary>Initializes the state of the cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.IsCacheable(System.String)">
+            <summary>Determines whether the specified entity name is cacheable.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.IsInCache(System.String)">
+            <summary>Determines whether the specified entity name is in the cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.ValidateCache(System.String)">
+            <summary>Validates the cache.</summary>
+            <param name="entityName">Name of the entity.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.StartMonitoringCache">
+            <summary>Starts monitoring the cache.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.CacheInvalidationTimerElapsed(System.Object,System.Timers.ElapsedEventArgs,System.String)">
+            <summary>Caches the invalidation timer elapsed.</summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+            <param name="entityName">Name of the entity.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.WaitForCacheStateToStabilize(System.String,System.Guid)">
+            <summary>
+            Waits for the cache state to stabilize. We want to get back the same cache id twice in a row
+            to make sure the table has stopped changing before we re-load the cache.
+            </summary>
+            <param name="entityName">Name of the entity.</param>
+            <param name="currentCacheId">The current cache identifier.</param>
+            <returns>The stable current cache id.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.GetCurrentCacheId(System.String)">
+            <summary>Gets the current cache identifier.</summary>
+            <param name="entityName">Name of the entity.</param>
+            <returns>The current cache id.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.CacheEntity(System.String,System.Guid)">
+            <summary>Caches the entity.</summary>
+            <param name="entityName">Name of the entity.</param>
+            <param name="currentCacheId">The current cache identifier.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.CacheWithSqlStatement(System.String,System.Guid)">
+            <summary>Runs Sql Statement to cache the entity value as a string.</summary>
+            <param name="entityName">Name of the entity.</param>
+            <param name="currentCacheId">The current cache identifier.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.CacheEntityList(System.String,System.Guid)">
+            <summary>Runs function to cache the entity list.</summary>
+            <param name="entityName">Name of the entity.</param>
+            <param name="currentCacheId">The current cache identifier.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.SetEntityCacheValue(System.String,System.String,System.Guid,System.Object)">
+            <summary>Sets the entity cache value.</summary>
+            <param name="cachePrefix">The cache prefix.</param>
+            <param name="entityName">Name of the entity.</param>
+            <param name="currentCacheId">The current cache identifier.</param>
+            <param name="cacheValue">The value to cache.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.Caching.EntityCacheManager.RunSqlWithRetries(System.String,System.String,System.Boolean)">
+            <summary>Runs the supplied sql statement with error handling and retries.</summary>
+            <param name="sql">The sql statement.</param>
+            <param name="entityName">Optional entity name parameter, if set, adds an entity name parameter to the sql command.</param>
+            <param name="executeScalar">If true, executes the command with ExecuteScalar and returns the result.</param>
+            <returns>The result of ExecuteScalar if it was requested, otherwise null.</returns>
+        </member>
+        <member name="T:Insite.Core.Plugins.Caching.EntityCacheManager.EntityCacheConfiguration">
+            <summary>The entity cache configuration class.</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.EntityCacheConfiguration.InCache">
+            <summary>Gets or sets whether the entity is currently in the cache.</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.EntityCacheConfiguration.SqlStatement">
+            <summary>Gets or sets the sql statement to cache the entity with.</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.EntityCacheConfiguration.GetListToCache">
+            <summary>Gets or sets the function to call to cache the entity list with.</summary>
+        </member>
+        <member name="P:Insite.Core.Plugins.Caching.EntityCacheManager.EntityCacheConfiguration.RelatedEntities">
+            <summary>Gets or sets the list of related entity names that when they are added/updated/removed, will invalidate the cache for this entity.</summary>
+        </member>
+        <member name="T:Insite.Core.Plugins.Caching.EntityCacheStartupTask">
+            <summary>The entity cache startup task.</summary>
+            <seealso cref="T:Insite.Core.BootStrapper.IStartupTask" />
+        </member>
+        <member name="T:Insite.Core.Plugins.Content.IContentProvider">
+            <summary>Implement this interface to customize how content managed content is provided.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.Content.IContentProvider.GetCurrentApprovedRevision(Insite.Data.Entities.ContentManager,Insite.Data.Entities.Dtos.Interfaces.ILanguage,System.Nullable{Insite.Core.Interfaces.Plugins.DeviceTypeProvider.DeviceType},Insite.Data.Entities.Dtos.Interfaces.IPersona)">
+            <summary>Get current approved content</summary>
+            <param name="contentManager"><see cref="T:Insite.Data.Entities.ContentManager"/></param>
+            <param name="language">Language definition.</param>
+            <param name="deviceType">Device type.</param>
+            <param name="persona">Persona identifier.</param>
+            <returns>Latest specified content or null if none found.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Content.IContentProvider.GetCurrentOrFutureApprovedRevision(Insite.Data.Entities.ContentManager,Insite.Data.Entities.Dtos.Interfaces.ILanguage,System.Nullable{Insite.Core.Interfaces.Plugins.DeviceTypeProvider.DeviceType},Insite.Data.Entities.Dtos.Interfaces.IPersona)">
+            <summary>Get current or future approved content</summary>
+            <param name="contentManager"><see cref="T:Insite.Data.Entities.ContentManager"/></param>
+            <param name="language">Language definition.</param>
+            <param name="deviceType">Device type.</param>
+            <param name="persona">Persona identifier.</param>
+            <returns>Latest specified content or null if none found.</returns>
+        </member>
+        <member name="M:Insite.Core.Plugins.Content.IContentProvider.GetCurrentUnapprovedRevision(Insite.Data.Entities.ContentManager,Insite.Data.Entities.Dtos.Interfaces.ILanguage,System.Nullable{Insite.Core.Interfaces.Plugins.DeviceTypeProvider.DeviceType},Insite.Data.Entities.Dtos.Interfaces.IPersona,System.Boolean)">
+            <summary>Get current unapproved content</summary>
+            <param name="contentManager"><see cref="T:Insite.Data.Entities.ContentManager"/></param>
+            <param name="language">Language definition.</param>
+            <param name="deviceType">Device type.</param>
+            <param name="persona">Persona identifier.</param>
+            <param name="resolveExact">True to resolve exactly for Language, DeviceType and Persona</param>
+            <returns>Latest specified content or null if none found.</returns>
+        </member>
+        <member name="T:Insite.Core.Plugins.RulesEngine.CriteriaTypeFactory">
+            <summary>The criteria type factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Plugins.RulesEngine.CriteriaTypeFactory.DependencyLocator">
+            <summary>The dependency locator.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.RulesEngine.CriteriaTypeFactory.#ctor(Insite.Common.Dependencies.IDependencyLocator)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Plugins.RulesEngine.CriteriaTypeFactory"/> class. Initializes a new instance of the class with dependencies passed in.</summary>
+            <param name="dependencyLocator">The Dependency Locator used to resolve the request to create a new  <see cref="T:Insite.Core.Plugins.RulesEngine.ICriteriaType"/>.</param>
+        </member>
+        <member name="M:Insite.Core.Plugins.RulesEngine.CriteriaTypeFactory.GetCriteriaType(System.String)">
+            <summary>Creates new instances of <see cref="T:Insite.Core.Plugins.RulesEngine.ICriteriaType"/> by resolving the name of the postprocessor which is registered in the Ioc Container.</summary>
+            <param name="criteriaTypeName">The name of the criteria type to be instantiated and returned from the ioc container.</param>
+            <returns>A new instance of an object that implements <see cref="T:Insite.Core.Plugins.RulesEngine.ICriteriaType"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Plugins.StorageProvider.PathValidation">
+            <summary>The path validation.</summary>
+        </member>
+        <member name="M:Insite.Core.Plugins.StorageProvider.PathValidation.ValidatePath(System.String,System.String)">
+            <summary>Determines if a path lies within the base path boundaries.
+            If not, an exception is thrown.</summary>
+            <param name="basePath">The base path which boundaries are not to be transposed.</param>
+            <param name="mappedPath">The path to determine.</param>
+            <rereturns>The mapped path if valid.</rereturns>
+            <exception cref="T:System.ArgumentException">If the path is invalid.</exception>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Common.IIdentityServerUrlValidator">
+            <summary>The IdentityServerUrlValidator interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Common.IIdentityServerUrlValidator.ValidateSettings">
+            <summary>The validate settings.</summary>
+        </member>
+        <member name="T:Insite.Core.Common.InsiteLogAppender">
+            <summary>The insite log appender.</summary>
+        </member>
+        <member name="M:Insite.Core.Common.InsiteLogAppender.Append(log4net.Core.LoggingEvent)">
+            <summary>The append.</summary>
+            <param name="loggingEvent">The logging event.</param>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetBillToParameter">
+            <summary>The get bill to parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetBillToParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Dtos.Interfaces.IWebsite,Insite.Data.Entities.Dtos.Interfaces.IUserProfile,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetBillToParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="website">The website.</param>
+            <param name="userProfile">The user profile.</param>
+            <param name="cookieBillToId">The bill to id.</param>
+            <param name="queryBillToId">The query bill to id.</param>
+            <param name="signatureVerified">The signature verified</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetBillToParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetBillToParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetBillToParameter.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetBillToParameter.CookieBillToId">
+            <summary>Gets or sets the bill to id.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetCurrencyParameter">
+            <summary>The get currency parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Dtos.Interfaces.IWebsite,System.String,System.Nullable{System.Guid},Insite.Data.Entities.Dtos.Interfaces.IUserProfile,Insite.Data.Entities.Customer,Insite.Data.Entities.Customer,System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetCurrencyParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="website">The website.</param>
+            <param name="queryStringCurrencyCode">The query string currency code.</param>
+            <param name="cookieCurrencyId">The cookie currency id.</param>
+            <param name="userProfile">The user profile.</param>
+            <param name="billTo">The bill to.</param>
+            <param name="shipTo">The ship to.</param>
+            <param name="isReviewer">The is reviewer.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.QueryStringCurrencyCode">
+            <summary>Gets or sets the query string currency code.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.CookieCurrencyId">
+            <summary>Gets or sets the cookie currency id.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.BillTo">
+            <summary>Gets or sets the bill to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.ShipTo">
+            <summary>Gets or sets the ship to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetCurrencyParameter.IsReviewer">
+            <summary>Gets or sets a value indicating whether is reviewer.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter">
+            <summary>The get device type parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter.#ctor(System.String,System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter"/> class.</summary>
+            <param name="queryStringDeviceType">The query string device type.</param>
+            <param name="cookieDeviceType">The cookie device type.</param>
+            <param name="userAgent">The user agent.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter.QueryStringDeviceType">
+            <summary>Gets or sets the query string device type.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter.CookieDeviceType">
+            <summary>Gets or sets the cookie device type.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter.UserAgent">
+            <summary>Gets or sets the user agent.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetLanguageParameter">
+            <summary>The get language parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetLanguageParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Dtos.Interfaces.IWebsite,System.String,System.Nullable{System.Guid},Insite.Data.Entities.Dtos.Interfaces.IUserProfile,System.String,System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetLanguageParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="website">The website.</param>
+            <param name="queryStringLanguageCode">The query string language code.</param>
+            <param name="cookieLanguageId">The cookie language id.</param>
+            <param name="userProfile">The user profile.</param>
+            <param name="browserLanguageCode">The browser language code.</param>
+            <param name="isReviewer">The is reviewer.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.QueryStringLanguageCode">
+            <summary>Gets or sets the query string language code.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.CookieLanguageId">
+            <summary>Gets or sets the cookie language id.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.BrowserLanguageCode">
+            <summary>Gets or sets the browser language code.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetLanguageParameter.IsReviewer">
+            <summary>Gets or sets a value indicating whether is reviewer.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetPersonaParameter">
+            <summary>The get persona parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetPersonaParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Dtos.Interfaces.IWebsite,Insite.Data.Entities.Dtos.Interfaces.IUserProfile,Insite.Data.Entities.Customer,Insite.Data.Entities.Customer,System.String,System.Nullable{System.Guid},System.String,System.String,Insite.Data.Entities.AdminUserProfile)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetPersonaParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="website">The website.</param>
+            <param name="userProfile">The user profile.</param>
+            <param name="billTo">The bill to.</param>
+            <param name="shipTo">The ship to.</param>
+            <param name="queryStringPersona">The query string persona.</param>
+            <param name="cookiePersona">The cookie persona.</param>
+            <param name="clientIp">The client Ip.</param>
+            <param name="path">The path.</param>
+            <param name="adminUserProfile">The admin User Profile.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.BillTo">
+            <summary>Gets or sets the bill to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.ShipTo">
+            <summary>Gets or sets the ship to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.QueryStringPersona">
+            <summary>Gets or sets the query string persona.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.CookiePersona">
+            <summary>Gets or sets the cookie persona.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.ClientIp">
+            <summary>Gets or sets the client ip.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.Path">
+            <summary>Gets or sets the path.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetPersonaParameter.AdminUserProfile">
+            <summary>Gets or sets the admin user profile.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetShipToParameter">
+            <summary>The get ship to parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetShipToParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Dtos.Interfaces.IWebsite,Insite.Data.Entities.UserProfile,Insite.Data.Entities.Customer,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetShipToParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="website">The website.</param>
+            <param name="userProfile">The user profile.</param>
+            <param name="billTo">The bill to.</param>
+            <param name="cookieShipToId">The cookie ship to id.</param>
+            <param name="queryShipToId">The query ship to id.</param>
+            <param name="signatureVerified">The signature verified</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetShipToParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetShipToParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetShipToParameter.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetShipToParameter.BillTo">
+            <summary>Gets or sets the bill to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetShipToParameter.CookieShipToId">
+            <summary>Gets or sets the cookie ship to id.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetUserProfileParameter">
+            <summary>The get user profile parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetUserProfileParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Dtos.Interfaces.IWebsite,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetUserProfileParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="website">The website.</param>
+            <param name="userName">The userName.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetUserProfileParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetUserProfileParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetUserProfileParameter.UserName">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetWarehouseParameter">
+            <summary>The get warehouse parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetWarehouseParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,Insite.Data.Entities.Customer,Insite.Data.Entities.Customer)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetWarehouseParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="billTo">The bill to.</param>
+            <param name="shipTo">The ship to.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetWarehouseParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetWarehouseParameter.BillTo">
+            <summary>Gets or sets the bill to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetWarehouseParameter.ShipTo">
+            <summary>Gets or sets the ship to.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.GetWebsiteParameter">
+            <summary>The get website parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.GetWebsiteParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,System.Uri)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.GetWebsiteParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="pageUri">The page uri.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetWebsiteParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.GetWebsiteParameter.PageUri">
+            <summary>Gets or sets the page uri.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.SetBillToParameter">
+            <summary>The set bill to parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.SetBillToParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,System.Nullable{System.Guid})">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.SetBillToParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="billToId">The bill to id.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetBillToParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetBillToParameter.BillToId">
+            <summary>Gets or sets the bill to id.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.SetCurrencyParameter">
+            <summary>The set currency parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.SetCurrencyParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,System.Nullable{System.Guid},System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.SetCurrencyParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="currencyId">The currency id.</param>
+            <param name="isReviewer">The is reviewer.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetCurrencyParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetCurrencyParameter.CurrencyId">
+            <summary>Gets or sets the currency id.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetCurrencyParameter.IsReviewer">
+            <summary>Gets or sets a value indicating whether is reviewer.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.SetLanguageParameter">
+            <summary>The set language parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.SetLanguageParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,System.Nullable{System.Guid},System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.SetLanguageParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="languageId">The language id.</param>
+            <param name="isReviewer">The is reviewer.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetLanguageParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetLanguageParameter.LanguageId">
+            <summary>Gets or sets the language id.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetLanguageParameter.IsReviewer">
+            <summary>Gets or sets a value indicating whether is reviewer.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.SetPersonaParameter">
+            <summary>The set persona parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.SetPersonaParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,System.Nullable{System.Guid},System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.SetPersonaParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="personaId">The persona id.</param>
+            <param name="runRulesEngine">Indicates whether to run the rules engine or not.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.PersonaId">
+            <summary>Gets or sets the persona id.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.RunRulesEngine">
+            <summary>Gets or sets a value indicating whether [run rules engine].</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.BillTo">
+            <summary>Gets or sets the bill to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.ShipTo">
+            <summary>Gets or sets the ship to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetPersonaParameter.ClientIp">
+            <summary>Gets or sets the client ip.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Parameters.SetShipToParameter">
+            <summary>The set ship to parameter.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Parameters.SetShipToParameter.#ctor(Insite.Core.Interfaces.Data.IUnitOfWork,System.Nullable{System.Guid})">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Parameters.SetShipToParameter"/> class.</summary>
+            <param name="unitOfWork">The unit of work.</param>
+            <param name="shipToId">The ship to id.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetShipToParameter.UnitOfWork">
+            <summary>Gets or sets the unit of work.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Parameters.SetShipToParameter.ShipToId">
+            <summary>Gets or sets the ship to id.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.ICatalogContextService">
+            <summary>The ICatalogContextService interface.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IPersonaService">
+            <summary>The PersonaService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IPersonaService.GetPersona(Insite.Core.Context.Services.Parameters.GetPersonaParameter)">
+            <summary>The get persona.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IPersonaService.SetPersona(Insite.Core.Context.Services.Parameters.SetPersonaParameter)">
+            <summary>The set persona.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IDeviceTypeService">
+            <summary>The DeviceTypeService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IDeviceTypeService.GetDeviceType(Insite.Core.Context.Services.Parameters.GetDeviceTypeParameter)">
+            <summary>The get device type.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Core.Interfaces.Plugins.DeviceTypeProvider.DeviceType"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IDeviceTypeService.SetDeviceType(Insite.Core.Interfaces.Plugins.DeviceTypeProvider.DeviceType)">
+            <summary>The set device type.</summary>
+            <param name="deviceType">The device type.</param>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IWarehouseService">
+            <summary>The WarehouseService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IWarehouseService.GetWarehouse(Insite.Core.Context.Services.Parameters.GetWarehouseParameter)">
+            <summary>The get warehouse.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.Warehouse"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IShipToService">
+            <summary>The ShipToService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IShipToService.GetShipTo(Insite.Core.Context.Services.Parameters.GetShipToParameter)">
+            <summary>The get ship to.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.Customer"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IShipToService.SetShipTo(Insite.Core.Context.Services.Parameters.SetShipToParameter)">
+            <summary>The set ship to.</summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IBillToService">
+            <summary>The GetBillToService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IBillToService.GetBillTo(Insite.Core.Context.Services.Parameters.GetBillToParameter)">
+            <summary>The get bill to.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.Customer"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IBillToService.SetBillTo(Insite.Core.Context.Services.Parameters.SetBillToParameter)">
+            <summary>The set bill to.</summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="T:Insite.Core.Context.Services.ICurrencyService">
+            <summary>The CurrencyService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.ICurrencyService.GetCurrency(Insite.Core.Context.Services.Parameters.GetCurrencyParameter)">
+            <summary>The get currency.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.Currency"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.ICurrencyService.SetCurrency(Insite.Core.Context.Services.Parameters.SetCurrencyParameter)">
+            <summary>The set currency.</summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="T:Insite.Core.Context.Services.ILanguageService">
+            <summary>The LanguageService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.ILanguageService.GetLanguage(Insite.Core.Context.Services.Parameters.GetLanguageParameter)">
+            <summary>The get language.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.Language"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.ILanguageService.SetLanguage(Insite.Core.Context.Services.Parameters.SetLanguageParameter)">
+            <summary>The set language.</summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IUserProfileService">
+            <summary>The UserProfileService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IUserProfileService.GetUserProfile(Insite.Core.Context.Services.Parameters.GetUserProfileParameter)">
+            <summary>The get user profile.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.UserProfile"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IUserProfileService.GetAdminUserProfile(Insite.Core.Context.Services.Parameters.GetUserProfileParameter)">
+            <summary>The get admin user profile.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Data.Entities.AdminUserProfile"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IUserProfileService.SetRememberedUserProfile(Insite.Core.Context.Services.Parameters.SetRememberedUserProfileParameter)">
+            <summary>The set remembered user profile.</summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IUserProfileService.GetRememberedUserProfile">
+            <summary>The get remember me user profile.</summary>
+            <returns>The <see cref="T:Insite.Data.Entities.UserProfile"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Context.Services.Results.GetWebsiteResult">
+            <summary>The get website result.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.Results.GetWebsiteResult.#ctor(Insite.Data.Entities.Dtos.WebsiteDto,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.Services.Results.GetWebsiteResult"/> class.</summary>
+            <param name="websiteDto">The website dto.</param>
+            <param name="microsite">The microsite.</param>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Results.GetWebsiteResult.WebsiteDto">
+            <summary>Gets or sets the website dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.Services.Results.GetWebsiteResult.Microsite">
+            <summary>Gets or sets the microsite.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.Services.IWebsiteService">
+            <summary>The WebsiteService interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.Services.IWebsiteService.GetWebsite(Insite.Core.Context.Services.Parameters.GetWebsiteParameter)">
+            <summary>The get website.</summary>
+            <param name="parameter">The parameter.</param>
+            <returns>The <see cref="T:Insite.Core.Context.Services.Results.GetWebsiteResult"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Context.CatalogContext">
+            <summary>The catalog context.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.ICatalogContext">
+            <summary>The CatalogContext interface.</summary>
+        </member>
+        <member name="T:Insite.Core.Context.SiteContextDto">
+            <summary>The site context dto.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.SiteContextDto.#ctor(Insite.Core.Context.ISiteContext)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.SiteContextDto"/> class.</summary>
+            <param name="siteContext">The site context.</param>
+        </member>
+        <member name="M:Insite.Core.Context.SiteContextDto.#ctor(Insite.Data.Entities.Website,Insite.Data.Entities.Customer,Insite.Data.Entities.Customer,System.String,Insite.Data.Entities.UserProfile,Insite.Data.Entities.Language,Insite.Data.Entities.Currency,Insite.Data.Entities.Warehouse,Insite.Core.Interfaces.Plugins.DeviceTypeProvider.DeviceType,Insite.Data.Entities.Persona,Insite.Data.Entities.UserProfile)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Context.SiteContextDto"/> class.</summary>
+            <param name="website">The website.</param>
+            <param name="billTo">The bill to.</param>
+            <param name="shipTo">The ship to.</param>
+            <param name="microsite">The microsite.</param>
+            <param name="userProfile">The user profile.</param>
+            <param name="language">The language.</param>
+            <param name="currency">The currency.</param>
+            <param name="warehouse">The warehouse.</param>
+            <param name="deviceType">The device type.</param>
+            <param name="persona">The persona.</param>
+            <param name="rememberedUserProfile">The remember Me User Profile.</param>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.Website">
+            <summary>Gets or sets the website.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.WebsiteDto">
+            <summary>Gets or sets the website dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.BillTo">
+            <summary>Gets or sets the bill to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.ShipTo">
+            <summary>Gets or sets the ship to.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.Microsite">
+            <summary>Gets or sets the microsite.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.UserProfile">
+            <summary>Gets or sets the user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.UserProfileDto">
+            <summary>Gets or sets the user profile dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.Language">
+            <summary>Gets or sets the language.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.LanguageDto">
+            <summary>Gets or sets the language dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.Currency">
+            <summary>Gets or sets the currency.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.CurrencyDto">
+            <summary>Gets or sets the currency dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.Warehouse">
+            <summary>Gets or sets the warehouse.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.WarehouseDto">
+            <summary>Gets or sets the warehouse dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.DeviceType">
+            <summary>Gets or sets the device type.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.Persona">
+            <summary>Gets or sets the persona.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.PersonaDto">
+            <summary>Gets or sets the persona dto.</summary>
+        </member>
+        <member name="M:Insite.Core.Context.SiteContextDto.IsUserInRole(System.String)">
+            <summary>The is user in role.</summary>
+            <param name="roleName">The role name.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.RememberedUserProfile">
+            <summary>Gets the remember me user profile.</summary>
+        </member>
+        <member name="P:Insite.Core.Context.SiteContextDto.RememberedUserProfileDto">
+            <summary>Gets the remember me user profile dto.</summary>
+        </member>
+        <member name="T:Insite.Core.Security.AdminUserNameHelper">
+            <summary>A helper class for dealing with the prefix on AspNetUsers.UserName for AdminUserProfile users</summary>
+        </member>
+        <member name="M:Insite.Core.Security.AdminUserNameHelper.RemovePrefix(System.String)">
+            <summary>removes the admin prefix from identity user names</summary>
+            <param name="identityUserName">AspNetUsers user name</param>
+            <returns>user name with out the prefix</returns>
+            <exception cref="T:System.ArgumentException">Thrown if identityUserName does not start with the prefix</exception>
+        </member>
+        <member name="M:Insite.Core.Security.AdminUserNameHelper.AddPrefix(System.String)">
+            <summary>Applies the AspNetUsers admin prefix to a user name</summary>
+            <param name="userName">user name without an admin prefix</param>
+            <returns>user name with an admin prefix</returns>
+        </member>
+        <member name="M:Insite.Core.Security.AdminUserNameHelper.IsAdminUser(System.String)">
+            <summary>Evaluates whether a user name is an admin</summary>
+            <param name="identityUserName">AspNetUsers username</param>
+            <returns>true if this is an admin user</returns>
+        </member>
+        <member name="T:Insite.Core.Security.IAccessTokenProvider">
+            <summary>The AccessTokenProvider interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Security.IAccessTokenProvider.GetAccessToken(System.Security.Principal.IPrincipal)">
+            <summary>The get access token.</summary>
+            <param name="user">The user.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Security.IAccessTokenProvider.ValidateAccessToken(System.String)">
+            <summary>Validates the token.</summary>
+            <param name="token">The token.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Security.SsoClientDto">
+            <summary>The SSO Client Dto.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.ClientId">
+            <summary>Gets or sets the client identifier.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.ClientName">
+            <summary>Gets or sets the name.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.Flow">
+            <summary>Gets or sets the flow.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.Enabled">
+            <summary>Gets or sets a value indicating whether this <see cref="T:Insite.Core.Security.SsoClientDto"/> is enabled.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.RequireConsent">
+            <summary>Gets or sets a value indicating whether [require consent].</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.IncludeAdminScope">
+            <summary>Gets or sets a value indicating whether [include admin scope].</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.IncludeStorefrontScope">
+            <summary>Gets or sets a value indicating whether [include storefront scope].</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.AccessTokenLifetime">
+            <summary>Gets or sets the access token lifetime (in seconds).</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.IdentityTokenLifetime">
+            <summary>Gets or sets the identity token lifetime (in seconds).</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.AuthorizationCodeLifetime">
+            <summary>Gets or sets the authorization code lifetime (in seconds).</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.AllowRefreshTokens">
+            <summary>Gets or sets a value indicating whether [allow refresh tokens].</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.AbsoluteRefreshTokenLifetime">
+            <summary>Gets or sets the absolute refresh token lifetime (in seconds).</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.SlidingRefreshTokenLifetime">
+            <summary>Gets or sets the sliding refresh token lifetime (in seconds).</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.HasClientSecret">
+            <summary>Gets or sets a value indicating whether this instance has client secret.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.ClientSecret">
+            <summary>
+            Gets or sets the client secret. If ClientSecret has a value, it will set the Client Secret for this client.
+            It never returns the current Client Secret because the value is one way hashed.
+            </summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientDto.RedirectUris">
+            <summary>Gets or sets the comma separated list of redirect uris.</summary>
+        </member>
+        <member name="T:Insite.Core.Security.ISsoClientRepository">
+            <summary>The Sso Client Repository interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Security.ISsoClientRepository.GetTable">
+            <summary>Gets an IQueryable to query Sso Clients.</summary>
+            <returns>The <see cref="T:System.Linq.IQueryable`1"/></returns>
+        </member>
+        <member name="M:Insite.Core.Security.ISsoClientRepository.Get(System.String)">
+            <summary>Gets the specified Sso Client.</summary>
+            <param name="clientId">The client identifier.</param>
+            <returns>The <see cref="T:Insite.Core.Security.SsoClientDto"/> or null if not found.</returns>
+        </member>
+        <member name="M:Insite.Core.Security.ISsoClientRepository.Insert(Insite.Core.Security.SsoClientDto)">
+            <summary>Inserts the specified Sso Client.</summary>
+            <param name="ssoClientDto">The sso client dto.</param>
+            <returns>The <see cref="T:Insite.Core.Security.SsoClientResult"/> indicating if the operation was successful.</returns>
+        </member>
+        <member name="M:Insite.Core.Security.ISsoClientRepository.Update(Insite.Core.Security.SsoClientDto)">
+            <summary>Updates the specified Sso Client.</summary>
+            <param name="ssoClientDto">The sso client dto.</param>
+            <returns>The <see cref="T:Insite.Core.Security.SsoClientResult"/> indicating if the operation was successful.</returns>
+        </member>
+        <member name="M:Insite.Core.Security.ISsoClientRepository.Delete(Insite.Core.Security.SsoClientDto)">
+            <summary>Deletes the specified Sso Client.</summary>
+            <param name="ssoClientDto">The sso client dto.</param>
+            <returns>The <see cref="T:Insite.Core.Security.SsoClientResult"/> indicating if the operation was successful.</returns>
+        </member>
+        <member name="T:Insite.Core.Security.MixedOAuthBearerAuthenticationProvider">
+            <summary>The mixed o auth bearer authentication provider.</summary>
+        </member>
+        <member name="M:Insite.Core.Security.MixedOAuthBearerAuthenticationProvider.RequestToken(Microsoft.Owin.Security.OAuth.OAuthRequestTokenContext)">
+            <summary>The request token.</summary>
+            <param name="context">The context.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Security.SsoClientResult">
+            <summary>The Sso Client Result.</summary>
+        </member>
+        <member name="M:Insite.Core.Security.SsoClientResult.#ctor(System.Boolean,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Security.SsoClientResult"/> class.</summary>
+            <param name="success">if set to <c>true</c> [success].</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientResult.Success">
+            <summary>Gets or sets a value indicating whether this <see cref="T:Insite.Core.Security.SsoClientResult"/> is success.</summary>
+        </member>
+        <member name="P:Insite.Core.Security.SsoClientResult.Message">
+            <summary>Gets or sets the message.</summary>
+        </member>
+        <member name="T:Insite.Core.Licensing.ILicenseManager">
+            <summary>The LicenseManager interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Licensing.ILicenseManager.Check(System.String)">
+            <summary>The check.</summary>
+            <param name="module">The module.</param>
+        </member>
+        <member name="T:Insite.Core.Licensing.License">
+            <summary>The class representing a license</summary>
+        </member>
+        <member name="M:Insite.Core.Licensing.License.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Licensing.License"/> class.</summary>
+        </member>
+        <member name="M:Insite.Core.Licensing.License.#ctor(Insite.Core.Licensing.License)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Licensing.License"/> class.</summary>
+            <param name="that">The that.</param>
+        </member>
+        <member name="P:Insite.Core.Licensing.License.Module">
+            <summary>Gets or sets the module.</summary>
+        </member>
+        <member name="P:Insite.Core.Licensing.License.Count">
+            <summary>Gets or sets the count.</summary>
+        </member>
+        <member name="P:Insite.Core.Licensing.License.Status">
+            <summary>Gets or sets the status.</summary>
+        </member>
+        <member name="P:Insite.Core.Licensing.License.ExpirationDate">
+            <summary>Gets or sets the expiration date.</summary>
+        </member>
+        <member name="P:Insite.Core.Licensing.License.HasExpired">
+            <summary>Gets a value indicating whether has expired.</summary>
+        </member>
+        <member name="P:Insite.Core.Licensing.License.NextCheckDate">
+            <summary>Gets or sets the next check date.</summary>
+        </member>
+        <member name="T:Insite.Core.Licensing.LicenseSavedException">
+            <summary>The exception class throw where license save failed or license was invalid</summary>
+        </member>
+        <member name="M:Insite.Core.Licensing.LicenseSavedException.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Licensing.LicenseSavedException"/> class.</summary>
+            <param name="reason">The reason.</param>
+            <param name="host">The host.</param>
+        </member>
+        <member name="P:Insite.Core.Licensing.LicenseSavedException.Message">
+            <summary>Gets the message.</summary>
+        </member>
+        <member name="T:Insite.Core.Licensing.LicenseStatus">
+            <summary>
+            An enum of the possible license statuses.
+            Needs to be compatible with a similar enum in InSite.LicenseService.
+            </summary>
+        </member>
+        <member name="F:Insite.Core.Licensing.LicenseStatus.Permanent">
+            <summary>The permanent.</summary>
+        </member>
+        <member name="F:Insite.Core.Licensing.LicenseStatus.Temporary">
+            <summary>The temporary.</summary>
+        </member>
+        <member name="F:Insite.Core.Licensing.LicenseStatus.Pending">
+            <summary>The pending.</summary>
+        </member>
+        <member name="F:Insite.Core.Licensing.LicenseStatus.Presumed">
+            <summary>The presumed.</summary>
+        </member>
+        <member name="T:Insite.Core.Licensing.Licensing">
+            <summary>License validator class which calls back to the public ISC licensing web service</summary>
+        </member>
+        <member name="F:Insite.Core.Licensing.Licensing.AdminConsoleModule">
+            <summary>Module for the admin console</summary>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.Check(System.String,System.String)">
+             <summary>Checks the licensing for the given module and host key. Throws if expired</summary>
+             <param name="module">The name of the module</param>
+             <param name="hostName">The host name or identifier that the license is assigned to, or null to use current http request host.</param>
+             <returns>true if the there is a valid license for the given parameters</returns>
+            
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.SetNextCheckdate(Insite.Core.Licensing.License,System.Double)">
+            <summary>The set next checkdate.</summary>
+            <param name="license">The license.</param>
+            <param name="daysIfNotExpired">The days If Not Expired.</param>
+            Set the next check time for the license.
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.PhoneHomeForLicense(System.String,System.String)">
+            <summary>The phone home for license.</summary>
+            <param name="hostName">The host name.</param>
+            <param name="module">The module.</param>
+            <returns>The <see cref="T:Insite.Core.LicensingService.InSiteLicense"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.ChangeMembershipAdminPassword(System.String,System.String)">
+            <summary>The change membership admin password.</summary>
+            <param name="currentPassword">The current password.</param>
+            <param name="newPassword">The new password.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.SetPasswordHasBeenChanged(System.String)">
+            <summary>The set password has been changed.</summary>
+            <param name="hostName">The host name.</param>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.SaveLicensesToDatabase(System.String,System.Collections.Generic.Dictionary{System.String,Insite.Core.Licensing.License})">
+            <summary>The save licenses to database.</summary>
+            <param name="hostName">The host name.</param>
+            <param name="licenses">The licenses.</param>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.ReadLicensesFromDatabase(System.String)">
+            <summary>The read licenses from database.</summary>
+            <param name="hostName">The host name.</param>
+            <returns>A dictionary of licenses.</returns>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.GetHosts(System.String)">
+            <summary>Gets a list of all hosts that are aliased to the same representative as the current host.
+            In plainer English, gets the hosts that share the licenses of the current host.</summary>
+            <param name="hostName">The host Name.</param>
+            <returns>List of host names.</returns>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.GetExistingLicenses(System.String)">
+            <summary>Gets all existing licenses. Used by management console to show all licenses.</summary>
+            <param name="hostName">The host Name.</param>
+            <returns>A list of licenses.</returns>
+        </member>
+        <member name="M:Insite.Core.Licensing.Licensing.Register(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>Requests registration of the clients's licenses.</summary>
+            <param name="customerId">The customer Id.</param>
+            <param name="contactName">The contact Name.</param>
+            <param name="contactPhone">The contact Phone.</param>
+            <param name="contactEmail">The contact Email.</param>
+            <param name="companyName">The company name.</param>
+            <param name="hostName">The host Name.</param>
+            <returns>A list of licenses.</returns>
+        </member>
+        <member name="T:Insite.Core.Exceptions.InvalidAddressException">
+            <summary>The invalid address exception.</summary>
+        </member>
+        <member name="T:Insite.Core.Exceptions.NotFoundException">
+            <summary>The not found exception.</summary>
+        </member>
+        <member name="P:Insite.Core.Exceptions.NotFoundException.RequestedObjectType">
+            <summary>Gets or sets the requested object type.</summary>
+        </member>
+        <member name="P:Insite.Core.Exceptions.NotFoundException.RequestedId">
+            <summary>Gets or sets the requested id.</summary>
+        </member>
+        <member name="M:Insite.Core.Exceptions.NotFoundException.#ctor(System.Type,System.Guid)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Exceptions.NotFoundException"/> class.</summary>
+            <param name="requestedObjectType">The requested object type.</param>
+            <param name="requestedId">The requested id.</param>
+        </member>
+        <member name="T:Insite.Core.Extensions.UriExtensions">
+            <summary>The uri extensions.</summary>
+        </member>
+        <member name="M:Insite.Core.Extensions.UriExtensions.SetQueryStringParameter(System.Uri,System.String,System.String)">
+            <summary>The set query string parameter.</summary>
+            <param name="uri">The uri.</param>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <returns>The <see cref="T:System.Uri"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ICategoryCopyService">
+            <summary>The category copy service interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ICategoryCopyService.Copy(Insite.Data.Entities.Category,Insite.Data.Entities.Website)">
+            <summary>The copy method for <see cref="T:Insite.Data.Entities.Category"/></summary>
+            <param name="category">The category to copy.</param>
+            <param name="website">The website to associate the new category to.</param>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ConfigurationOptionConditionCopyService">
+            <summary>The configuration option condition copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ConfigurationOptionConditionCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ConfigurationOptionConditionCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ConfigurationOptionConditionCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Services.ICopyServiceFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.ConfigurationOptionConditionCopyService"/> class.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ConfigurationOptionConditionCopyService.Copy(Insite.Data.Entities.ConfigurationOptionCondition)">
+            <summary>The configuration option condition copy method.</summary>
+            <param name="configurationOptionCondition">The configuration option condition to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.ConfigurationOptionCondition"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ConfigurationOptionCopyService">
+            <summary>The configuration option copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ConfigurationOptionCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ConfigurationOptionCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ConfigurationOptionCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Services.ICopyServiceFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.ConfigurationOptionCopyService"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="copyServiceFactory">The copy service factory.</param>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ConfigurationOptionCopyService.Copy(Insite.Data.Entities.ConfigurationOption)">
+            <summary>The configuration option copy method.</summary>
+            <param name="configurationOption">The configuration option to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.ConfigurationOption"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ConfigurationPageCopyService">
+            <summary>The configuration page copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ConfigurationPageCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ConfigurationPageCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ConfigurationPageCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Services.ICopyServiceFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.ConfigurationPageCopyService"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="copyServiceFactory">The copy service factory.</param>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ConfigurationPageCopyService.Copy(Insite.Data.Entities.ConfigurationPage)">
+            <summary>The configuration page copy method.</summary>
+            <param name="configurationPage">The product to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.ConfigurationPage"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.EntityBaseCopyService`1">
+            <summary>The base entity copy service.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.EntityBaseCopyService`1.Copy(`0)">
+            <summary>Makes a basic copy of the simple properties on an <see cref="T:Insite.Data.Entities.EntityBase"/> object.</summary>
+            <param name="entity">The entity to be copied</param>
+            <returns>The copied entity</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ContentCopyService">
+            <summary>The Content copy service.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ContentCopyService.Copy(Insite.Data.Entities.Content)">
+            <summary>The Content copy method.</summary>
+            <param name="content">The content to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.ContentManager"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ContentManagerCopyService">
+            <summary>The ContentManager copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ContentManagerCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ContentManagerCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ContentManagerCopyService.ContentManagerUtilities">
+            <summary>The content manager utilities.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ContentManagerCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Services.ICopyServiceFactory,Insite.Core.Plugins.EntityUtilities.IContentManagerUtilities)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.ContentManagerCopyService"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="copyServiceFactory">The copy service factory.</param>
+            <param name="contentManagerUtilities">The content manager helper utilities.</param>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ContentManagerCopyService.Copy(Insite.Data.Entities.ContentManager)">
+            <summary>The ContentManager copy method.</summary>
+            <param name="contentManager">The ContentManager to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.ContentManager"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.CategoryCopyService">
+            <summary>The category copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.CategoryCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.CategoryCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.CategoryCopyService.CategoryRepository">
+            <summary>The category repository.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.CategoryCopyService.ContentManagerCopyService">
+            <summary>The content manager copy service.</summary>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ProductCopyService">
+            <summary>The product copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ProductCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ProductCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ProductCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Services.ICopyServiceFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.ProductCopyService"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="copyServiceFactory">The copy service factory.</param>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ProductCopyService.Copy(Insite.Data.Entities.Product)">
+            <summary>The product copy method.</summary>
+            <param name="product">The product to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.Product"/>.</returns>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.ProductWarehouseCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ProductWarehouseCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.ProductWarehouseCopyService"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ProductWarehouseCopyService.Copy(Insite.Data.Entities.ProductWarehouse)">
+            <summary>The product warehouse copy method.</summary>
+            <param name="productWarehouse">The product warehouse to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.ProductWarehouse"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.SpecificationCopyService">
+            <summary>The Specification copy service.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.SpecificationCopyService.CopyServiceFactory">
+            <summary>The copy service factory.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.CopyServices.SpecificationCopyService.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.SpecificationCopyService.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Services.ICopyServiceFactory)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.CopyServices.SpecificationCopyService"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="copyServiceFactory">The copy service factory.</param>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.SpecificationCopyService.Copy(Insite.Data.Entities.Specification)">
+            <summary>The Specification copy method.</summary>
+            <param name="specification">The Specification to be copied.</param>
+            <returns>The copied <see cref="T:Insite.Data.Entities.Specification"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.Services.CopyServices.ICopyService`1">
+            <summary>The copy service interface.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.CopyServices.ICopyService`1.Copy(`0)">
+            <summary>Makes a basic copy of the simple properties on an <see cref="T:Insite.Data.Entities.EntityBase"/> object.</summary>
+            <param name="entity">The entity to be copied</param>
+            <returns>The copied entity</returns>
+        </member>
+        <member name="T:Insite.Core.Services.Handlers.HandlerFactory">
+            <summary>Factory to get service handlers.</summary>
+        </member>
+        <member name="F:Insite.Core.Services.Handlers.HandlerFactory.dependencyLocator">
+            <summary>The dependency locator.</summary>
+        </member>
+        <member name="M:Insite.Core.Services.Handlers.HandlerFactory.#ctor(Insite.Common.Dependencies.IDependencyLocator)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.Services.Handlers.HandlerFactory"/> class.</summary>
+            <param name="dependencyLocator">The dependency locator.</param>
+        </member>
+        <member name="M:Insite.Core.Services.Handlers.HandlerFactory.GetHandler``1">
+            <summary>Sets up the <see cref="T:Insite.Core.Services.Handlers.IHandler`2"/> chain and returns the first <see cref="T:Insite.Core.Services.Handlers.IHandler`2"/> in the chain.</summary>
+            <typeparam name="T">The type</typeparam>
+        </member>
+        <member name="M:Insite.Core.Services.Handlers.HandlerFactory.GetHandler``1(System.String)">
+            <summary>Get a specific <see cref="T:Insite.Core.Services.Handlers.IHandler`2"/> by name.</summary>
+            <param name="name">The name.</param>
+            <typeparam name="T">The type</typeparam>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.AccountManagement.AccountManagementPrimaryGroup">
+            <summary>The Account Management primary group.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.Catalog.CatalogPrimaryGroup">
+            <summary>The Catalog primary group.</summary>
+        </member>
+        <member name="P:Insite.Core.SystemSetting.Groups.Catalog.CatalogPrimaryGroup.Name">
+            <summary>The name.</summary>
+        </member>
+        <member name="P:Insite.Core.SystemSetting.Groups.Catalog.CatalogPrimaryGroup.Label">
+            <summary>The label.</summary>
+        </member>
+        <member name="P:Insite.Core.SystemSetting.Groups.Catalog.CatalogPrimaryGroup.ShortDescription">
+            <summary>The short description.</summary>
+        </member>
+        <member name="P:Insite.Core.SystemSetting.Groups.Catalog.CatalogPrimaryGroup.Description">
+            <summary>The description.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.Integration.IntegrationPrimaryGroup">
+            <summary>The integration primary group.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.OrderManagement.OrderManagementPrimaryGroup">
+            <summary>The Order Management primary group.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.Search.SearchPrimaryGroup">
+            <summary>The Search primary group.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.Shipping.ShippingPrimaryGroup">
+            <summary>The Shipping primary group.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.Groups.SiteConfigurations.SiteConfigurationsPrimaryGroup">
+            <summary>The Site Configurations primary group.</summary>
+        </member>
+        <member name="T:Insite.Core.SystemSetting.SystemSettingProvider">
+            <summary>The system setting provider.</summary>
+        </member>
+        <member name="F:Insite.Core.SystemSetting.SystemSettingProvider.SystemSettingKey">
+            <summary>The system setting key.</summary>
+        </member>
+        <member name="F:Insite.Core.SystemSetting.SystemSettingProvider.SystemSettingDefaultsKey">
+            <summary>The system setting defaults key.</summary>
+        </member>
+        <member name="F:Insite.Core.SystemSetting.SystemSettingProvider.CacheManager">
+            <summary>The cache manager.</summary>
+        </member>
+        <member name="F:Insite.Core.SystemSetting.SystemSettingProvider.SystemSettingsCacheKeyProvider">
+            <summary>The cache key provider.</summary>
+        </member>
+        <member name="F:Insite.Core.SystemSetting.SystemSettingProvider.UnitOfWorkFactory">
+            <summary>The unit of work factory.</summary>
+        </member>
+        <member name="P:Insite.Core.SystemSetting.SystemSettingProvider.UnitOfWork">
+            <summary>The unit of work.</summary>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.Interfaces.Plugins.Caching.ICacheManager,Insite.Core.Interfaces.Plugins.SystemSetting.ISystemSettingsCacheKeyProvider)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.SystemSetting.SystemSettingProvider"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="cacheManager">The cache manager.</param>
+            <param name="systemSettingsCacheKeyProvider">The cache key provider.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.GetValue``1(System.String,``0,System.Boolean,System.Nullable{System.Guid})">
+            <summary>The get value.</summary>
+            <param name="name">The name.</param>
+            <param name="defaultValue">The default value.</param>
+            <param name="isEncrypted">The is encrypted.</param>
+            <param name="overriddenWebsiteId">Indicates the website id to use if not the current website.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.SetValue(System.String,System.String,System.Boolean,System.Nullable{System.Guid})">
+            <summary>The set value.</summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+            <param name="isEncrypted">The is encrypted.</param>
+            <param name="overriddenWebsiteId">Indicates the website id to use if not the current website.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.Delete(System.String,System.Nullable{System.Guid})">
+            <summary>The delete setting.</summary>
+            <param name="name">The name.</param>
+            <param name="overriddenWebsiteId">Indicates the website id to use if not the current website.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.SetCurrentWebsiteId(System.Nullable{System.Guid})">
+            <summary>The set current website id.</summary>
+            <param name="websiteId">The website id.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.GetDefaultValue``1(System.String,System.Boolean,System.Boolean)">
+            <summary>The get default value for setting.</summary>
+            <param name="name">The name.</param>
+            <param name="isEncrypted">The is encrypted.</param>
+            <param name="isGlobal">The is global.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.DeleteGlobalValue(System.String)">
+            <summary>The delete global setting.</summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Insite.Core.SystemSetting.SystemSettingProvider.HasWebsiteSpecificValue(System.String)">
+            <summary>The has website specific value.</summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="T:Insite.Core.WebApi.CacheRoutePatternProvider">
+            <summary>Responsible for providing route pattern and linked route patterns.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.CacheRoutePatternProvider.GetRoutePattern(System.Net.Http.HttpRequestMessage)">
+            <summary>Generates the route pattern stored for this request to be used to invalidate the resource.</summary>
+            <param name="request">The request.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.CacheRoutePatternProvider.GetLinkedRoutePatterns(System.Net.Http.HttpRequestMessage)">
+            <summary>Gets all linked route patterns for this request. Called at the time of invalidation.</summary>
+            <param name="request">The request.</param>
+            <returns>All linked route patterns for this request that should be invalidated.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.CacheRoutePatternProvider.GetInvalidateRoutes(System.Net.Http.HttpRequestMessage)">
+            <summary>The get invalidate routes.</summary>
+            <param name="request">The request.</param>
+        </member>
+        <member name="M:Insite.Core.WebApi.CacheRoutePatternProvider.GetPattern(System.Net.Http.HttpRequestMessage)">
+            <summary>The get pattern.</summary>
+            <param name="request">The request.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.WebApi.BrowserJsonFormatter">
+            <summary>This class makes the Json returned from the REST service format nicely on browsers</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.BrowserJsonFormatter.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Core.WebApi.BrowserJsonFormatter" /> class.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.BrowserJsonFormatter.SetDefaultContentHeaders(System.Type,System.Net.Http.Headers.HttpContentHeaders,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>The set default content headers.</summary>
+            <param name="type">The type.</param>
+            <param name="headers">The headers.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="T:Insite.Core.WebApi.DeltaContractResolver">
+            <summary>The delta contract resolver.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.DeltaContractResolver.CreateContract(System.Type)">
+            <summary>The create contract.</summary>
+            <param name="objectType">The object type.</param>
+            <returns>The <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/>.</returns>
+        </member>
+        <member name="P:Insite.Core.WebApi.DeltaContractResolver.DynamicObjectValueProvider.PropertyName">
+            <summary>Gets or sets the property name.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.DeltaContractResolver.DynamicObjectValueProvider.GetValue(System.Object)">
+            <summary>The get value.</summary>
+            <param name="target">The target.</param>
+            <returns>The <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.DeltaContractResolver.DynamicObjectValueProvider.SetValue(System.Object,System.Object)">
+            <summary>The set value.</summary>
+            <param name="target">The target.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:Insite.Core.WebApi.GlobalExceptionHandler">
+            <summary>The global exception handler.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.GlobalExceptionHandler.Handle(System.Web.Http.ExceptionHandling.ExceptionHandlerContext)">
+            <summary>The handle.</summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Insite.Core.WebApi.GlobalExceptionLogger">
+            <summary>The global exception logger.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.GlobalExceptionLogger.LogAsync(System.Web.Http.ExceptionHandling.ExceptionLoggerContext,System.Threading.CancellationToken)">
+            <summary>The log async.</summary>
+            <param name="context">The context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.GlobalExceptionLogger.LogException(System.Web.Http.ExceptionHandling.ExceptionLoggerContext,System.Threading.CancellationToken)">
+            <summary>The log exception.</summary>
+            <param name="context">The context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="T:Insite.Core.WebApi.InheritanceDirectRouteProvider">
+            <summary>Enables attribute route inheritance.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.InsiteUrlHelper.Link(System.String,System.Object,System.Net.Http.HttpRequestMessage)">
+            <summary>Links the specified route name.</summary>
+            <param name="routeName">Name of the route.</param>
+            <param name="routeValues">The route values.</param>
+            <param name="request">The request.</param>
+        </member>
+        <member name="T:Insite.Core.WebApi.LocalizationHandler">
+            <summary>The localization handler.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.LocalizationHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>The send async.</summary>
+            <param name="request">The request.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.WebApi.RouteDataProvider">
+            <summary>The route data provider.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.RouteDataProvider.GetRouteValue(System.Net.Http.HttpRequestMessage,System.String)">
+            <summary>The get route value.</summary>
+            <param name="request">The request.</param>
+            <param name="name">The name.</param>
+            <returns>The value or blank if not found.</returns>
+        </member>
+        <member name="T:Insite.Core.WebApi.SelectSupportConverter">
+            <summary>Adds support to only return fields specified in a comma separated list included in a querystring parameter named select.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.SelectSupportConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>The write json.</summary>
+            <param name="writer">The writer.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The serializer.</param>
+        </member>
+        <member name="M:Insite.Core.WebApi.SelectSupportConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>The read json.</summary>
+            <param name="reader">The reader.</param>
+            <param name="objectType">The object type.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The serializer.</param>
+            <returns>The <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.SelectSupportConverter.CanConvert(System.Type)">
+            <summary>The can convert.</summary>
+            <param name="objectType">The object type.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Insite.Core.WebApi.ModelStateValidationFilter">
+            <summary>The validate request filter.</summary>
+        </member>
+        <member name="M:Insite.Core.WebApi.ModelStateValidationFilter.OnActionExecutingAsync(System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
+            <summary>The on action executing async.</summary>
+            <param name="actionContext">The action context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.SetupWebApiStartupTask.CacheControlHeaderProvider(System.Net.Http.HttpRequestMessage,System.Web.Http.HttpConfiguration)">
+            <summary>The cache control header provider.</summary>
+            <param name="request">The request.</param>
+            <param name="httpConfiguration">The http configuration.</param>
+            <returns>The <see cref="T:System.Net.Http.Headers.CacheControlHeaderValue"/>.</returns>
+        </member>
+        <member name="M:Insite.Core.WebApi.SetupWebApiStartupTask.CacheRefreshPolicyProvider(System.Net.Http.HttpRequestMessage,System.Web.Http.HttpConfiguration)">
+            <summary>The cache refresh policy provider.</summary>
+            <param name="request">The request.</param>
+            <param name="httpConfiguration">The http configuration.</param>
+            <returns>The <see cref="T:System.TimeSpan"/>.</returns>
+        </member>
+    </members>
+</doc>

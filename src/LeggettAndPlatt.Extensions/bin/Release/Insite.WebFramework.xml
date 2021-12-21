@@ -1,0 +1,504 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insite.WebFramework</name>
+    </assembly>
+    <members>
+        <member name="T:Insite.WebFramework.Attributes.AuthorizationRequiredAttribute">
+            <summary>The authorization required attribute.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Attributes.AuthorizationRequiredAttribute.AllowedRoles">
+            <summary>Gets or sets the allowed roles.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Attributes.AuthorizationRequiredAttribute.DeniedRoles">
+            <summary>Gets or sets the denied roles.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentHelper.#ctor(Insite.Core.Plugins.Content.IContentModeProvider,Insite.Core.Interfaces.Plugins.Caching.ICacheManager,Insite.WebFramework.Content.IContentCacheKeyProvider,Insite.WebFramework.Content.Services.Interfaces.IRetrievalService,Insite.WebFramework.Content.Interfaces.IContentContextProvider,System.Lazy{Insite.WebFramework.Content.Services.Interfaces.IPagePublishingService},Insite.Core.BootStrapper.IHierarchicalGenericTypeLocator,Insite.Core.Interfaces.Localization.ITranslationLocalizer,Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.Core.SystemSetting.Groups.SystemSettings.PerformanceSettings,Insite.Core.Context.Services.ICatalogContextService)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Content.ContentHelper"/> class.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentHelper.GetPage``1(System.Boolean,System.Nullable{System.Guid})">
+            <summary>Returns the first page found for the given type</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentHelper.T(System.String)">
+            <summary>Returns a translated label based on the <see cref="T:Insite.Data.Entities.TranslationDictionary"/> table.</summary>
+            <param name="defaultText">Label text in the default website language. May be of the form "label_context"</param>
+            <returns>Translated label text</returns>
+        </member>
+        <member name="T:Insite.WebFramework.Content.ContentHelper.NullAbstractPage">
+            <summary>The null abstract page.</summary>
+            <remarks>we need to put something in the cache for pages that are published in the future and have no current version</remarks>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentInitializer.Run(System.Guid)">
+            <summary>Runs this instance.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentInitializer.UpdatePathsToUseVariantKeys">
+            <summary> This method updates all of the paths to reference the VariantKeys for pages instead of the ContentKey.
+            This will only run after 2016.12.29.01.UpdateParentContentKeys.sql so we know the ParentContentKeys for all pages have been updated
+            to point to the VariantKey of the parent.
+            </summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.Interfaces.IAdminService.IsNameInUse(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid})">
+            <summary>Checks to see if this name is in use by a <see cref="T:Insite.Data.Entities.ContentItem"/> with a different contentKey</summary>
+            <param name="variantKey">The VariantKey of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="contentKey">The ContentKey to of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="name">The name to look for on other <see cref="T:Insite.Data.Entities.ContentItem"/> objects in the system</param>
+            <param name="websiteId">The id of the <see cref="T:Insite.Data.Entities.Website"/> to find the name</param>
+            <returns>boolean indicating if the name is in use in the <see cref="T:Insite.Data.Entities.Website"/></returns>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.Interfaces.IAdminService.IsVariantNameInUse(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>Checks to see if this variant name is in use by a <see cref="T:Insite.Data.Entities.ContentItem"/> with the same VariantKey</summary>
+            <param name="variantKey">The VariantKey of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="contentKey">The ContentKey of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="variantName">The variant name to look for on other <see cref="T:Insite.Data.Entities.ContentItem"/> objects with the same VariantKey</param>
+            <returns>boolean indicating if the name is in use in the <see cref="T:Insite.Data.Entities.Website"/></returns>
+        </member>
+        <member name="T:Insite.WebFramework.Content.Services.Interfaces.IRollbackService">
+            <summary>The RollbackService interface.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.Interfaces.IRollbackService.Rollback(System.Int32,System.DateTime,System.Boolean)">
+            <summary>The rollback.</summary>
+            <param name="key">The content key.</param>
+            <param name="rollbackDate">The rollback date.</param>
+            <param name="publishNow">The publish now.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.AdminService.IsNameInUse(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Guid})">
+            <summary>Checks to see if this name is in use by a <see cref="T:Insite.Data.Entities.ContentItem"/> not referenced to by the provided contentKey</summary>
+            <param name="variantKey">The VariantKey of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="contentKey">The ContentKey to of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="name">The name to look for on other <see cref="T:Insite.Data.Entities.ContentItem"/> objects in the system</param>
+            <param name="websiteId">The id of the <see cref="T:Insite.Data.Entities.Website"/> to find the name</param>
+            <returns>boolean indicating if the name is in use in the <see cref="T:Insite.Data.Entities.Website"/></returns>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.AdminService.IsVariantNameInUse(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>Checks to see if this variant name is in use by a <see cref="T:Insite.Data.Entities.ContentItem"/> with the same VariantKey</summary>
+            <param name="variantKey">The VariantKey of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="contentKey">The ContentKey of the current <see cref="T:Insite.Data.Entities.ContentItem"/> trying to use the name</param>
+            <param name="variantName">The variant name to look for on other <see cref="T:Insite.Data.Entities.ContentItem"/> objects with the same VariantKey</param>
+            <returns>boolean indicating if the name is in use in the <see cref="T:Insite.Data.Entities.Website"/></returns>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.BaseContentService.ValidateContentKeyIsForPage(Insite.Core.Interfaces.Data.IRepository{Insite.Data.Entities.ContentItem},System.Int32)">
+            <summary>Validates the content key is for page.</summary>
+            <param name="contentItemRepository">The content item repository.</param>
+            <param name="contentKey">The content key.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.BaseContentService.FindParent(Insite.Core.Interfaces.Content.IContentItem)">
+            <summary>Finds the parent.</summary>
+            <param name="contentItem">The content item.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Content.Services.BaseContentService.FindParent(Insite.Core.Interfaces.Content.IContentItem,System.Collections.Generic.IList{Insite.Data.Entities.ContentItem})">
+            <summary>Finds the parent.</summary>
+            <param name="contentItem">The content item.</param>
+            <param name="contentItemsOnPage">List of all content items on the page</param>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentCreatorFactory.#ctor(Insite.Core.BootStrapper.IHierarchicalGenericTypeLocator)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Content.ContentCreatorFactory"/> class.</summary>
+            <param name="typeLocator">The type locator.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentCreatorFactory.GetCreator``1">
+            <summary>Gets the creator.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Content.ContentController.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Content.ContentController"/> class (only needed because it used by output generator).</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.PartialViewController.#ctor(Insite.Core.Interfaces.Data.IUnitOfWorkFactory,Insite.WebFramework.Templating.IPartialViewLocator,Insite.WebFramework.Templating.IPartialViewRenderer)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Mvc.PartialViewController"/> class.</summary>
+            <param name="unitOfWorkFactory">The unit of work factory.</param>
+            <param name="partialViewLocator">The partial view locator service.</param>
+            <param name="partialViewRenderer">The dotLiquid partial view renderer.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.PartialViewController.Index(System.String)">
+            <summary>Locates the appropriate HTML partial view from the DB or the filesystem.</summary>
+            <param name="alias">The partial's alias.</param>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.AllowCrossSiteJsonAttribute">
+            <summary>The allow cross site json attribute.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.AllowCrossSiteJsonAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>The on action executing.</summary>
+            <param name="filterContext">The filter context.</param>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.CombinedRouteContraint">
+            <summary>The combined route contraint needed when two or more route constraints need to applied.</summary>
+        </member>
+        <member name="F:Insite.WebFramework.Mvc.CombinedRouteContraint.constraints">
+            <summary>The constraints.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.CombinedRouteContraint.#ctor(System.Collections.Generic.List{System.Web.Routing.IRouteConstraint})">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Mvc.CombinedRouteContraint"/> class.</summary>
+            <param name="constraints">The constraints.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.CombinedRouteContraint.Match(System.Web.HttpContextBase,System.Web.Routing.Route,System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteDirection)">
+            <summary>The match.</summary>
+            <param name="httpContext">The http context.</param>
+            <param name="route">The route.</param>
+            <param name="parameterName">The parameter name.</param>
+            <param name="values">The values.</param>
+            <param name="routeDirection">The route direction.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions">
+            <summary>Extensions for <see cref="T:System.Web.Mvc.HtmlHelper"/></summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.RequireCss(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Add a script to the page and maintains a list of scripts added to the page to prevent multiple inclusion
+            of any specific script.
+            </summary>
+            <param name="htmlHelper">The <see cref="T:System.Web.Mvc.HtmlHelper"/> instance that this method extends.</param>
+            <param name="cssPath">The path to the css.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.RequireScript(System.Web.Mvc.HtmlHelper,System.String,System.Boolean)">
+            <summary>
+            Add a script to the page and maintains a list of scripts added to the page to prevent multiple inclusion
+            of any specific script.
+            </summary>
+            <remarks>Don't use this on the storefront on pages loaded via AJAX because of SPA because _MainLayout won't be updated.</remarks>
+            <param name="htmlHelper">The <see cref="T:System.Web.Mvc.HtmlHelper"/> instance that this method extends.</param>
+            <param name="scriptPath">The path to the script.</param>
+            <param name="deferRenderingOfTag">Defer rendering of the tag until RenderDeferredScripts is called</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.RequireScriptIfItExists(System.Web.Mvc.HtmlHelper,System.String,System.Boolean)">
+            <summary>Call down to RequireScript only if the file referenced by scriptPath exists on disk.</summary>
+            <param name="htmlHelper">The <see cref="T:System.Web.Mvc.HtmlHelper"/> instance that this method extends.</param>
+            <param name="scriptPath">The path to the script.</param>
+            <param name="deferRenderingOfTag">Defer rendering of the tag until RenderDeferredScripts is called</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.GetViewName(System.Web.Mvc.HtmlHelper)">
+            <summary>Gets the current top level view name</summary>
+            <param name="htmlHelper">The <see cref="T:System.Web.Mvc.HtmlHelper"/> instance that this method extends.</param>
+            <returns>full path to the current view without the file extension or starting slash</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.Script(System.Web.Mvc.HtmlHelper,System.Func{System.Object,System.Web.WebPages.HelperResult})">
+            <summary>Add a script to the page.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.Script(System.Web.Mvc.HtmlHelper,System.Web.Mvc.MvcHtmlString)">
+            <summary>Add a script to the page.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.HtmlHelperExtensions.RenderDeferredScripts(System.Web.Mvc.HtmlHelper)">
+            <summary>Render the required script files and stirngs that have not been rendered yet.</summary>
+            <param name="htmlHelper">The <see cref="T:System.Web.Mvc.HtmlHelper"/> instance that this method extends.</param>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.Extensions.UrlHelperExtensions">
+            <summary>Extensions for <see cref="T:System.Web.Mvc.UrlHelper"/></summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.UrlHelperExtensions.ThemedContent(System.Web.Mvc.UrlHelper,System.String)">
+            <summary>
+            Generates a url for the given content file taking into account the current WebSite theme.
+            </summary>
+            <param name="urlHelper">The <see cref="T:System.Web.Mvc.UrlHelper"/> instance that this method extends.</param>
+            <param name="webPath">The content file to locate</param>
+            <returns>The url for the content file</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.Extensions.UrlHelperExtensions.VersionCacheQueryString(System.Web.Mvc.UrlHelper,System.String)">
+            <summary>Append a cache query string value to a file, so that based on the version, we can cache bust</summary>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.IocControllerFactory">
+            <summary>Class which resolves <see cref="T:System.Web.Mvc.IController"/>s from the <see cref="F:Insite.WebFramework.Mvc.IocControllerFactory.DependencyLocator"/>.</summary>
+        </member>
+        <member name="F:Insite.WebFramework.Mvc.IocControllerFactory.DependencyLocator">
+            <summary><see cref="F:Insite.WebFramework.Mvc.IocControllerFactory.DependencyLocator"/></summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.IocControllerFactory.GetControllerType(System.Web.Routing.RequestContext,System.String)">
+            <summary>Method to get the controller type from the <see cref="F:Insite.WebFramework.Mvc.IocControllerFactory.DependencyLocator"/>.</summary>
+            <param name="requestContext">request</param>
+            <param name="controllerName">controller name to resolve.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.IocControllerFactory.CreateController(System.Web.Routing.RequestContext,System.String)">
+            <summary>Method to create controller by resolving instance from <see cref="F:Insite.WebFramework.Mvc.IocControllerFactory.DependencyLocator"/>.</summary>
+            <param name="requestContext">request</param>
+            <param name="controllerName">controller name to resolve.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.MvcApplication.Application_PreSendRequestHeaders">
+            <summary>Add an X-ServerTime custom header to track timings</summary>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.SearchCrawlerRouteConstraint">
+            <summary>The search crawler route constraint.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.SearchCrawlerRouteConstraint.Match(System.Web.HttpContextBase,System.Web.Routing.Route,System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteDirection)">
+            <summary>The match.</summary>
+            <param name="httpContext">The http context.</param>
+            <param name="route">The route.</param>
+            <param name="parameterName">The parameter name.</param>
+            <param name="values">The values.</param>
+            <param name="routeDirection">The route direction.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.SslModeSecurityFilter">
+            <summary>
+            The <see cref="T:Insite.WebFramework.Mvc.SslModeSecurityFilter"/> provides the mechanism to check the SslMode website setting to determine the proper connection security settings for the
+            current request and redirects the request if necessary.
+            </summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.SslModeSecurityFilter.OnAuthorization(System.Web.Mvc.AuthorizationContext)">
+            <summary>Checks to see what the SslMode Website Setting is and redirects requests to http or https.</summary>
+            <param name="authorizationContext">incoming context.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.SslModeSecurityFilter.RedirectToSecure(System.Web.Mvc.AuthorizationContext)">
+            <summary>Redirects the current request to a secure connection.</summary>
+            <param name="authorizationContext">current context</param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.SslModeSecurityFilter.RedirectToInsecure(System.Web.Mvc.AuthorizationContext)">
+            <summary>Redirects the current request to an insecure connection.</summary>
+            <param name="authorizationContext">current context</param>
+        </member>
+        <member name="T:Insite.WebFramework.Mvc.ViewRenderer">
+             <summary>
+             Class that renders MVC views to a string using the
+             standard MVC View Engine to render the view.
+             From Westwind Toolkit: https://github.com/RickStrahl/WestwindToolkit
+            
+             Note: This class can only be used within MVC
+             applications that have an active ControllerContext.
+             </summary>
+        </member>
+        <member name="P:Insite.WebFramework.Mvc.ViewRenderer.Context">
+            <summary>Required Controller Context</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.#ctor(System.Web.Mvc.ControllerContext)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Mvc.ViewRenderer"/> class with a Context.</summary>
+            <param name="controllerContext">
+            If you are running within the context of an ASP.NET MVC request pass in
+            the controller's context.
+            Only leave out the context if no context is otherwise available.
+            </param>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderView(System.String,System.Object)">
+            <summary>
+            Renders a full MVC view to a string. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to render the view with</param>
+            <returns>string of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderPartialView(System.String,System.Object)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <returns>string of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderView(System.String,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <returns>string of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderView(System.String,System.Object,System.Web.Mvc.ControllerContext,System.String@)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <param name="errorMessage">optional out parameter that captures an error message instead of throwing</param>
+            <returns>string of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderPartialView(System.String,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active controller context</param>
+            <returns>string of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderPartialView(System.String,System.Object,System.Web.Mvc.ControllerContext,System.String@)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active controller context</param>
+            <param name="errorMessage">optional output parameter to receive an error message on failure</param>
+            <returns>string of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.RenderViewToStringInternal(System.String,System.Object,System.Boolean)">
+            <summary>
+            Internal method that handles rendering of either partial or
+            or full views.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">Model to render the view with</param>
+            <param name="partial">Determines whether to render a full or partial view</param>
+            <returns>string of the rendered view</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Mvc.ViewRenderer.CreateController``1(System.Web.Routing.RouteData)">
+            <summary>
+            Creates an instance of an MVC controller from scratch
+            when no existing ControllerContext is present
+            </summary>
+            <typeparam name="T">Type of the controller to create</typeparam>
+        </member>
+        <member name="P:Insite.WebFramework.Mvc.WebViewPage`1.T">
+            <summary>Translates text with the TranslationDictionary</summary>
+            <remarks>
+            First argument is text to translate.
+            Second argument is optional TranslationDiction.Sources type to translated (defaults to Label type)
+            Otherwise additional argument are format arguments.
+            </remarks>
+        </member>
+        <member name="M:Insite.WebFramework.Routing.IRouteProvider.RegisterHtmlRedirectRoute(System.Web.Routing.RouteCollection)">
+            <summary>Registers the route required to handle HtmlRedirects, which should be registered before any other routes</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Routing.IRouteProvider.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>Registers routes required for the application</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Routing.IRouteProvider.MapRoute(System.Web.Routing.RouteCollection,System.String,System.String,System.Object,System.Web.Routing.IRouteConstraint)">
+            <summary>register a route with microsite support</summary>
+            <param name="routes">route map</param>
+            <param name="name">name of route</param>
+            <param name="url">url of route</param>
+            <param name="defaults">defaults</param>
+            <param name="constraint">The constraint.</param>
+        </member>
+        <member name="T:Insite.WebFramework.Routing.UrlProvider">
+            <summary>The url provider.</summary>
+        </member>
+        <member name="F:Insite.WebFramework.Routing.UrlProvider.ContentHelper">
+            <summary>The content helper.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Routing.UrlProvider.#ctor(Insite.WebFramework.Content.Interfaces.IContentHelper)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.WebFramework.Routing.UrlProvider"/> class.</summary>
+            <param name="contentHelper">The content helper.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Routing.UrlProvider.GetUrl``1">
+            <summary>The get url.</summary>
+            <typeparam name="T">The page type.</typeparam>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Insite.WebFramework.Routing.UrlProvider.PrepareUrl(System.String)">
+            <summary>The prepare url.</summary>
+            <param name="url">The url.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:Insite.WebFramework.Theming.ThemeProvider">
+            <summary>Default implementation to provide the current WebSite.</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.ThemeProvider.GetCurrentTheme">
+            <summary>
+            Returns the value of the current theme for this request
+            Uses website settings Theme and MobileTheme depending on device type
+            </summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.ThemeProvider.GetCurrentThemeHierarchy">
+            <summary>Returns a collection of the hierarchy for the current theme</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.ThemeProvider.GetFullThemeHierarchy(System.Boolean)">
+            <summary>Returns all the defined theme hierarchies</summary>
+        </member>
+        <member name="T:Insite.WebFramework.Theming.LoadCMSDataStartupTask">
+            <summary>StartupTask that loads CMS data into the DB for a user to have a history of system changes over time.</summary>
+        </member>
+        <member name="T:Insite.WebFramework.Theming.ThemePreview">
+            <summary>The theme preview.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.BundleName">
+            <summary>Gets or sets the bundle name.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.PreviewedResources">
+            <summary>Guids for all FrontEndResources and ContentItemTemplates that are being previewed</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.ThemeVersion">
+            <summary>Gets or sets the theme version.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.PreviewId">
+            <summary>Gets or sets the preview id.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.EnableOptimizations">
+            <summary>Gets or sets a value indicating whether enable optimizations.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.ScriptCompilerOutput">
+            <summary>Gets or sets the script compiler output.</summary>
+        </member>
+        <member name="P:Insite.WebFramework.Theming.ThemePreview.StyleCompilerOutput">
+            <summary>Gets or sets the style compiler output.</summary>
+        </member>
+        <member name="T:Insite.WebFramework.Theming.IFileBundler">
+            <summary>Provides functionality around bundling scripts and styles</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.IFileBundler.AddScriptBundle(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Add a bundle for the given scriptPaths using the given bundlePath</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.IFileBundler.AddScriptBundle(System.Web.Optimization.BundleCollection,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Add a bundle for the given scriptPaths using the given bundlePath</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.IFileBundler.AddStyleBundle(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Add a bundle for the given stylePaths using the given bundlePath</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.IFileBundler.AddStyleBundle(System.Web.Optimization.BundleCollection,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Add a bundle for the given stylePaths using the given bundlePath</summary>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.IFileBundler.AddScriptBundleFromXml(System.String,System.String)">
+            <summary>Adds a files list in an xml file into to a script bundle</summary>
+            <param name="bundlePath">The bundle path.</param>
+            <param name="bundleXmlPath">The bundle XML path.</param>
+        </member>
+        <member name="M:Insite.WebFramework.Theming.IFileBundler.AddScriptBundleFromXml(System.Web.Optimization.BundleCollection,System.String,System.String)">
+            <summary>Adds a files list in an xml file into to a script bundle</summary>
+            <param name="bundles">The bundles to add the scripts to.</param>
+            <param name="bundlePath">The bundle path.</param>
+            <param name="bundleXmlPath">The bundle XML path.</param>
+        </member>
+        <member name="T:Insite.WebFramework.Theming.NonOrderingBundleOrderer">
+            <summary>BundleOrderer which returns scripts in the order they were added</summary>
+        </member>
+        <member name="T:Insite.WebFramework.Theming.RelativePathResolverTransform">
+            <summary>
+            Transform which changes the relative paths in css to absolute server paths
+            so combined css location doesn't break urls to images and fonts
+            </summary>
+        </member>
+        <member name="M:System.Web.Mvc.Html.HtmlHelperExtensions.Zone(System.Web.Mvc.HtmlHelper,Insite.WebFramework.Content.ContentItemModel,System.String)">
+            <summary>Zones the specified content item.</summary>
+            <param name="htmlHelper">The HTML helper.</param>
+            <param name="contentItemModel">The content item model.</param>
+            <param name="zone">The zone.</param>
+        </member>
+        <member name="M:System.Web.Mvc.Html.HtmlHelperExtensions.ProductName(System.Web.Mvc.HtmlHelper)">
+            <summary>The product name.</summary>
+            <param name="hmlHelper">The HTML helper.</param>
+            <returns>The product name</returns>
+        </member>
+        <member name="M:System.Web.Mvc.Html.HtmlHelperExtensions.PageTitle(System.Web.Mvc.HtmlHelper,Insite.WebFramework.IPage)">
+            <summary>Pages the title.</summary>
+            <param name="htmlHelper">The HTML helper.</param>
+            <param name="page">The page.</param>
+        </member>
+    </members>
+</doc>

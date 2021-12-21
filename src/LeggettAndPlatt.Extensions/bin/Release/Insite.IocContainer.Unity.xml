@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insite.IocContainer.Unity</name>
+    </assembly>
+    <members>
+        <member name="T:Insite.IocContainer.Unity.AOP.AssemblyQualifiedTypeNameConverter">
+            <summary>The assembly qualified type name converter.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.AOP.AssemblyQualifiedTypeNameConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>The convert to.</summary>
+            <param name="context">The context.</param>
+            <param name="culture">The culture.</param>
+            <param name="value">The value.</param>
+            <param name="destinationType">The destination type.</param>
+            <returns>The <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.AOP.AssemblyQualifiedTypeNameConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>The convert from.</summary>
+            <param name="context">The context.</param>
+            <param name="culture">The culture.</param>
+            <param name="value">The value.</param>
+            <returns>The <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="T:Insite.IocContainer.Unity.AOP.ErrorLogHandler">
+            <summary>The error log handler.</summary>
+        </member>
+        <member name="P:Insite.IocContainer.Unity.AOP.ErrorLogHandler.Order">
+            <summary>Gets or sets the order.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.AOP.ErrorLogHandler.Invoke(Microsoft.Practices.Unity.InterceptionExtension.IMethodInvocation,Microsoft.Practices.Unity.InterceptionExtension.GetNextHandlerDelegate)">
+            <summary>The invoke.</summary>
+            <param name="input">The input.</param>
+            <param name="getNext">The get next.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Unity.InterceptionExtension.IMethodReturn"/>.</returns>
+        </member>
+        <member name="T:Insite.IocContainer.Unity.AOP.PerformanceLogHandler">
+            <summary>The performance log handler.</summary>
+        </member>
+        <member name="P:Insite.IocContainer.Unity.AOP.PerformanceLogHandler.Order">
+            <summary>Gets or sets the order.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.AOP.PerformanceLogHandler.Invoke(Microsoft.Practices.Unity.InterceptionExtension.IMethodInvocation,Microsoft.Practices.Unity.InterceptionExtension.GetNextHandlerDelegate)">
+            <summary>The invoke.</summary>
+            <param name="input">The input.</param>
+            <param name="getNext">The get next.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Unity.InterceptionExtension.IMethodReturn"/>.</returns>
+        </member>
+        <member name="T:Insite.IocContainer.Unity.AOP.TransactionHandler">
+            <summary>
+            Unity Interception handler to wrap a transaction around a method call.
+            NOTE: For this to work the class for the method being intercepted must have a field named UnitOfWork that is an <see cref="T:Insite.Core.Interfaces.Data.IUnitOfWork" />.
+            </summary>
+        </member>
+        <member name="P:Insite.IocContainer.Unity.AOP.TransactionHandler.Order">
+            <summary>Gets or sets the order.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.AOP.TransactionHandler.Invoke(Microsoft.Practices.Unity.InterceptionExtension.IMethodInvocation,Microsoft.Practices.Unity.InterceptionExtension.GetNextHandlerDelegate)">
+            <summary>Intercept the method invocation and wrap it in a transaction.</summary>
+            <param name="input">Inputs to the current call to the target.</param>
+            <param name="getNext">Delegate to execute to get the next delegate in the handler
+            chain.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Unity.InterceptionExtension.IMethodReturn"/>.</returns>
+        </member>
+        <member name="T:Insite.IocContainer.Unity.PerRequestLifetimeManager">
+            <summary>A Microsoft Unity Per Web Request Lifetime Manager</summary>
+        </member>
+        <member name="T:Insite.IocContainer.Unity.UnityIocContainer">
+            <summary>Microsoft Unity implementation of <see cref="T:Insite.Core.BootStrapper.IIocContainer"/>.</summary>
+        </member>
+        <member name="P:Insite.IocContainer.Unity.UnityIocContainer.UnityContainer">
+            <summary>The singleton instance of the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.UnityIocContainer.Configure">
+            <summary>Loads Unity Configuration from web.config and sets up <see cref="T:Microsoft.Practices.ServiceLocation.ServiceLocator"/> to use <see cref="P:Insite.IocContainer.Unity.UnityIocContainer.UnityContainer"/> and sets itself as the <see cref="T:Insite.Core.BootStrapper.IIocContainer"/>.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.UnityIocContainer.SetHttpContextWrapper">
+            <summary>Sets up the <see cref="T:System.Web.HttpContextBase"/> to use <see cref="T:System.Web.HttpContextWrapper"/>.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.UnityIocContainer.RegisterType(System.Type,System.Type,System.String)">
+            <summary>Registers a type mapping in Unity.</summary>
+            <param name="from">Type you are mapping from, usually an interface.</param>
+            <param name="to">Type you are mapping resolves to the from type to.</param>
+            <param name="name">Name to register by, null for default registration, defaults to null.</param>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.UnityIocContainer.FinalizeContainer">
+            <summary>Unity doesn't need to do anything for finalize.</summary>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.UnityIocContainer.IsRegistered(System.Type,System.String)">
+            <summary>Checks Unity to see if the specified type is registered.</summary>
+            <param name="type">Type to check for.</param>
+            <param name="name">Name for the Type to check for, defaults to null.</param>
+            <returns>True if the type is found, false if not.</returns>
+        </member>
+        <member name="M:Insite.IocContainer.Unity.UnityIocContainer.GetRegistrations">
+            <summary>A list of the <see cref="T:Insite.Core.BootStrapper.IocRegistration"/>s in Unity.</summary>
+            <returns>A List of <see cref="T:Insite.Core.BootStrapper.IocRegistration"/>s.</returns>
+        </member>
+    </members>
+</doc>

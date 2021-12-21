@@ -1,0 +1,995 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insite.Data.Providers.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="T:Insite.Data.Providers.EntityFramework.CommerceContext">
+            <summary>The commerce context.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.CommerceContext.#ctor(Insite.Core.Plugins.Utilities.IGuidGenerator,Insite.Data.Interfaces.IEntityValidator,Insite.Core.Interfaces.Plugins.Caching.IEntityCacheManager)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.CommerceContext"/> class.</summary>
+            <param name="guidGenerator">The unique identifier generator.</param>
+            <param name="entityValidator">The entity validator.</param>
+            <param name="entityCacheManager">The entity cache manager.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.CommerceContext.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>The on model creating.</summary>
+            <param name="modelBuilder">The model builder.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.CommerceContext.SaveChanges">
+            <summary>The save changes.</summary>
+            <returns>The <see cref="T:System.Int32"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.CommerceContext.ValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry,System.Collections.Generic.IDictionary{System.Object,System.Object})">
+            <summary>The validate entity.</summary>
+            <param name="entityEntry">The entity entry.</param>
+            <param name="items">The items.</param>
+            <returns>The <see cref="T:System.Data.Entity.Validation.DbEntityValidationResult"/>.</returns>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider">
+            <summary>The data provider entity framework.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.#ctor(Insite.Core.Interfaces.Plugins.Caching.ICacheManager,Insite.Core.Plugins.Utilities.IGuidGenerator,Insite.Data.Interfaces.IEntityValidator,Insite.Core.Interfaces.Plugins.Caching.IEntityCacheManager)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider"/> class.</summary>
+            <param name="cacheManager">The cache manager.</param>
+            <param name="guidGenerator">The unique identifier generator.</param>
+            <param name="entityValidator">The entity validator.</param>
+            <param name="entityCacheManager">The entity cache manager.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.#ctor(Insite.Core.Interfaces.Plugins.Caching.ICacheManager,System.Data.Entity.DbContext)">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider"/> class.</summary>
+            <param name="cacheManager">The cache Manager.</param>
+            <param name="context">The db context.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Dispose">
+            <summary>The dispose.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Dispose(System.Boolean)">
+            <summary>Releases unmanaged and - optionally - managed resources.</summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="P:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.DbConnection">
+            <summary>Gets the db connection.</summary>
+        </member>
+        <member name="P:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.TransactionActive">
+            <summary>Gets a value indicating whether transaction active.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.BeginTransaction">
+            <summary>The begin transaction.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>The begin transaction.</summary>
+            <param name="isolationLevel">Isolation level.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.CommitTransaction">
+            <summary>The commit transaction.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.RollbackTransaction">
+            <summary>The rollback transaction.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Save">
+            <summary>The save.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.SaveAsync">
+            <summary>The save async.</summary>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Clear(System.Boolean)">
+            <summary>The clear.</summary>
+            <param name="dispose">If true, the context will be disposed.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.DetectChanges">
+            <summary>Detects the changes.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Evict(System.Object)">
+            <summary>The evict.</summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Reattach``1(``0)">
+            <summary>The reattach.</summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Close">
+            <summary>The close.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.SqlExecuteNonQuery(System.String,System.Collections.ObjectModel.Collection{System.Data.IDbDataParameter},System.Int32,System.Boolean)">
+            <summary>The sql execute non query.</summary>
+            <param name="sql">The sql.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="commandTimeout">The command timeout.</param>
+            <param name="useTransaction">The use transaction.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.SqlExecuteScalar``1(System.String,System.Collections.ObjectModel.Collection{System.Data.IDbDataParameter},System.Int32)">
+            <summary>The sql execute scalar.</summary>
+            <param name="sql">The sql.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="commandTimeout">The command timeout.</param>
+            <returns>The <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.SqlExecuteStoredProcedure(System.String,System.Collections.ObjectModel.Collection{System.Data.IDbDataParameter},System.Int32)">
+            <summary>The sql execute stored procedure.</summary>
+            <param name="storedProcedureName">The stored procedure name.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="commandTimeout">The command timeout.</param>
+            <returns>The <see cref="T:System.Int32"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.PrepareSqlCommand(System.String,System.Collections.ObjectModel.Collection{System.Data.IDbDataParameter},System.Int32)">
+            <summary>The prepare sql command.</summary>
+            <param name="sql">The sql.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="commandTimeout">The command timeout.</param>
+            <returns>The <see cref="T:System.Data.IDbCommand"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.LinqQuery``1">
+            <summary>The linq query.</summary>
+            <typeparam name="T">The T</typeparam>
+            <returns>The <see cref="T:System.Linq.IQueryable"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.LinqQueryAsNoTracking``1">
+            <summary>The linq query with no change tracking.</summary>
+            <typeparam name="T">The T</typeparam>
+            <returns>The <see cref="T:System.Linq.IQueryable"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.SqlQuery``1(System.String,System.Collections.ObjectModel.Collection{System.Data.IDbDataParameter},System.Boolean,System.Int32)">
+            <summary>The sql query.</summary>
+            <param name="sql">The sql.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="useAliasBinding">The use alias binding.</param>
+            <param name="commandTimeout">The command timeout</param>
+            <typeparam name="T">The T</typeparam>
+            <returns>The <see cref="T:System.Collections.Generic.IList`1"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetById``1(System.Guid)">
+            <summary>The get by id.</summary>
+            <param name="id">The id.</param>
+            <typeparam name="T">The T</typeparam>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetById``1(System.String)">
+            <summary>The get by id.</summary>
+            <param name="id">The id.</param>
+            <typeparam name="T">The T</typeparam>
+            <returns>The <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetByNaturalKey``1(System.Object[])">
+            <summary>The get by natural key.</summary>
+            <param name="keyValues">The key values.</param>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetByNaturalKeyWithoutCaching``1(System.Object[])">
+            <summary>The get by natural key.</summary>
+            <param name="keyValues">The key values.</param>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetCollectionByNaturalKeys``1(System.Collections.Generic.List{System.Collections.Generic.List{System.Object}})">
+            <summary>Gets the collection by natural keys.</summary>
+            <typeparam name="T">The T</typeparam>
+            <param name="listOfKeyValues">The list of key values.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetFromListByNaturalKey``1(System.Object[],System.Collections.Generic.IList{``0})">
+            <summary>Gets from list by natural key.</summary>
+            <typeparam name="T">The T</typeparam>
+            <param name="keyValues">The key values.</param>
+            <param name="list">The list.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.CreateForClassName``1(System.String)">
+            <summary>The create for class name.</summary>
+            <param name="className">The class name.</param>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetAllMappedTypes">
+            <summary>The get all mapped types.</summary>
+            <returns>The <see cref="T:System.Collections.Generic.IList`1"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetTypeForClassName(System.String)">
+            <summary>The get type for class name.</summary>
+            <param name="className">The class name.</param>
+            <returns>The <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Refresh``1(``0)">
+            <summary>The refresh.</summary>
+            <param name="value">The value.</param>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Insert``1(``0)">
+            <summary>The insert.</summary>
+            <param name="value">The value.</param>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Delete``1(``0)">
+            <summary>The delete.</summary>
+            <param name="value">The value.</param>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.EagerLoad(System.Object)">
+            <summary>The eager load.</summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Unproxy(System.Object)">
+            <summary>The unproxy.</summary>
+            <param name="value">The value.</param>
+            <returns>The <see cref="T:System.Object"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.ClearCache">
+            <summary>The clear cache.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.Expand``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>Used to eager load properties.</summary>
+            <param name="queryable">The queryable.</param>
+            <param name="path">The path.</param>
+            <returns>A queryable{T}.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.DisableLazyLoading">
+            <summary>Disable lazy loading of relationships</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.EnableLazyLoading">
+            <summary>Enable lazy loading of relationships</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.GetConfiguration">
+            <summary>The get configuration.</summary>
+            <returns>The <see cref="T:Insite.Core.Interfaces.Data.IDataProviderConfiguration"/>.</returns>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityFrameworkDataProvider.SetConfiguration(Insite.Core.Interfaces.Data.IDataProviderConfiguration)">
+            <summary>The set configuration.</summary>
+            <param name="dataProviderConfiguration">The data provider configuration.</param>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminUserProfileMapping">
+            <summary>The admin user profile mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.AdminUserProfileMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminUserProfileMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminUserProfilePasswordMapping">
+            <summary>The admin user profile password mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.FrontEndResourceVersionMapping">
+            <summary>The FrontEndResourceVersion mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.FrontEndResourceVersionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.FrontEndResourceVersionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.FrontEndResourceMapping">
+            <summary>The FrontEndResource mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.FrontEndResourceMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.FrontEndResourceMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderStatusMappingMapping">
+            <summary>The order status mapping mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductImageMapping">
+            <summary>The product image mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestItemOutExtrinsicMapping">
+            <summary>The punch out order request item out extrinsic mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeVersionResourceMapping">
+            <summary>The ThemeFrontEndResource mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeVersionResourceMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeVersionResourceMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemTemplateVersionMapping">
+            <summary>The widget presentation mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemTemplateVersionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemTemplateVersionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemTemplateMapping">
+            <summary>The widget presentation mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemTemplateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemTemplateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeVersionMapping">
+            <summary>The ThemeVersion mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeVersionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeVersionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeMapping">
+            <summary>The theme mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ThemeMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AffiliateMapping">
+            <summary>The affiliate mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.AffiliateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.AffiliateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ApplicationLogMapping">
+            <summary>The application log mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ApplicationMessageMapping">
+            <summary>The application message mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryPromotionMapping">
+            <summary>The order history promotion mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SystemSettingMapping">
+            <summary>The application setting mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AttributeTypeMapping">
+            <summary>The attribute type mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AttributeValueMapping">
+            <summary>The attribute value mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.AttributeValueMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.AttributeValueMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AuditMapping">
+            <summary>The audit mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.AuditMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.AuditMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.BudgetCalendarMapping">
+            <summary>The budget calendar mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierMapping">
+            <summary>The carrier mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierPackageMapping">
+            <summary>The carrier package mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierPackageMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierPackageMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZoneMapping">
+            <summary>The carrier zone mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZoneMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZoneMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZonePostalCodeRangeMapping">
+            <summary>The carrier zone postal code range mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZoneRateMapping">
+            <summary>The carrier zone rate mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZoneRateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CarrierZoneRateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CategoryAttributeTypeMapping">
+            <summary>The category attribute type mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CategoryMapping">
+            <summary>The category mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CategoryMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CategoryMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CategoryRelatedProductMapping">
+            <summary>The category related product mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationConditionFilterMapping">
+            <summary>The configuration condition filter mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationMapping">
+            <summary>The configuration mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationOptionConditionMapping">
+            <summary>The configuration option condition mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationOptionMapping">
+            <summary>The configuration option mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationOptionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationOptionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationPageMapping">
+            <summary>The configuration page mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationPageMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationPageMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationQueryResultFieldMapping">
+            <summary>The configuration query result field mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationQueryResultMapping">
+            <summary>The configuration query result mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationQueryResultMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationQueryResultMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ConfigurationQueryResultValueMapping">
+            <summary>The configuration query result value mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemFieldMapping">
+            <summary>The content item field mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemFieldMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemFieldMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentItemMapping">
+            <summary>The content item mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentManagerMapping">
+            <summary>The content manager mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentMapping">
+            <summary>The content mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ContentMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ContentPageStateMapping">
+            <summary>The content page state mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CountryMapping">
+            <summary>The country mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CountryMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CountryMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CreditCardTransactionMapping">
+            <summary>The credit card transaction mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CreditCardTransactionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CreditCardTransactionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CurrencyMapping">
+            <summary>The currency mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CurrencyRateMapping">
+            <summary>The currency rate mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CurrencyRateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CurrencyRateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerBudgetMapping">
+            <summary>The customer budget mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerBudgetMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerBudgetMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerCostCodeMapping">
+            <summary>The customer cost code mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerMapping">
+            <summary>The customer mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderPromotionMapping">
+            <summary>The customer order promotion mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderMapping">
+            <summary>The customer order mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderTaxMapping">
+            <summary>The customer order tax mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderTaxMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerOrderTaxMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerProductMapping">
+            <summary>The customer product mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerProductSetMapping">
+            <summary>The customer product set mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerProductSetMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomerProductSetMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.CustomPropertyMapping">
+            <summary>The custom property mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.DashboardPanelPositionMapping">
+            <summary>The dashboard panel position mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.DatabaseScriptMapping">
+            <summary>The database script mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.DealerMapping">
+            <summary>The dealer mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.DealerMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.DealerMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.DocumentMapping">
+            <summary>The document mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailListMapping">
+            <summary>The email list mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.EmailListMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailListMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailMessageAddressMapping">
+            <summary>The email message address mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailMessageDeliveryAttemptMapping">
+            <summary>The email message delivery attempt mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailMessageMapping">
+            <summary>The email message mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailSubscriberMapping">
+            <summary>The email subscriber mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailTemplateMapping">
+            <summary>The email template mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.EmailTemplateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.EmailTemplateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EntityBaseTypeConfiguration`1">
+            <summary>The entity base type configuration.</summary>
+            <typeparam name="T">The T</typeparam>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.EntityBaseTypeConfiguration`1.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.EntityBaseTypeConfiguration`1"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminActionConfigurationMapping">
+            <summary>The admin action configuration mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.AdminActionConfigurationMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminActionConfigurationMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EntityConfigurationMapping">
+            <summary>The entity configuration mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.EntityConfigurationMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.EntityConfigurationMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminActionPermissionMapping">
+            <summary>The admin action permission mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.EntityPermissionMapping">
+            <summary>The entity permission mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.GiftCardMapping">
+            <summary>The gift card mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.GiftCardMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.GiftCardMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.GiftCardTransactionMapping">
+            <summary>The gift card transaction mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.GiftCardTransactionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.GiftCardTransactionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.GlobalSynonymMapping">
+            <summary>The global synonym mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.HtmlRedirectMapping">
+            <summary>The html redirect mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.IntegrationConnectionMapping">
+            <summary>The integration connection mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.IntegrationJobLogMapping">
+            <summary>The integration job log mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.IntegrationJobMapping">
+            <summary>The integration job mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.IntegrationJobMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.IntegrationJobMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.IntegrationJobParameterMapping">
+            <summary>The integration job parameter mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryLineMapping">
+            <summary>The invoice history line mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryLineMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryLineMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryMapping">
+            <summary>The invoice history mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryTaxMapping">
+            <summary>The invoice history tax mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryTaxMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.InvoiceHistoryTaxMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionMapping">
+            <summary>The job definition mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionParameterMapping">
+            <summary>The job definition parameter mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionStepFieldMapMapping">
+            <summary>The job definition step field map mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionStepMapping">
+            <summary>The job definition step mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.JobDefinitionStepParameterMapping">
+            <summary>The job definition step parameter mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.LanguageMapping">
+            <summary>The language mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.LocalTaxRateMapping">
+            <summary>The local tax rate mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.LocalTaxRateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.LocalTaxRateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.MessageAuditMapping">
+            <summary>The message audit mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.MessageAuditMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.MessageAuditMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.MessageMapping">
+            <summary>The message mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.MessageStatusMapping">
+            <summary>The message status mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.MessageTargetMapping">
+            <summary>The message target mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryTaxMapping">
+            <summary>The order history tax mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryTaxMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryTaxMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductKitSectionMapping">
+            <summary>The product kit section mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductKitSectionOptionMapping">
+            <summary>The product kit section option mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SystemListMapping">
+            <summary>The SystemList mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.SystemListMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.SystemListMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SystemListValueMapping">
+            <summary>The system list value mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryLineMapping">
+            <summary>The order history line mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryLineMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryLineMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryMapping">
+            <summary>The order history mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderHistoryMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineConfigurationValueMapping">
+            <summary>The order line configuration value mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineConfigurationValueMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineConfigurationValueMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineMapping">
+            <summary>The order line mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineRequisitionMapping">
+            <summary>The order line requisition mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineRequisitionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineRequisitionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineRfqMapping">
+            <summary>The order line rfq mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineRfqMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderLineRfqMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.OrderPromotionCodeMapping">
+            <summary>The order promotion code mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PaymentMethodMapping">
+            <summary>The payment method mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PersonaMapping">
+            <summary>The persona mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PersonaMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PersonaMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PluginMapping">
+            <summary>The plugin mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PriceMatrixMapping">
+            <summary>The price matrix mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PriceMatrixMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PriceMatrixMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductMapping">
+            <summary>The product mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ProductMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductRelatedProductMapping">
+            <summary>The product related product mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ProductRelatedProductMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductRelatedProductMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductUnitOfMeasureMapping">
+            <summary>The product unit of measure mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ProductUnitOfMeasureMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductUnitOfMeasureMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductWarehouseMapping">
+            <summary>The product warehouse mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ProductWarehouseMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ProductWarehouseMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PromotionMapping">
+            <summary>The promotion mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PromotionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PromotionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PromotionResultMapping">
+            <summary>The promotion result mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PromotionResultMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PromotionResultMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PropertyAttributeConfigurationMapping">
+            <summary>The property attribute configuration mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PropertyConfigurationMapping">
+            <summary>The property configuration mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PropertyConfigurationMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PropertyConfigurationMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PropertyPermissionMapping">
+            <summary>The property permission mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutCustomerUserProfileMapMapping">
+            <summary>The punch out customer user profile map mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestExtrinsicMapping">
+            <summary>The punch out order request extrinsic mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestItemOutMapping">
+            <summary>The punch out order request item out mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestItemOutMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestItemOutMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestMapping">
+            <summary>The punch out order request mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutOrderRequestMessageMapping">
+            <summary>The punch out order request message mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSessionAccessMapping">
+            <summary>The punch out session access mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSessionExtrinsicMapping">
+            <summary>The punch out session extrinsic mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSessionItemInMapping">
+            <summary>The punch out session item in mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSessionMapping">
+            <summary>The punch out session mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSessionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSessionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.PunchOutSetupRequestMapping">
+            <summary>The punch out setup request mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.RestrictionGroupMapping">
+            <summary>The restriction group mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.RuleClauseMapping">
+            <summary>The rule clause mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.RuleManagerMapping">
+            <summary>The rule manager mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.RuleTypeMapping">
+            <summary>The rule type mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.RuleTypeOptionMapping">
+            <summary>The rule type option mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SalespersonMapping">
+            <summary>The salesperson mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.SalespersonMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.SalespersonMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SearchBoostMapping">
+            <summary>The search boost mapping</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SearchStopwordMapping">
+            <summary>The search stopword mapping</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SearchSynonymMapping">
+            <summary>The search synonym mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SearchTermRedirectMapping">
+            <summary>The search term redirect mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipChargeMapping">
+            <summary>The ship charge mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ShipChargeMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipChargeMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentMapping">
+            <summary>The shipment mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentPackageLineMapping">
+            <summary>The shipment package line mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentPackageLineMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentPackageLineMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentPackageMapping">
+            <summary>The shipment package mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentPackageMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipmentPackageMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipRateMapping">
+            <summary>The ship rate mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ShipRateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipRateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipRuleMapping">
+            <summary>The ship rule mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ShipRuleMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipRuleMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipViaMapping">
+            <summary>The ship via mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.ShipViaMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.ShipViaMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SpecificationMapping">
+            <summary>The specification mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.SpecificationMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.SpecificationMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.StateMapping">
+            <summary>The state mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.StateMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.StateMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.StyleClassMapping">
+            <summary>The style class mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.StyleTraitMapping">
+            <summary>The style trait mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.StyleTraitValueMapping">
+            <summary>The style trait value mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionLineMapping">
+            <summary>The subscription line mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionLineMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionLineMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionMapping">
+            <summary>The subscription mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionProductMapping">
+            <summary>The subscription product mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionProductMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.SubscriptionProductMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.TaxExemptionMapping">
+            <summary>The tax exemption mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.TaxExemptionMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.TaxExemptionMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.TranslationDictionaryMapping">
+            <summary>The translation dictionary mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.TranslationPropertyMapping">
+            <summary>The translation property mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.UserPaymentProfileMapping">
+            <summary>The user payment profile mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.UserProfileMapping">
+            <summary>The user profile mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.UserProfileMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.UserProfileMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.AdminUserProfilePreferenceMapping">
+            <summary>The admin user profile password mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.VendorMapping">
+            <summary>The vendor mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.VendorMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.VendorMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WarehouseMapping">
+            <summary>The warehouse mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.WarehouseMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.WarehouseMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebPageContentMapping">
+            <summary>The web page content mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebPageMapping">
+            <summary>The web page mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteCurrencyMapping">
+            <summary>The website currency mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteLanguageMapping">
+            <summary>The website language mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteMapping">
+            <summary>The website mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteSitemapMapping">
+            <summary>The website sitemap mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteSitemapMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.WebsiteSitemapMapping"/> class.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WishListMapping">
+            <summary>The wish list mapping.</summary>
+        </member>
+        <member name="T:Insite.Data.Providers.EntityFramework.EntityMappings.WishListProductMapping">
+            <summary>The wish list product mapping.</summary>
+        </member>
+        <member name="M:Insite.Data.Providers.EntityFramework.EntityMappings.WishListProductMapping.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:Insite.Data.Providers.EntityFramework.EntityMappings.WishListProductMapping"/> class.</summary>
+        </member>
+    </members>
+</doc>
