@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:vev="urn:vertexinc:o-series:tps:7:0" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://www.vertexinc.com/oseries/services/CalculateTax70" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.vertexinc.com/oseries/services/CalculateTax70" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import schemaLocation="../xsd/7.0/VertexInc_Envelope.xsd" namespace="urn:vertexinc:o-series:tps:7:0" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="calculateTaxRequest">
+    <wsdl:part name="part" element="vev:VertexEnvelope" />
+  </wsdl:message>
+  <wsdl:message name="calculateTaxResponse">
+    <wsdl:part name="VertexEnvelope" element="vev:VertexEnvelope" />
+  </wsdl:message>
+  <wsdl:portType name="CalculateTaxWS70">
+    <wsdl:operation name="calculateTax70">
+      <wsdl:input name="calculateTaxRequest" message="tns1:calculateTaxRequest" />
+      <wsdl:output name="calculateTaxResponse" message="tns1:calculateTaxResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculateTax70SoapBinding" type="tns1:CalculateTaxWS70">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="calculateTax70">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="calculateTaxRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="calculateTaxResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculateTaxWSService70">
+    <wsdl:port name="CalculateTax70" binding="tns1:CalculateTax70SoapBinding">
+      <wsdlsoap:address location="https://10.21.9.59:8443/vertex-ws/services/CalculateTax70" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
