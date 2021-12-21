@@ -4,6 +4,7 @@ using Insite.Core.Interfaces.Data;
 using Insite.Core.Interfaces.Dependency;
 using Insite.Core.Plugins.EntityUtilities;
 using Insite.Core.Plugins.PaymentGateway;
+using Insite.Core.Plugins.PaymentGateway.Dtos;
 using Insite.Core.Services;
 using Insite.Core.Services.Handlers;
 using Insite.Core.SystemSetting.Groups.OrderManagement;
@@ -21,6 +22,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
         private readonly Lazy<IPaymentService> paymentService;
         private readonly ICustomerOrderUtilities customerOrderUtilities;
         private readonly PaymentSettings paymentSettings;
+        private readonly CheckoutSettings checkoutSettings;
 
         public override int Order
         {
@@ -30,8 +32,9 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
             }
         }
 
-        public DriftProcessCreditCardTransactions(Lazy<IPaymentService> paymentService, ICustomerOrderUtilities customerOrderUtilities, PaymentSettings paymentSettings)
+        public DriftProcessCreditCardTransactions(Lazy<IPaymentService> paymentService, ICustomerOrderUtilities customerOrderUtilities, PaymentSettings paymentSettings, CheckoutSettings checkoutSettings)
         {
+            this.checkoutSettings = checkoutSettings;
             this.paymentService = paymentService;
             this.customerOrderUtilities = customerOrderUtilities;
             this.paymentSettings = paymentSettings;
@@ -47,11 +50,21 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                 return this.NextHandler.Execute(unitOfWork, parameter, result);
             if (parameter.IsPayPal)
             {
+                parameter.CreditCard = parameter.CreditCard ?? new CreditCardDto();
                 parameter.CreditCard.CardType = "PayPal";
                 parameter.CreditCard.CardHolderName = parameter.PayPalPayerId;
                 parameter.CreditCard.SecurityCode = parameter.PayPalToken;
             }
+            if (!this.paymentSettings.SubmitSaleTransaction && this.checkoutSettings.IncreaseCreditCardAuthorizationAmount && this.checkoutSettings.AmountOfIncrease > 0M)
+            {
+                if (this.checkoutSettings.IncreaseCreditCardAuthorizationType == IncreaseType.Amount)
+                    orderTotalDue += this.checkoutSettings.AmountOfIncrease;
+                else
+                    orderTotalDue *= 1M + this.checkoutSettings.AmountOfIncrease / 100M;
+            }
+
             IPaymentService paymentService1 = this.paymentService.Value;
+
             AddPaymentTransactionParameter parameter1 = new AddPaymentTransactionParameter();
             parameter1.TransactionType = this.paymentSettings.SubmitSaleTransaction ? TransactionType.Sale : TransactionType.Authorization;
             parameter1.ReferenceNumber = cart.OrderNumber;
@@ -60,7 +73,10 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
             parameter1.CreditCard = parameter.CreditCard;
             parameter1.PaymentProfileId = parameter.PaymentProfileId;
             parameter1.Amount = orderTotalDue;
+
+
             AddPaymentTransactionResult transactionResult = paymentService1.AddPaymentTransaction(parameter1);
+
             if (transactionResult.ResultCode != ResultCode.Success)
                 return this.CreateErrorServiceResult<UpdateCartResult>(result, transactionResult.SubCode, transactionResult.Message);
             if (transactionResult.CreditCardTransaction != null && result.Properties.ContainsKey("ElavonRespMessage"))
@@ -70,7 +86,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                 transactionResult.CreditCardTransaction.ResponseString = result.Properties["ElavonRespMessage"];
                 transactionResult.CreditCardTransaction.OrigId = result.Properties["ElavonResponseType"];
             }
-            if (parameter.StorePaymentProfile)
+            if (parameter.StorePaymentProfile && parameter.PaymentMethod != null && parameter.PaymentMethod.IsCreditCard)
             {
                 IPaymentService paymentService2 = this.paymentService.Value;
                 AddPaymentProfileParameter parameter2 = new AddPaymentProfileParameter();
