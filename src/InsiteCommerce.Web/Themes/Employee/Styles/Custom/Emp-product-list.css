@@ -27,7 +27,7 @@
   }
 
   .product-list .left-nav-2 a {
-    color: white;
+    color: #ffffff;
   }
 
   .product-list .n-filter .accordion ul li a {
@@ -35,7 +35,7 @@
   }
 
   .product-list .ln2-wrap h3, .product-list .ln2-wrap .nav-head h2 {
-    color: white !important;
+    color: #ffffff !important;
   }
 
   .product-list .vm-table .tv-table .actions-block .add-to-cart-block .item-qty input {
@@ -47,3 +47,5 @@
     margin-left: 4px;
   }
 }
+
+/*# sourceMappingURL=Emp-product-list.css.map */
