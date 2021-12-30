@@ -22,3 +22,18 @@
 
 /src/InsiteCommerce.Web/Themes/Employee/Employee.csproj.user
 /src/InsiteCommerce.Web/package-lock.json
+/src/InsiteCommerce.Web/Themes/Employee/bin
+/src/LeggettAndPlatt.Extensions/obj/Debug
+/src/LeggettAndPlatt.Extensions/bin/Debug
+/src/LeggettAndPlatt.FTP/obj/Debug
+/src/LeggettAndPlatt.FTP/bin/Debug
+/src/LeggettAndPlatt.Integration/obj/Debug
+/src/LeggettAndPlatt.Integration/bin/Debug
+/src/LeggettAndPlatt.IntegrationProcessor/obj/Debug
+/src/LeggettAndPlatt.IntegrationProcessor/bin/Debug
+/src/LeggettAndPlatt.PinPointe/obj/Debug
+/src/LeggettAndPlatt.PinPointe/bin/Debug
+/src/LeggettAndPlatt.Test/obj/Debug
+/src/LeggettAndPlatt.Test/bin/Debug
+/src/LeggettAndPlatt.Vertex/obj/Debug
+/src/LeggettAndPlatt.Vertex/bin/Debug
