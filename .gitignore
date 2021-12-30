@@ -37,3 +37,5 @@
 /src/LeggettAndPlatt.Test/bin/Debug
 /src/LeggettAndPlatt.Vertex/obj/Debug
 /src/LeggettAndPlatt.Vertex/bin/Debug
+/src/InsiteCommerce.Web/Themes/**/*.js
+/src/InsiteCommerce.Web/Themes/**/*.map
