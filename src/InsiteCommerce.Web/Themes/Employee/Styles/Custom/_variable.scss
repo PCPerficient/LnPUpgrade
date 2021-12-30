@@ -1,0 +1,32 @@
+﻿//
+// Color settings
+//
+
+// Color palette
+$color-brand: #002855 !default;
+$color-alt: #777777 !default;
+$white: #ffffff !default;
+$color-gray-light: #cccccc !default;
+$disabled: $color-gray-light;
+$footer-bg-color: $color-alt;
+$primary-color: $color-brand;
+
+// Text
+$text-color: #6f6f6f !default;
+
+// Links
+$link-color: $color-brand !default;
+$link-color-hover: lighten($color-brand, 18%) !default;
+
+//Buttons
+$btn-primary: $color-brand;
+$btn-secondary: $link-color-hover;
+
+$btn-primary-border: $btn-primary;
+$btn-secondary-border: $btn-secondary;
+
+//
+// Typography settings
+//
+
+$base-font-size: 16px !default;

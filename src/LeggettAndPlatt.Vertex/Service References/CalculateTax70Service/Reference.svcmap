@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="94f0c94e-d052-4cb6-8e50-f72c020cc5ac" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://10.21.9.59:8443/vertex-ws/services/CalculateTax70?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="VertexInc-Delete.xsd" MetadataType="Schema" ID="6ca17234-ec5b-4481-b64f-b40a85bc8fa5" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Delete.xsd" />
+    <MetadataFile FileName="VertexInc-InvoiceVerification.xsd" MetadataType="Schema" ID="e024216e-248b-44ed-9971-1f607e5532c5" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-InvoiceVerification.xsd" />
+    <MetadataFile FileName="VertexInc-CodeList-TaxingLocation.xsd" MetadataType="Schema" ID="a103a2b2-b893-4074-ab7b-91d3d179bc2a" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/codelist/VertexInc-CodeList-TaxingLocation.xsd" />
+    <MetadataFile FileName="VertexInc-DistributeTaxProcurement.xsd" MetadataType="Schema" ID="4528d0c3-491e-47e9-85ee-9ec71bc71997" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-DistributeTaxProcurement.xsd" />
+    <MetadataFile FileName="VertexInc-Rollback.xsd" MetadataType="Schema" ID="6f6867c3-08db-4b92-af13-a08014f4869b" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Rollback.xsd" />
+    <MetadataFile FileName="VertexInc-DistributeTax.xsd" MetadataType="Schema" ID="9a9fddf6-4f50-436a-9f21-d2248caef13f" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-DistributeTax.xsd" />
+    <MetadataFile FileName="VertexInc-Exists.xsd" MetadataType="Schema" ID="bc784b51-a621-4fd5-9c06-9b282791faf7" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Exists.xsd" />
+    <MetadataFile FileName="VertexInc-CodeList-DeliveryTerm.xsd" MetadataType="Schema" ID="b939e3f6-8508-4247-bf6c-611cc83d1443" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/codelist/VertexInc-CodeList-DeliveryTerm.xsd" />
+    <MetadataFile FileName="VertexInc-AssetMovement.xsd" MetadataType="Schema" ID="005921fd-afe0-492c-95af-c7c968445295" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-AssetMovement.xsd" />
+    <MetadataFile FileName="VertexInc-AccrualSync.xsd" MetadataType="Schema" ID="8ce99da2-1bdf-44b5-83cc-3121a0f45f32" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-AccrualSync.xsd" />
+    <MetadataFile FileName="VertexInc-TaxAreaResponse.xsd" MetadataType="Schema" ID="e07efe40-37b3-4089-81a3-6e028bdcee48" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-TaxAreaResponse.xsd" />
+    <MetadataFile FileName="VertexInc-FindTaxAreasRequest.xsd" MetadataType="Schema" ID="394e5d04-bdfc-4588-a64d-ee6758da1e7b" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-FindTaxAreasRequest.xsd" />
+    <MetadataFile FileName="VertexInc-TaxAreaRequest.xsd" MetadataType="Schema" ID="9916395b-206b-434b-aeb6-a9789b2af524" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-TaxAreaRequest.xsd" />
+    <MetadataFile FileName="VertexInc-Core.xsd" MetadataType="Schema" ID="6b188bc5-714b-4191-9dec-d83671f5f9d8" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/tax/VertexInc-Core.xsd" />
+    <MetadataFile FileName="VertexInc-CodeList-JurisdictionLevel.xsd" MetadataType="Schema" ID="c95a1a23-fe05-474c-ab90-28d4aa3f5bab" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/codelist/VertexInc-CodeList-JurisdictionLevel.xsd" />
+    <MetadataFile FileName="VertexInc-Accrual.xsd" MetadataType="Schema" ID="ed2ff0ec-84da-44b8-ac99-5aefe46cea7f" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Accrual.xsd" />
+    <MetadataFile FileName="VertexInc-FindChangedTaxAreaResponse.xsd" MetadataType="Schema" ID="bc65aefa-c32c-4667-9cd8-5af3a872086e" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-FindChangedTaxAreaResponse.xsd" />
+    <MetadataFile FileName="VertexInc-Reversal.xsd" MetadataType="Schema" ID="ba679def-559b-4efb-ba42-891e3014a0fc" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Reversal.xsd" />
+    <MetadataFile FileName="VertexInc-ERS.xsd" MetadataType="Schema" ID="9f40b7fb-a23f-493c-8b92-9454c7716ebc" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-ERS.xsd" />
+    <MetadataFile FileName="VertexInc-ChangedTaxAreaRequest.xsd" MetadataType="Schema" ID="0fe94f66-4737-4920-9e5c-3f7fee20f4a4" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-ChangedTaxAreaRequest.xsd" />
+    <MetadataFile FileName="VertexInc-Common.xsd" MetadataType="Schema" ID="bd81cc30-da6c-44d3-8fc1-30849e0b1f8e" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/tax/VertexInc-Common.xsd" />
+    <MetadataFile FileName="VertexInc-APInvoiceSync.xsd" MetadataType="Schema" ID="9593cf21-6c14-4b24-b84f-86c4d5497a9f" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-APInvoiceSync.xsd" />
+    <MetadataFile FileName="VertexInc-CodeList-TaxingType.xsd" MetadataType="Schema" ID="03cc0e9d-213c-4bb4-9628-45c5044c5b7a" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/codelist/VertexInc-CodeList-TaxingType.xsd" />
+    <MetadataFile FileName="VertexInc-ARBillingSync.xsd" MetadataType="Schema" ID="b807c6ea-f781-43cf-9ad0-5b414f6574cd" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-ARBillingSync.xsd" />
+    <MetadataFile FileName="VertexInc-Version.xsd" MetadataType="Schema" ID="b1b8de89-7b91-4494-ac13-ecdddf97af3e" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/version/VertexInc-Version.xsd" />
+    <MetadataFile FileName="VertexInc-Invoice.xsd" MetadataType="Schema" ID="706766cb-ad4c-4c43-8b19-92090009b755" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Invoice.xsd" />
+    <MetadataFile FileName="VertexInc-Quotation.xsd" MetadataType="Schema" ID="79b5890b-edc0-4a96-b08b-1d7dae83acdb" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-Quotation.xsd" />
+    <MetadataFile FileName="VertexInc-InventoryRemoval.xsd" MetadataType="Schema" ID="48343d3e-b7d3-422d-a14c-064afd319b40" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-InventoryRemoval.xsd" />
+    <MetadataFile FileName="VertexInc-ChangedTaxAreaResponse.xsd" MetadataType="Schema" ID="7382c998-053a-46c1-9994-c3e3a3bba65b" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-ChangedTaxAreaResponse.xsd" />
+    <MetadataFile FileName="VertexInc-PurchaseOrder.xsd" MetadataType="Schema" ID="aa41cf8b-090f-4595-90f1-3ff3858468a4" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-PurchaseOrder.xsd" />
+    <MetadataFile FileName="VertexInc_Envelope.xsd" MetadataType="Schema" ID="67077361-a888-4cc2-b3e5-0bd7a97a24e1" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/VertexInc_Envelope.xsd" />
+    <MetadataFile FileName="VertexInc-FindTaxAreasResponse.xsd" MetadataType="Schema" ID="71ef0c2b-bdbb-4f4b-a7b7-721604c77352" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-FindTaxAreasResponse.xsd" />
+    <MetadataFile FileName="VertexInc-FindChangedTaxAreaRequest.xsd" MetadataType="Schema" ID="ac46bbcd-17fd-4542-b46b-dc5e3313b8dd" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/taxgis/VertexInc-FindChangedTaxAreaRequest.xsd" />
+    <MetadataFile FileName="CalculateTax70.wsdl" MetadataType="Wsdl" ID="ca033a4d-aee2-472f-899b-7e6f7b8919c4" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/services/CalculateTax70?wsdl" />
+    <MetadataFile FileName="VertexInc-BuyerInputTax.xsd" MetadataType="Schema" ID="75a501a2-47d9-458c-8827-6d20ec7a2b80" SourceId="1" SourceUrl="https://10.21.9.59:8443/vertex-ws/xsd/7.0/indirect/VertexInc-BuyerInputTax.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

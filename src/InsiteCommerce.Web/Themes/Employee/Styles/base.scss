@@ -5038,9 +5038,6 @@ ul[role="search"], ul[role="cart"] {
     width: auto !important;
 }
 
-ul[role="search"] {
-    border-left: 1px solid #ddd;
-}
 
 ul[role="cart"] {
     background: url("../Images/isc/nav-vertical-border.png") repeat-y scroll right top rgba(0, 0, 0, 0);
@@ -7966,13 +7963,18 @@ nav ul:not(.side-nav) li a {
     display: inline-block;
     float: left;
     border-right: 1px solid #ddd;
-    padding-right: 1em;
-    margin-right: 1em;
+    padding-right: 0.8em;
+    margin-right: 0.8em;
     margin-bottom: .5em;
 }
 
 .widget-linklist.list-horizontal ul li:last-child {
     border-right: 0;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.widget-linklist.list-horizontal ul li:last-child  a {
     margin-right: 0;
     padding-right: 0;
 }

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{088753FE-05F0-4421-ABD8-BFF2A394141C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeggettAndPlatt.IntegrationProcessor</RootNamespace>
+    <AssemblyName>LeggettAndPlatt.IntegrationProcessor</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GemBox.Spreadsheet">
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\GemBox.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Common">
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Integration">
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Insite.Integration.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.WIS.Broker">
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Insite.WIS.Broker.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions">
+      <HintPath>..\packages\Unity.5.11.1\lib\net40\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container">
+      <HintPath>..\packages\Unity.5.11.1\lib\net40\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CustomPropertyConstants.cs" />
+    <Compile Include="Common\JobDefinitionParametersConstant.cs" />
+    <Compile Include="Helpers\ExcelHelper.cs" />
+    <Compile Include="Models\OrderHistoryModels.cs" />
+    <Compile Include="Models\OrderHistoryStatusXmlModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Plugins\CustomFileFinder.cs" />
+    <Compile Include="Plugins\IntegrationProcessorConsoleUserExport.cs" />
+    <Compile Include="Plugins\IntegrationProcessorCustomFlatFile.cs" />
+    <Compile Include="Plugins\IntegrationProcessorDownloadFilesFromFtp.cs" />
+    <Compile Include="Plugins\IntegrationProcessorDownloadFilesFromFtpsPIM.cs" />
+    <Compile Include="Plugins\IntegrationProcessorMovePIMFoldersToArchiveLocation.cs" />
+    <Compile Include="Plugins\IntegrationProcessorOrderHistoryXml.cs" />
+    <Compile Include="Plugins\IntegrationProcessorOrderSubmit.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LeggettAndPlatt.FTP\LeggettAndPlatt.FTP.csproj">
+      <Project>{83fea5c1-4c93-4356-aaa1-6adc987396ba}</Project>
+      <Name>LeggettAndPlatt.FTP</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

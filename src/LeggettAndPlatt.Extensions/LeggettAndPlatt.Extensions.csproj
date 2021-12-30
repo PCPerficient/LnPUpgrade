@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ED8EB601-9E5E-475D-9530-AE431A2340AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeggettAndPlatt.Extensions</RootNamespace>
+    <AssemblyName>LeggettAndPlatt.Extensions</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotLiquid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=82e46016ecf9f07c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\DotLiquid.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Account, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Account.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Cart, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Cart.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Catalog, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Catalog.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Common, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.ContentLibrary, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.ContentLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Core, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Insite.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Core.Interfaces, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Core.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Customers, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Customers.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Data, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Data.Entities, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Data.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Data.Providers.EntityFramework, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Data.Providers.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Data.Repositories, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Data.Repositories.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Order, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Order.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Payments, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Payments.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Plugins, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Insite.Plugins.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Public.Core, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Public.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Public.WebFramework, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Public.WebFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.WebFramework, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Insite.WebFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Insite.Websites, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Websites.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="RemoteActiveDirectory, Version=1.0.0.53, Culture=neutral, PublicKeyToken=d9ff2a1d43ad9af4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\RemoteActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.7\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.7\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CustomPropertyConstants.cs" />
+    <Compile Include="Common\CustomPropertyHelper.cs" />
+    <Compile Include="Common\EmailHelper.cs" />
+    <Compile Include="Common\EmpRegistrationHelper.cs" />
+    <Compile Include="Common\SettingHelper.cs" />
+    <Compile Include="ContentLibrary\Pages\ActivationEmailSentCreator.cs" />
+    <Compile Include="ContentLibrary\Pages\ActivationEmailSentPage.cs" />
+    <Compile Include="ContentLibrary\Pages\ContactCustomerServiceCreator.cs" />
+    <Compile Include="ContentLibrary\Pages\ContactCustomerServicePage.cs" />
+    <Compile Include="ContentLibrary\Pages\DriftResetPasswordCreator.cs" />
+    <Compile Include="ContentLibrary\Pages\DriftResetPasswordPage.cs" />
+    <Compile Include="ContentLibrary\Pages\InternalLinkPage.cs" />
+    <Compile Include="ContentLibrary\Pages\ResetPasswordOrLoginCreator.cs" />
+    <Compile Include="ContentLibrary\Pages\ResetPasswordOrLoginPage.cs" />
+    <Compile Include="ContentLibrary\Widgets\DriftResetPasswordWidget.cs" />
+    <Compile Include="Controllers\CaptchaContactUsController.cs" />
+    <Compile Include="Core\Providers\CustomMessageProvider.cs" />
+    <Compile Include="CustomSettings\AbandonedCartSetting.cs" />
+    <Compile Include="CustomSettings\AddThisSettings.cs" />
+    <Compile Include="CustomSettings\CommonSettings.cs" />
+    <Compile Include="CustomSettings\ElavonSettings.cs" />
+    <Compile Include="CustomSettings\EmployeeSettings.cs" />
+    <Compile Include="CustomSettings\NavigationSetting.cs" />
+    <Compile Include="CustomSettings\OrderSettings.cs" />
+    <Compile Include="CustomSettings\PIMSettings.cs" />
+    <Compile Include="CustomSettings\PinPointeSettings.cs" />
+    <Compile Include="CustomSettings\SirvImagesSetting.cs" />
+    <Compile Include="CustomSettings\VertexSettings.cs" />
+    <Compile Include="Entities\LPEmployee.cs" />
+    <Compile Include="Entities\LPEmployeeMapping.cs" />
+    <Compile Include="Extensions\CustomStringHelperExtensions.cs" />
+    <Compile Include="Modules\Account\Content\CustomResetPasswordPageFilter.cs" />
+    <Compile Include="Modules\Account\Services\Handlers\AddAccountHandler\SetAdditionalValues.cs" />
+    <Compile Include="Modules\Account\Services\Handlers\UpdateSessionHandler\ChangePasswordWithToken.cs" />
+    <Compile Include="Modules\Cart\Services\ElavonService.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\AddElavonErrorLogHandler.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\CopyCustomPropertiesToResultDrift.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\DriftUpdateCartHandler.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\GetElavonSessionTokenHandler.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\CreateOrderHistoryDrift.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\DriftProcessCreditCardTransactions.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\ElavonPostLevel3Data.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\Elavon\ElavonLevel3Request.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\SendConfirmationEmailDrift.cs" />
+    <Compile Include="Modules\Cart\Services\IElavonService.cs" />
+    <Compile Include="Modules\Cart\Services\Parameters\ElavonErrorLogParameter.cs" />
+    <Compile Include="Modules\Cart\Services\Parameters\ElavonSessionTokenParameter.cs" />
+    <Compile Include="Modules\Cart\Services\Pipelines\Pipes\GetOrderDataSet\AddOrderSetting.cs" />
+    <Compile Include="Modules\Cart\Services\Results\ElavonErrorLogResult.cs" />
+    <Compile Include="Modules\Cart\Services\Results\ElavonSessionTokenResult.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\ApiModels\ElavonErrorLogModel.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\ApiModels\ElavonSessionTokenModel.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\ApiModels\ElavonTokenModel.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\ElavonErroLogV1Controller.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\ElavonSessionTokenV1Controller.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\Mappers\DriftGetCartCollectionMapper.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\Mappers\ElavonErrorLogMapper.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\Mappers\ElavonSessionTokenMapper.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\Mappers\GetCartMapperDrift.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\Mappers\Interfaces\IElavonErrorLogMapper.cs" />
+    <Compile Include="Modules\Cart\WebApi\V1\Mappers\Interfaces\IElavonSessionTokenMapper.cs" />
+    <Compile Include="Modules\Common\Services\CustomPropertyService.cs" />
+    <Compile Include="Modules\Common\Services\Handlers\AddCustomPropertyField.cs" />
+    <Compile Include="Modules\Common\Services\ICustomPropertyService.cs" />
+    <Compile Include="Modules\Common\Services\Parameters\CustomPropertyParameter.cs" />
+    <Compile Include="Modules\Common\Services\Results\CustomPropertyResult.cs" />
+    <Compile Include="Modules\Common\WebApi\V2\ApiModels\CustomPropertyRequestModel.cs" />
+    <Compile Include="Modules\Common\WebApi\V2\ApiModels\CustomPropertyResponseModel.cs" />
+    <Compile Include="Modules\Common\WebApi\V2\CustomPropertyResponceModel.cs" />
+    <Compile Include="Modules\Common\WebApi\V2\CustomPropertyV2Controller.cs" />
+    <Compile Include="Modules\Common\WebApi\V2\Mappers\CustomPropertyPostMapper.cs" />
+    <Compile Include="Modules\Common\WebApi\V2\Mappers\Interfaces\ICustomPropertyPostMapper.cs" />
+    <Compile Include="Modules\EmployeeRegistration\Services\Handlers\Registration.cs" />
+    <Compile Include="Modules\EmployeeRegistration\Services\IRegistrationService.cs" />
+    <Compile Include="Modules\EmployeeRegistration\Services\Parameters\RegistrationParameter.cs" />
+    <Compile Include="Modules\EmployeeRegistration\Services\RegistrationService.cs" />
+    <Compile Include="Modules\EmployeeRegistration\Services\Results\RegistrationResult.cs" />
+    <Compile Include="Modules\EmployeeRegistration\WebApi\V2\ApiModels\RegistrationModel.cs" />
+    <Compile Include="Modules\EmployeeRegistration\WebApi\V2\ApiModels\RegistrationResultModel.cs" />
+    <Compile Include="Modules\EmployeeRegistration\WebApi\V2\Mappers\Interfaces\IRegistrationPostMapper.cs" />
+    <Compile Include="Modules\EmployeeRegistration\WebApi\V2\Mappers\RegistrationPostMapper.cs" />
+    <Compile Include="Modules\EmployeeRegistration\WebApi\V2\RegistrationV2Controller.cs" />
+    <Compile Include="Modules\Order\Services\Handlers\GetShipmentHandler\GetShipmentDrift.cs" />
+    <Compile Include="Modules\Order\WebApi\V1\Mappers\GetOrderMapperDrift.cs" />
+    <Compile Include="Modules\VertexAddressValidation\Services\AddressValidationService.cs" />
+    <Compile Include="Modules\VertexAddressValidation\Services\Handlers\AddressValidation.cs" />
+    <Compile Include="Modules\VertexAddressValidation\Services\IAddressValidationService.cs" />
+    <Compile Include="Modules\VertexAddressValidation\Services\Parameters\AddressValidationParameter.cs" />
+    <Compile Include="Modules\VertexAddressValidation\Services\Results\AddressValidationResult.cs" />
+    <Compile Include="Modules\VertexAddressValidation\WebApi\V2\AddressValidationV2Controller.cs" />
+    <Compile Include="Modules\VertexAddressValidation\WebApi\V2\ApiModels\AddressSuggestion.cs" />
+    <Compile Include="Modules\VertexAddressValidation\WebApi\V2\ApiModels\AddressValidationRequestModel.cs" />
+    <Compile Include="Modules\VertexAddressValidation\WebApi\V2\ApiModels\AddressValidationResponseModel.cs" />
+    <Compile Include="Modules\VertexAddressValidation\WebApi\V2\Mappers\AddressValidationPostMapper.cs" />
+    <Compile Include="Modules\VertexAddressValidation\WebApi\V2\Mappers\Interfaces\IAddressValidationPostMapper.cs" />
+    <Compile Include="Modules\Websites\Services\Handlers\GetSettingsCollectionHandler\GetSettingsCollectionDrift.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Plugins\Cart\CartOrderProviderByUserDrift.cs" />
+    <Compile Include="Plugins\Emails\EmailServiceDrift.cs" />
+    <Compile Include="Plugins\PaymentGateway\PaymentGatewayElavon.cs" />
+    <Compile Include="Plugins\Pipelines\CalculateMattressFee.cs" />
+    <Compile Include="Plugins\ReCaptcha\ReCaptcha.cs" />
+    <Compile Include="Plugins\Tax\TaxCalculatorVertex.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\AntiForgeryTag.cs" />
+    <Compile Include="WebFramework\Templating\LeggettLoadTemplateExtensionsStartupTask\LeggettLoadTemplateExtensionsStartupTask.cs" />
+    <Compile Include="Widgets\CaptchaContactUsForm.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseScripts\2018.01.08.1.Update_ApplicationMessage_EmailSubscription.sql" />
+    <Content Include="DatabaseScripts\2018.03.10.1.Create_AddressValidation.sql" />
+    <Content Include="DatabaseScripts\2018.04.12.1.Insert_Update_System_Setting_StorefrontSecurity_RequireUniqueEmail.sql" />
+    <Content Include="DatabaseScripts\2018.04.12.2.Insert_Update_System_Setting_Order_EnterpriseCode.sql" />
+    <Content Include="DatabaseScripts\2018.05.10.1.CreateUpdate_AddressValidation.sql" />
+    <Content Include="DatabaseScripts\2018.05.10.1.Disable_State_From_US_Not_In_Contiguous_State.sql" />
+    <Content Include="DatabaseScripts\2018.05.10.2.AddressValidation_CustomerCustomProperty.sql" />
+    <Content Include="DatabaseScripts\2018.05.11.Alter_LNPIsUserAlreadyRegistered.sql" />
+    <Content Include="DatabaseScripts\2018.06.08.1.AbandonedCart_PopupMessage.sql" />
+    <Content Include="DatabaseScripts\2018.06.09.1.Create_LNPOMSPricingForProduct_Job.sql" />
+    <Content Include="DatabaseScripts\2018.06.09.1.Order_XML_Setting_Resource.sql" />
+    <Content Include="DatabaseScripts\2018.06.09.1.System_List_EnterpriseCode_Website_Mapping.sql" />
+    <Content Include="DatabaseScripts\2018.06.09.1.Update_SystemSetting_Cart_ShowOrderLineNotes_OrderHistory_ShowPoNumber_Checkout_PONumberRequired.sql" />
+    <Content Include="DatabaseScripts\2018.06.09.Create_Integration_Job_OMS_Mail_Notifications.sql" />
+    <Content Include="DatabaseScripts\2018.08.08.1.Update_SystemSetting_Checkout_AllowPONumbers.sql" />
+    <Content Include="DatabaseScripts\2018.08.08.1.Update_SystemSetting_OrderManagementGeneral_OrderNumberPrefix.sql" />
+    <Content Include="DatabaseScripts\2018.10.09.1.Order_XML_Archive_Retention_Days_Setting.sql" />
+    <Content Include="DatabaseScripts\2018.10.09.Update_Parameters_OMS_Mail_Notification.sql" />
+    <Content Include="DatabaseScripts\2018.10.15.1.Remove_IntegrationJobParameter.sql" />
+    <Content Include="DatabaseScripts\2018.10.16.1.AdminUser_Role_Creation.sql" />
+    <Content Include="DatabaseScripts\2018.10.18.1_Create_Database_Cleanup_Script.sql" />
+    <Content Include="DatabaseScripts\2018.12.09.1.Update_SystemSetting_OrderHistory_ShowErpOrderNumber.sql" />
+    <Content Include="DatabaseScripts\2018.13.08.1.Create_Table_LNPEmployee.sql" />
+    <Content Include="DatabaseScripts\2018.13.09.2.Create_Update_ApplicationMessage_For_LNP_Elavon_Get_Token_Error_Message.sql" />
+    <Content Include="DatabaseScripts\2018.14.08.1.AbandonedCart_PopupMessageTitle.sql" />
+    <Content Include="DatabaseScripts\2018.14.08.1.Create_Table_LNPEmployee.sql" />
+    <Content Include="DatabaseScripts\2018.14.11.1.ConsoleUserProfileExport_Job_And_Connection.sql" />
+    <Content Include="DatabaseScripts\2018.15.10.1.Create_LNP_Resubmit_Failed_Orders_Job_Script.sql" />
+    <Content Include="DatabaseScripts\2018.15.10.1.Create_OrderHistory_Shipment_TrackingUrl_Property.sql" />
+    <Content Include="DatabaseScripts\2018.15.10.2.Create_LNP_Custom_Job_Connection.sql" />
+    <Content Include="DatabaseScripts\2018.15.11.1.Insert_Update_OMS_Order_Setting_For_Employee_Store.sql" />
+    <Content Include="DatabaseScripts\2018.18.09.1.Update_SystemSetting_OMS_Order.sql" />
+    <Content Include="DatabaseScripts\2018.18.09.1.Update_SystemSetting_OrderHistory_ReorderEnabled.sql" />
+    <Content Include="DatabaseScripts\2018.18.09.2.Create_Job_Order_HistoryPurge_Create_SP_LNPOrderHistoryPurge.sql" />
+    <Content Include="DatabaseScripts\2018.20.08.1.Create_UserProfile_Property_And_SP_LNPDeactivateEmployeeUser.sql" />
+    <Content Include="DatabaseScripts\2018.20.08.1.Update_SystemSetting_Cart_TotalCountDisplay.sql" />
+    <Content Include="DatabaseScripts\2018.20.08.1RegistrationAndValidation_ApplicationMessage.sql" />
+    <Content Include="DatabaseScripts\2018.20.11.1.Update_Order_HistoryPurge_Paramerter.sql" />
+    <Content Include="DatabaseScripts\2018.20.12.1.Add_Update_Shipping_Billing_Address_For_Employee_Store.sql" />
+    <Content Include="DatabaseScripts\2018.20.12.2.Delete_All_Countries_For_EMP_Store_And_Assign_Only_US_Country.sql" />
+    <Content Include="DatabaseScripts\2018.21.11.1.Create_LNP_Custom_Job_Connection_PIMFtpsConnection_FlatFileConnectionPIM.sql" />
+    <Content Include="DatabaseScripts\2018.22.11.1.Create_LNP_PIM_Images_Import_Integration_Job.sql" />
+    <Content Include="DatabaseScripts\2018.23.11.1.Create_LNP_Custom_Job_steps.sql" />
+    <Content Include="DatabaseScripts\2018.24.09.1.Update_SystemSetting_Value_Employee_OrderManagementGeneral_OrderNumberPrefix.sql" />
+    <Content Include="DatabaseScripts\2018.26.09.1.Create_Order_History_Refresh_Job_Defination_Setting.sql" />
+    <Content Include="DatabaseScripts\2018.26.09.1.Update_SystemSetting_Security_RestrictUsersToAssignedWebsites_Insert_Into_UserProfileWebsite.sql" />
+    <Content Include="DatabaseScripts\2018.26.11.1.Upadte_LNP_PIM_Images_Import_Integration_Job.sql" />
+    <Content Include="DatabaseScripts\2018.27.08.1.Create_Product_And_CustomerOrder_Property_For_Vertax.sql" />
+    <Content Include="DatabaseScripts\2018.27.11.1.Update_Column_Name_LNPEmployee.sql" />
+    <Content Include="DatabaseScripts\2018.28.08.1.Create_CustomerOrder_Property_For_AddressValidation.sql" />
+    <Content Include="DatabaseScripts\2018.28.09.1.Create_AppDict.PropertyPermission_Custom_Property_OrderHistory.sql" />
+    <Content Include="DatabaseScripts\2018.28.09.1.Update_SystemSetting_Value_Cart_ShowTaxAndShipping.sql" />
+    <Content Include="DatabaseScripts\2018.28.09.2.Update_SystemSetting_Value_Employee_Security_StorefrontAccess.sql" />
+    <Content Include="DatabaseScripts\2018.30.08.1.Create_ApplicationMessage_For_Vertex_Tax_TBD.sql" />
+    <Content Include="DatabaseScripts\2018.30.11.2.Create_Connection_FlatFileConnectionEmployeeOrderHistory_.sql" />
+    <Content Include="DatabaseScripts\2018.31.08.1.Create_ApplicationMessage_For_Order_Total_TBD.sql" />
+    <Content Include="DatabaseScripts\2018.31.08.1.Create_OrderHistory_And_OrderHistoryLine_Property_For_Tax.sql" />
+    <Content Include="DatabaseScripts\2019.24.01.3.Delete_Elavon_ElavonEnableLevel3Data_Setting.sql" />
+    <Content Include="DatabaseScripts\2019.30.01.Add_Or_Update_Employee_EmployeeWebsiteName_Setting_Value.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.03.12.1.Insert_Update_SystemSetting_PIM_VariantAttributeName.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.04.12.1.Create_PIM_Temp_Tables.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.1.Create_PIM_Data_Import_Jobs.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.1.Insert_Update_SystemSetting_PIM_ImagePathPrefix.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.2.Update_PIM_Data_Import_Jobs_Execution_Links.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.3.PIM_Insite_Data_Import_SPs_and_ables.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.4.Update_PIM_Data_Import_Jobs_Setting.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.5.Updadted_Import_SPs_Script_Prod_Item_Res_Style.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.11.12.1.Update_PIM_Data_Import_Jobs_Setting_v2.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.17.12.1.Update_AND_Delete_Products_and_Items_SPs.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.21.12.1.Use_ItemSKUStockNumber_For_ERPNumber_20181221.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.26.12.1.Update_SP_For_Fix_JIRA_LPCF-454.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.30.11.1.Create_PropertyConfiguration_pimChannelEntityId_JobDefinition_LNP_2.1_PIM_Category_Import.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2019.02.01.1.ImportSPsIssueFixesScript_20190102.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2019.03.01.1.JIRA_LPCF-454_Fix_20190103.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2019.08.01.1.EmployeeStoreCleanupScript.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2019.09.01.1.JIRA_Issue_Fixes_Script_20190109.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2019.24.01.1.JiraIssueFix_LPCF_473_Script_20190122.sql" />
+    <Content Include="DatabaseScripts\PIMIntegrationScripts\2019.24.01.2.PRFTImportProductDelta_20190122.sql" />
+    <Content Include="DatabaseScripts\PostGoLiveScripts\2019.02.15.1.Alter_LNPDeactivateEmployeeUser.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\LeggettAndPlatt.Extensions.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\LeggettAndPlatt.Extensions.csprojAssemblyReference.cache" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Connected Services\" />
+    <Folder Include="ContentLibrary\Controllers\" />
+    <Folder Include="Modules\Account\WebApi\V2\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LeggettAndPlatt.PinPointe\LeggettAndPlatt.PinPointe.csproj">
+      <Project>{d4e73a7e-9ac2-4517-ac9c-4edadc2b37d2}</Project>
+      <Name>LeggettAndPlatt.PinPointe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeggettAndPlatt.Vertex\LeggettAndPlatt.Vertex.csproj">
+      <Project>{4b0d09bd-bc34-4e66-8f85-393c55d38086}</Project>
+      <Name>LeggettAndPlatt.Vertex</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>
