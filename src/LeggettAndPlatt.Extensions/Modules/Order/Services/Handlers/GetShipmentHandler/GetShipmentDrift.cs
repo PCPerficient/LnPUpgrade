@@ -53,7 +53,9 @@ namespace LeggettAndPlatt.Extensions.Modules.Order.Services.Handlers.GetShipment
                 shipmentPackageDto.ShipmentDate = shipmentDto.ShipmentDate;
                 ShipmentPackage shipmentPackage2 = source.ShipmentPackages.SingleOrDefault<ShipmentPackage>((Func<ShipmentPackage, bool>)(o => o.Id == shipmentPackageDto.Id));
                 if (shipmentPackage2 != null)
-                    shipmentPackageDto.TrackingUrl = GetShipmentPackageTrackingUrl(shipmentPackage2);                
+                    shipmentPackageDto.TrackingUrl = GetShipmentPackageTrackingUrl(shipmentPackage2);
+                if (parameter.GetShipmentPackageLines)
+                    shipmentPackageDto.ShipmentPackageLineDtos = this.objectToObjectMapper.Map<ICollection<ShipmentPackageLine>, ICollection<ShipmentPackageLineDto>>(shipmentPackage2.ShipmentPackageLines);
             }
             result.Shipment = shipmentDto;
             return this.NextHandler.Execute(unitOfWork, parameter, result);
