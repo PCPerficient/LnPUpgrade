@@ -41,10 +41,10 @@ module insite.account {
             protected spinnerService: core.SpinnerService,
             protected $q: ng.IQService,
             protected registrationService: IRegistrationService) {
-            this.init();
+            
         }
 
-        init(): void {
+        $onInit(): void {
             this.returnUrl = this.queryString.get("returnUrl");
 
             this.sessionService.getSession().then(

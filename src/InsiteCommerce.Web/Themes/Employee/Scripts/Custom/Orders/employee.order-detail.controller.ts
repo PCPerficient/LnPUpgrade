@@ -38,7 +38,7 @@
             protected sessionService: account.ISessionService,
             protected cartService: cart.ICartService,
             protected addToWishlistPopupService: wishlist.AddToWishlistPopupService) {
-            this.$onInit();
+           
         }
 
         $onInit(): void {

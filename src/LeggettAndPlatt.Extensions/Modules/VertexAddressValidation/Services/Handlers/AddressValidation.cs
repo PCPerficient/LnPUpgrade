@@ -97,15 +97,7 @@ namespace LeggettAndPlatt.Extensions.Modules.VertexAddressValidation.Services.Ha
                 this.EmailHelper.ErrorEmail(obj, this.EmailService);
             }
         }
-        private void AddVertexLog(VertexTaxRateResponseModel vertexTaxRateResponseModel)
-        {
-            if (VertexSettings.VertexEnableLog)
-            {
-                LogHelper.For((object)this).Info("Vertex Address Request: " + vertexTaxRateResponseModel.RequestXml);
-
-                LogHelper.For((object)this).Info("Vertex Address Response: " + vertexTaxRateResponseModel.ResponseXml);
-            }
-        }
+       
         private VertexAddressValidationRequestModel GetVertexAddressValidationRequestModel(AddressValidationParameter parameter)
         {
             VertexAddressValidationRequestModel model = new VertexAddressValidationRequestModel();

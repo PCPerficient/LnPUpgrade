@@ -24,7 +24,7 @@
             protected coreService: core.ICoreService,
             protected settingsService: core.ISettingsService,
             protected deliveryMethodPopupService: account.IDeliveryMethodPopupService) {
-            this.$onInit();
+           
         }
 
         $onInit(): void {

@@ -14,7 +14,7 @@
         static $inject = ["$timeout", "$scope"];
 
         constructor(protected $timeout: ng.ITimeoutService, protected $scope: ng.IScope) {
-            this.$onInit();
+          
         }
 
         $onInit(): void {

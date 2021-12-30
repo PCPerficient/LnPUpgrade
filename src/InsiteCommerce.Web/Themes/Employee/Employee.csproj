@@ -674,6 +674,8 @@
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Widgets\ProductComparisonView\EmployeeProductComparison.cshtml" />
+    <Content Include="Views\Pages\EmployeePDP.liquid" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

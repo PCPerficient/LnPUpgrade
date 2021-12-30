@@ -1,0 +1,10 @@
+<div class="row main-row [[Model.CssClass]] [[Model.DynamicCssClass]]">
+    <div class="medium-12 large-12 columns">
+      <span>PDP</span>
+      [% zone 'Content' %]
+    </div>
+  [% if Model.DefaultCssClass == "product-detail" %]
+      [% pdpScript 'pdpScript' %]
+  [% endif %]
+</div>
+

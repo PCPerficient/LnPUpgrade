@@ -206,20 +206,27 @@
 
         .budget-year-top-filter {
             .budget-year-lbl {
-                &-1 {
+                /*&-1 {
                     width: 25%;
                 }
 
                 &-2 {
                     width: 30%;
-                }
-
+                }*/
                 label {
                     line-height: 1.2em;
                 }
             }
 
-            .budget-year-ops {
+            .budget-year-lbl-1 {
+                width: 25%;
+            }
+
+            .budget-year-lbl-2 {
+                width: 30%;
+            }
+
+           .budget-year-ops {
                 width: 22.5%;
 
                 .picker__holder {
@@ -239,46 +246,46 @@
         }
     }
 
-    .ma-budget-management {
-        button.btn {
-            float: right;
-        }
+        .ma-budget-management {
+            button.btn {
+                float: right;
+            }
 
-        .btn.btn-assign-calendar-months {
-            width: 100%;
-        }
+            .btn.btn-assign-calendar-months {
+                width: 100%;
+            }
 
-        .bm-maintenance .budget-year, .bm-review .budget-year {
-            width: 100%;
-        }
+            .bm-maintenance .budget-year, .bm-review .budget-year {
+                width: 100%;
+            }
 
-        .budget-year-lbl {
-            width: 30%;
-            max-width: 100px;
-            padding-right: 0;
-        }
+            .budget-year-lbl {
+                width: 30%;
+                max-width: 100px;
+                padding-right: 0;
+            }
 
-        .budget-year-ops {
-            width: 30%;
-        }
+            .budget-year-ops {
+                width: 30%;
+            }
 
-        .budget-search-fields {
-            max-width: 50%;
-        }
+            .budget-search-fields {
+                max-width: 50%;
+            }
 
-        .budget-year > .row {
-        }
+            .budget-year > .row {
+            }
 
-        .budget-year-action {
-            width: 40%;
-        }
+            .budget-year-action {
+                width: 40%;
+            }
 
-        .budget-year-action button.btn {
-            width: 100%;
-            white-space: nowrap;
+            .budget-year-action button.btn {
+                width: 100%;
+                white-space: nowrap;
+            }
         }
     }
-}
 
 @media all and (min-width: 768px) {
     .ma-budget-management {

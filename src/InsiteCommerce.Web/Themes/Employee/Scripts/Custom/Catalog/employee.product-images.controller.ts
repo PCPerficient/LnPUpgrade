@@ -13,10 +13,10 @@
         static $inject = ["$scope", "coreService"];
 
         constructor(protected $scope: ng.IScope, protected coreService: core.ICoreService) {
-            this.init();
+           
         }
 
-        init(): void {
+        $onInit(): void {
             this.$scope.$watch(() => this.product.productImages, () => {
                 if (this.product.productImages.length > 0) {
                    

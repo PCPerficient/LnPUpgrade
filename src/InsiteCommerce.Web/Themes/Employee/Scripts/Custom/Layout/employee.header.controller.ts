@@ -37,7 +37,7 @@
             protected ipCookie: any,
             protected $localStorage: common.IWindowStorage,
             protected deliveryMethodPopupService: account.IDeliveryMethodPopupService) {
-            this.$onInit();
+           
         }
 
         $onInit(): void {
