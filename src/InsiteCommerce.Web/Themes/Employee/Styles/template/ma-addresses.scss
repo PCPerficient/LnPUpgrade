@@ -39,6 +39,31 @@
     }
 }
 
+.address-popup {
+    .address-details {
+        display: inline-block;
+        max-width: 88%;
+        vertical-align: top;
+    }
+
+    ul {
+        margin-left: 15px;
+    }
+
+    li.label-head {
+        list-style: none;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    li:not(.label-head) {
+        margin-left: 15px;
+    }
+}
+
 @media all and (max-width: 767px) {
     .ma-addresses {
         .btns .btn {
