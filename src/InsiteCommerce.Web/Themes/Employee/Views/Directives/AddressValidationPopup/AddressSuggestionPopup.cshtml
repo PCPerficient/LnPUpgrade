@@ -7,7 +7,7 @@
         <div>
             <div ng-init="addressModel=1">
                 <ul>
-                    <li><label>[% siteMessage 'LNP_AddressValidationPopup_CorrectedAddress_Msg' %]</label> </li>
+                    <li class="label-head"><label>[% siteMessage 'LNP_AddressValidationPopup_CorrectedAddress_Msg' %]</label> </li>
                     <li ng-repeat="address in suggestedModel.addressSuggestions">
                         <input type="radio" id="radioCorrected{{$index}}"
                                ng-model="addressModel"
@@ -26,7 +26,7 @@
                     </li>
                 </ul>
                 <ul ng-show="suggestedModel.requestAddress">
-                    <li><label>[% siteMessage 'LNP_AddressValidationPopup_RequestedAddress_Msg' %]</label> </li>
+                    <li class="label-head"><label>[% siteMessage 'LNP_AddressValidationPopup_RequestedAddress_Msg' %]</label> </li>
                     <li>
                         <input id="requestedAddress" type="radio"
                                ng-model="addressModel"
