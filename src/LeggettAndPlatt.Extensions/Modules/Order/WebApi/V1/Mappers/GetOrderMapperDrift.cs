@@ -105,6 +105,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Order.WebApi.V1.Mappers
                 orderLineModel.UnitRegularPriceDisplay = this.CurrencyFormatProvider.GetString(orderLineModel.UnitRegularPrice, (ICurrency)currency);
                 orderLineModel.UnitCostDisplay = this.CurrencyFormatProvider.GetString(orderLineModel.UnitCost, (ICurrency)currency);
                 orderLineModel.OrderLineOtherChargesDisplay = this.CurrencyFormatProvider.GetString(orderLineModel.OrderLineOtherCharges, (ICurrency)currency);
+                orderLineModel.MediumImagePath = this.UrlHelper.CreateCdnLinkIfCdnIsEnabled(orderLineModel.MediumImagePath);
                 orderLineModel.Properties = getOrderLineResult.Properties;
                 orderModel1.OrderLines.Add(orderLineModel);
             }
@@ -136,6 +137,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Order.WebApi.V1.Mappers
                 orderHistoryTax.TaxDescription = this.TranslationLocalizer.TranslateLabel(orderHistoryTax.TaxDescription);
                 orderHistoryTax.TaxAmountDisplay = this.CurrencyFormatProvider.GetString(orderHistoryTax.TaxAmount, (ICurrency)currency);
             }
+            //PRFT Custom Code START
             if (!string.IsNullOrEmpty(orderModel1.ShipToState) && orderModel1.ShipToState.Length > 2)
             {
                 State state = this.UnitOfWork.GetRepository<State>().GetTable().FirstOrDefault(x => x.Name.Equals(orderModel1.ShipToState));
@@ -152,7 +154,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Order.WebApi.V1.Mappers
                     orderModel1.BillToState = state.Abbreviation;
                 }              
             }
-
+            //PRFT Custom Code END
             return orderModel1;
         }
     }

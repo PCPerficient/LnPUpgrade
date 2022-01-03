@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="small-12 detail-image">
-                <employee-product-images ng-if="vm.product" product="vm.product" ></employee-product-images>
+                <employee-product-images ng-if="vm.product" product="vm.product" image-provider="{{vm.settings.imageProvider}}"></employee-product-images>
             </div>
             <div class="pd-cm-wrap">
                 <div ng-show="vm.product.isConfigured && vm.product.configurationDto && vm.product.configurationDto.isKit">

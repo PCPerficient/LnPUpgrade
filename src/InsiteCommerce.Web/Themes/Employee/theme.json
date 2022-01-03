@@ -169,8 +169,8 @@
   // This is the default template used by pages that are flagged as "Use Default Template" in CMS
   // This setting is ignored by Header and Footer
   // This will make the view that lives at ~/Themes/MyTheme/Pages/Standard.cshtml be the default
-  //"DefaultPageTemplate": "Standard",
+  "DefaultPageTemplate": "Standard",
   //// This determines which layout will be used when rendering pages
-  //"LayoutTemplate": "Standard"
+  "LayoutTemplate": "Standard"
 }
 

@@ -114,6 +114,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.Public.WebFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Insite.TaxCalculator.Vertex">
+      <HintPath>..\packages\Insite.Commerce.Public.4.6.0.64968\lib\net48\Insite.TaxCalculator.Vertex.dll</HintPath>
+    </Reference>
     <Reference Include="Insite.WebFramework, Version=4.4.0.40920, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Insite.Commerce.Private.4.6.0.64968\lib\net48\Insite.WebFramework.dll</HintPath>
@@ -158,7 +161,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
@@ -287,17 +293,18 @@
     <Compile Include="Modules\VertexAddressValidation\WebApi\V2\Mappers\AddressValidationPostMapper.cs" />
     <Compile Include="Modules\VertexAddressValidation\WebApi\V2\Mappers\Interfaces\IAddressValidationPostMapper.cs" />
     <Compile Include="Modules\Websites\Services\Handlers\GetSettingsCollectionHandler\GetSettingsCollectionDrift.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Plugins\Cart\CartOrderProviderByUserDrift.cs" />
     <Compile Include="Plugins\Emails\EmailServiceDrift.cs" />
     <Compile Include="Plugins\PaymentGateway\PaymentGatewayElavon.cs" />
     <Compile Include="Plugins\Pipelines\CalculateMattressFee.cs" />
+    <Compile Include="Plugins\Pipelines\TaxCalculator\Vertex\CalculateVertexTax.cs" />
     <Compile Include="Plugins\ReCaptcha\ReCaptcha.cs" />
     <Compile Include="Plugins\Tax\TaxCalculatorVertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebFramework\Templating\DotLiquidTags\AntiForgeryTag.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderEndScriptTags.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderScripts.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderStartScriptsTag.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\ProductDetailPageScript.cs" />
     <Compile Include="WebFramework\Templating\LeggettLoadTemplateExtensionsStartupTask\LeggettLoadTemplateExtensionsStartupTask.cs" />
     <Compile Include="Widgets\CaptchaContactUsForm.cs" />
   </ItemGroup>
@@ -386,16 +393,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\Debug\LeggettAndPlatt.Extensions.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\LeggettAndPlatt.Extensions.csprojAssemblyReference.cache" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="ContentLibrary\Controllers\" />
     <Folder Include="Modules\Account\WebApi\V2\" />
-    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LeggettAndPlatt.PinPointe\LeggettAndPlatt.PinPointe.csproj">

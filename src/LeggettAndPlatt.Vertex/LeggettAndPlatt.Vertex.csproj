@@ -49,9 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestModels\VertexAddressValidationRequestModel.cs" />
     <Compile Include="RequestModels\VertexLoginRequestModel.cs" />
-    <Compile Include="RequestModels\VertexTaxRateRequestModel.cs" />
     <Compile Include="ResponseModels\VertexAddressValidationResponseModel.cs" />
-    <Compile Include="ResponseModels\VertexTaxRateResponseModel.cs" />
     <Compile Include="Service References\CalculateTax70Service\Reference.cs" />
     <Compile Include="Service References\CalculateTax70Service\Reference1.cs">
       <AutoGen>True</AutoGen>
@@ -65,9 +63,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\Interfaces\IVertexAddressValidationService.cs" />
-    <Compile Include="Services\Interfaces\IVertexTaxRateService.cs" />
     <Compile Include="Services\VertexAddressValidationService.cs" />
-    <Compile Include="Services\VertexTaxRateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -7,7 +7,8 @@
             restrict: "E",
             replace: true,
             scope: {
-                product: "="
+                product: "=",
+                imageProvider: "@"
             },
             templateUrl: "/PartialViews/Catalog-EmployeeProductImages",
             controller: "EmployeeProductImagesController",

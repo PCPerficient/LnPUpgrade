@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using LeggettAndPlatt.Extensions.CustomSettings;
+using Insite.Data.Entities;
 
 namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHandler
 {
@@ -47,13 +48,36 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                     ((IDictionary<string, object>)result.ConfirmationEmailModel).Add("OtherCharges", result.GetCartResult.Cart.OtherCharges.ToString("C"));
                 }
 
+
+
                 if (OrderSettings.DepartmentCode.ToLower() == "conwebc")//drift email
                 {
-                    //this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_DRIFT_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
+                    EmailList byName = unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_DRIFT_STORE_OrderConfirmation_List", "Order Confirmation");
+                    List<string> list = this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id);
+                    this.emailService.Value.SendEmailList(new SendEmailListParameter()
+                    {
+                        EmailListId = byName.Id,
+                        ToAddresses = (IList<string>)list,
+                        TemplateModel = result.ConfirmationEmailModel,
+                        UnitOfWork = unitOfWork,
+                        TemplateWebsiteId = SiteContext.Current.WebsiteDto?.Id
+                    });
+
+                  //  this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_DRIFT_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
                 }
                 else //employee email
                 {
-                    //this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_EMP_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
+                    EmailList byName = unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_EMP_STORE_OrderConfirmation_List", "Order Confirmation");
+                    List<string> list = this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id);
+                    this.emailService.Value.SendEmailList(new SendEmailListParameter()
+                    {
+                        EmailListId = byName.Id,
+                        ToAddresses = (IList<string>)list,
+                        TemplateModel = result.ConfirmationEmailModel,
+                        UnitOfWork = unitOfWork,
+                        TemplateWebsiteId = SiteContext.Current.WebsiteDto?.Id
+                    });
+                    //  this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_EMP_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
                 }
             }
             return this.NextHandler.Execute(unitOfWork, parameter, result);

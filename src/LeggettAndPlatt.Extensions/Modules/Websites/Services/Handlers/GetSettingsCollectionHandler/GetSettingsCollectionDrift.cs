@@ -9,6 +9,7 @@ using LeggettAndPlatt.Extensions.Common;
 using System;
 using System.Globalization;
 using System.Linq;
+using Insite.Core.Context;
 
 namespace LeggettAndPlatt.Extensions.Modules.Websites.Services.Handlers.GetSettingsCollectionHandler
 {
@@ -34,6 +35,10 @@ namespace LeggettAndPlatt.Extensions.Modules.Websites.Services.Handlers.GetSetti
 
         public override GetSettingsCollectionResult Execute(IUnitOfWork unitOfWork, GetSettingsCollectionParameter parameter, GetSettingsCollectionResult result)
         {
+            bool flag = SiteContext.Current.UserProfileDto != null;
+            if (parameter.ClientRequestedAuthenticatedSettings.HasValue && parameter.ClientRequestedAuthenticatedSettings.Value != flag)
+                return this.CreateErrorServiceResult<GetSettingsCollectionResult>(result, SubCode.BadRequest, "Insite.Websites.Services.Handlers.GetSettingsCollectionHandler.ServerClientAuthenticationMismatch");
+
             foreach (ISettingsService<ResultBase> settingsService in Enumerable.ToList<ISettingsService<ResultBase>>(Enumerable.Where<ISettingsService<ResultBase>>(Enumerable.Select<ISettingsService, ISettingsService<ResultBase>>(this.dependencyLocator.GetAllInstances<ISettingsService>(), (Func<ISettingsService, ISettingsService<ResultBase>>)(x => x as ISettingsService<ResultBase>)), (Func<ISettingsService<ResultBase>, bool>)(x => x != null))))
             {
                 string name = settingsService.GetType().Name;
@@ -42,12 +47,12 @@ namespace LeggettAndPlatt.Extensions.Modules.Websites.Services.Handlers.GetSetti
                 ResultBase settings = settingsService.GetSettings(parameter1);
                 result.SettingsCollection.Add(string.Format("{0}Settings", (object)str), (object)settings);
             }
-
+            //PRFT Custom Code START
             result.SettingsCollection.Add("navigationLinksSetting", SettingHelper.GetNavigationLinks());
             result.SettingsCollection.Add("elavonSetting", SettingHelper.GetElavonSetting());
             result.SettingsCollection.Add("AbandonedCartSetting", SettingHelper.GetAbandonedCartSetting());
             result.SettingsCollection.Add("shippingDisplay", SettingHelper.GetShippingDisplay());
-
+            //PRFT Custom code END
             return result;
         }
 

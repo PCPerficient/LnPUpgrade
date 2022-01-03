@@ -51,9 +51,11 @@ namespace LeggettAndPlatt.Extensions.Plugins.Cart
         {
             DateTimeOffset minValidOrderDate = this.CartRetentionDays > 0 ? DateTimeProvider.Current.Now.AddDays((double)-this.CartRetentionDays) : DateTimeOffset.MinValue;
             UserProfileDto currentUserProfile = SiteContext.Current.UserProfileDto ?? SiteContext.Current.RememberedUserProfileDto;
-            bool isPunchOutSession = !this.CookieManager.Get("PunchOutSessionId").IsBlank();
+            string id = this.CookieManager.Get("PunchOutSessionId");
+            Guid? punchOutSessionCustomerOrderId = id.IsBlank() ? new Guid?() : this.UnitOfWork.GetRepository<PunchOutSession>().Get(id)?.CustomerOrderId;
             //PRFT custom code start.
-            var customerOrderQuery = query.Where<CustomerOrder>((Expression<Func<CustomerOrder, bool>>)(co => co.WebsiteId == SiteContext.Current.WebsiteDto.Id && co.Customer.IsActive && co.ShipTo.IsActive && co.InitiatedByUserProfileId == (Guid?)currentUserProfile.Id && co.Type != "Job" && (co.Status == "Cart" && !isPunchOutSession || co.Status == "PunchOut" && isPunchOutSession) && co.OrderDate > minValidOrderDate));
+            var customerOrderQuery = query.Where<CustomerOrder>((Expression<Func<CustomerOrder, bool>>)(co => co.WebsiteId == SiteContext.Current.WebsiteDto.Id && co.Customer.IsActive && co.ShipTo.IsActive && co.InitiatedByUserProfileId == (Guid?)currentUserProfile.Id && co.Type != "Job" && (co.Status == "Cart" && punchOutSessionCustomerOrderId == new Guid?() || co.Status == "PunchOut" && co.Id == punchOutSessionCustomerOrderId.Value) && co.OrderDate > minValidOrderDate));
+           // var customerOrderQuery = query.Where<CustomerOrder>((Expression<Func<CustomerOrder, bool>>)(co => co.WebsiteId == SiteContext.Current.WebsiteDto.Id && co.Customer.IsActive && co.ShipTo.IsActive && co.InitiatedByUserProfileId == (Guid?)currentUserProfile.Id && co.Type != "Job" && (co.Status == "Cart" && !isPunchOutSession || co.Status == "PunchOut" && isPunchOutSession) && co.OrderDate > minValidOrderDate));
             SetAbandonedCartExistCookie(customerOrderQuery);
             //PRFT custom code end.
             return customerOrderQuery;

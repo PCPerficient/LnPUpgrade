@@ -13,7 +13,7 @@
             protected $scope: ng.IScope,
             protected sessionService: account.ISessionService
         ) {
-            this.$onInit();
+           
         }
 
         $onInit(): void {
