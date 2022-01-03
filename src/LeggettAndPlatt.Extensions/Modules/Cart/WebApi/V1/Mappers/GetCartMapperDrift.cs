@@ -45,7 +45,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.Mappers
             destination.ShippingAndHandling = serviceResult.ShippingAndHandling;
             destination.ShippingAndHandlingDisplay = this.CurrencyFormatProvider.GetString(destination.ShippingAndHandling, (ICurrency)cart.Currency);
             destination.TotalTax = serviceResult.TotalTax;
-            destination.TotalTaxDisplay = cart.TaxCalculated ? this.CurrencyFormatProvider.GetString(destination.TotalTax, (ICurrency)cart.Currency) : this.TranslationLocalizer.TranslateLabel("TBD");//this.CurrencyFormatProvider.GetString(destination.TotalTax, (ICurrency)cart.Currency);
+            destination.TotalTaxDisplay = this.CurrencyFormatProvider.GetString(destination.TotalTax, (ICurrency)cart.Currency);//cart.TaxCalculated ? this.CurrencyFormatProvider.GetString(destination.TotalTax, (ICurrency)cart.Currency) : this.TranslationLocalizer.TranslateLabel("TBD");//this.CurrencyFormatProvider.GetString(destination.TotalTax, (ICurrency)cart.Currency);
             destination.TypeDisplay = this.TranslationLocalizer.TranslateLabel(cart.Type);
             destination.StatusDisplay = this.TranslationLocalizer.TranslateLabel(cart.Status);
             destination.CurrencySymbol = serviceResult.CurrencySymbol;
