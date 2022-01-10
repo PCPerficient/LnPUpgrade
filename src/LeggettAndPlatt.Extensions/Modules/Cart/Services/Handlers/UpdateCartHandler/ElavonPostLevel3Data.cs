@@ -178,7 +178,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                     string shortDescription = ReplaceSpecialCharacter(orderLine.Product.ShortDescription);
 
                     ElavonProduct elavonProduct = new ElavonProduct();
-                    elavonProduct.Ssl_line_Item_commodity_code = CustomStringHelperExtensions.Truncate(orderLine.Product.ErpNumber,16);
+                    elavonProduct.Ssl_line_Item_commodity_code = CustomStringHelperExtensions.Truncate(orderLine.Product.ErpNumber,12);
                     elavonProduct.Ssl_line_item_description = CustomStringHelperExtensions.Truncate(shortDescription,25);
                     elavonProduct.Ssl_line_item_discount_amount = NumberHelper.RoundCurrency(orderLine.TotalNetPrice - orderLine.TotalRegularPrice).ToString();
                     string discountIndicator = "N";
