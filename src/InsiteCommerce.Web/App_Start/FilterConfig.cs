@@ -1,0 +1,14 @@
+﻿using LeggettAndPlatt.Extensions.Extensions;
+using System.Web.Mvc;
+namespace InsiteCommerce.Web.App_Start
+{
+ 
+    public class FilterConfig
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+
+            filters.Add(new ValidateAntiForgeryForContent());
+        }
+    }
+}

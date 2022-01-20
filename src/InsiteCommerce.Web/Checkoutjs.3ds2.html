@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Embedded Payment Demo</title>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <script>
+        var envs = {
+            DEMO: "demo.convergepay.com",
+            PROD: "www.convergepay.com"
+        };
+        function loadScript () {
+            var id = 'id_checkout_js';
+            var id_efs = 'id_efs_js';
+            var src = "https://" + envs[$("#env").val()] + "/hosted-payments/Checkout.js"; 
+            var srcEfs = ""; 
+            if ($("#env").val() === 'PROD'){
+                srcEfs = "https://libs.fraud.elavongateway.com/sdk-web-js/1.0.5/3ds2-web-sdk.min.js";
+           } else {
+                srcEfs = "https://dev.libs.fraud.eu.elavonaws.com/0.9.8/3ds2-web-sdk.min.js";
+           }
+
+            delete window.ConvergeEmbeddedPayment;
+            $("#" + id).remove();
+            $("#" + id_efs).remove();
+            var script = document.createElement('script');
+            script.setAttribute('id', id);
+            script.setAttribute('src', src);
+            document.head.appendChild(script);
+            var script1 = document.createElement('script');
+            script1.setAttribute('id', id_efs);
+            script1.setAttribute('src', srcEfs);
+            document.head.appendChild(script1);
+        }
+        $( document ).ready(function() {
+             console.log( "ready!" );
+             loadScript();
+        });
+
+        var transactionToken;
+    var efsToken;
+
+        var callback = {
+            onError: function (error) {
+                showResult("error", error);
+            },
+            onDeclined: function (response) {
+                showResult("declined", JSON.stringify(response));
+            },
+            onApproval: function (response) {
+
+                showResult("approval", JSON.stringify(response));
+            },
+            onCancelled: function () {
+                showResult("cancelled", "");
+            },
+            onThreeDSecure2: function (response) {
+                console.log("3ds2 token response:");
+                console.log(response);
+                if (response.ssl_3ds2_token){
+                    efsToken = response.ssl_3ds2_token;
+                    $("#efsToken").html(efsToken);
+                } else {
+                    efsToken ="";
+                    $("#efsToken").html("Error");
+                    }
+            }
+        };
+
+        function initiateCheckoutJS () {
+            var tokenRequest = {
+                ssl_amount: $("#ssl_amount").val()
+            };
+			 var num = new Date();
+            var number = num.getSeconds();
+            $.post("api/v2/getelavonsessiontoken", tokenRequest, function(data) {
+			console.log("Token"+JSON.stringify(data))
+                $("#token").html(data);
+                transactionToken = data;
+                //getEfsToken();
+            });
+            return false;
+        }
+
+        function getEfsToken() {
+            var paymentData = {
+                ssl_txn_auth_token: transactionToken
+            };
+            ConvergeEmbeddedPayment.getEFSToken(paymentData, callback);
+            return false;
+        }
+
+        function payWithCreditCard () {
+            var paymentData = {
+                ssl_txn_auth_token: transactionToken,
+                    ssl_card_number: $("#ssl_card_number").val(),
+                    ssl_exp_date: $("#ssl_exp_date").val(),
+                    ssl_cvv2cvc2: $("#ssl_cvv2cvc2").val(),
+                ssl_program_protocol: $("#ssl_program_protocol").val(),
+                ssl_dir_server_tran_id: $("#ssl_dir_server_tran_id").val(),
+                ssl_eci_ind: $("#ssl_eci_ind").val(),
+                ssl_3dsecure_value: $("#ssl_3dsecure_value").val()
+            };
+            ConvergeEmbeddedPayment.pay(paymentData, callback);
+            return false;
+        }
+
+        function showResult (status, msg, hash) {
+            document.getElementById('txn_status').innerHTML = "<b>" + status + "</b>";
+            document.getElementById('txn_response').innerHTML = msg + "</b>";
+            document.getElementById('txn_hash').innerHTML = hash;
+        }
+
+    function getEFSExpiry () {
+        var expMM = $("#ssl_exp_date").val().substring(0,2);
+        var expYY = $("#ssl_exp_date").val().substring(2,4);
+        return expYY.concat(expMM);
+    };
+
+    function getEFSEci(eci) {
+        if (eci === '02' || eci === '05'){
+            return '5';
+        } else if (eci === '01' || eci === '06'){
+            return '6';
+        } else {
+            return '7';
+        }
+    };
+
+        function handleAllInOne() {
+    if ($("#env").val() == 'PROD'){
+        efsUrl = "https://gw.fraud.elavongateway.com/3ds2";
+    } else {
+        efsUrl = "https://uat.gw.fraud.eu.elavonaws.com/3ds2"; 
+    }
+        var sdk = new window.Elavon3DSWebSDK({ baseUrl : efsUrl, token : efsToken, el : 'holder' });
+
+            var request = {
+              //challengeIframeElement: document.getElementById('holder'),
+              purchaseAmount : $("#ssl_amount").val()*100,
+              purchaseCurrency : "840",
+              purchaseExponent : "2",
+              //purchaseDate : "20200429112659",
+              acctNumber : $("#ssl_card_number").val(),
+              cardExpiryDate : getEFSExpiry(),
+              messageCategory : "01",
+              transType : "01",
+              threeDSRequestorAuthenticationInd : "01",
+              challengeWindowSize: "03",
+              displayMode: "lightbox"
+        };
+        console.log(request);
+
+        sdk.web3dsFlow(request).then( function success(response) {
+            console.log(response);
+            document.getElementById('ssl_dir_server_tran_id').value = response.dsTransID;
+            document.getElementById('ssl_eci_ind').value = getEFSEci(response.eci);
+            if (response.authenticationValue) {
+                document.getElementById('ssl_3dsecure_value').value = response.authenticationValue;
+            }
+            document.getElementById('ssl_program_protocol').value = 2; 
+        }, function error(response) {
+            console.log("Error " + response);
+             document.getElementById('ssl_eci_ind').value = "7";
+
+        });
+        }
+        </script>
+  </head>
+  <body leftmargin="20">
+  Environment:
+                <select id="env" name="env" onchange="loadScript()">
+                    <option value="DEMO">DEMO</option>
+                    <option value="PROD">Production</option>
+                </select><br><br>
+                <h3>Step 1: Initiate Checkout</h3>
+        <form name="getSessionTokenForm">
+            Transaction Amount: <input type="text" id="ssl_amount" name="ssl_amount" value="1.00"> <br> <br>
+            <button onclick="return initiateCheckoutJS();">Initiate Checkout.js</button> <br>
+        </form>
+        <br>
+        Transaction Token: <span id="token"></span><br><br>
+        <h3>Step 2: Get EFS Token</h3>
+        <button onclick="return getEfsToken();">Get EFS Token</button><br><br>
+        EFS Token: <span id="efsToken"></span><br><br>
+        <h3>Step 3: Process 3DS2</h3>
+            Card Number: <input id="ssl_card_number" type="text" name="ssl_card_number" value=""> <br/>
+            Expiry Date: <input id="ssl_exp_date" type="text" name="ssl_exp_date" value=""> <br/>
+            CVV2: <input id="ssl_cvv2cvc2" type="text" name="ssl_cvv2cvc2" value=""> <br/><br/>
+
+            <button onclick="handleAllInOne()">Process 3DS2</button><br><br>
+
+        <form name="creditCardForm">
+            Program protocol: <input id="ssl_program_protocol" type="text" name="ssl_program_protocol" value="" ><br/>
+            Dir Server: <input id="ssl_dir_server_tran_id" type="text" name="ssl_dir_server_tran_id" value="" ><br/>
+            Eci: <input id="ssl_eci_ind" type="text" name="ssl_eci_ind" value="" ><br/>
+            CAVV: <input id="ssl_3dsecure_value" type="text" name="ssl_3dsecure_value" value="" ><br/>
+            <h3>Step 4: Process Payment</h3>
+            <button onclick="return payWithCreditCard();">Pay With Credit Card</button> 
+        </form>
+        <br/>
+        <br>
+        Status:<div id="txn_status"></div>
+        <br>
+        Response:<div id="txn_response"></div>
+        <br>
+        Hash Value:<div id="txn_hash"></div>
+  </body>
+</html>

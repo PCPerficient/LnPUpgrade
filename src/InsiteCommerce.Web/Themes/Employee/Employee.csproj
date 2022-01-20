@@ -66,6 +66,7 @@
     <TypeScriptCompile Include="Scripts\Custom\Account\employee.create-account.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Account\employee.my-account-address.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Account\employee.sign-in.controller.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Account\employee.session.service.ts" />
     <TypeScriptCompile Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\AddressValidation\employee.address.validation.popup.directive.ts" />
     <TypeScriptCompile Include="Scripts\Custom\AddressValidation\employee.addressvalidation.service.ts" />
@@ -78,10 +79,12 @@
     <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-images.directive.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-search.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Common\Employee.customproperty.service.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\ContactUs\employee.contact-us.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Email\employee.email-subscription.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Layout\employee.header.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Layout\employee.top-nav.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Orders\employee.order-detail.controller.ts" />
+    <TypeScriptCompile Include="Scripts\insite.antiforgerytoken.ts" />
     <TypeScriptCompile Include="Scripts\insite.config.ts" />
     <TypeScriptCompile Include="Scripts\insite.content-pager.controller.ts" />
     <TypeScriptCompile Include="Scripts\insite.content.directives.ts" />
@@ -673,6 +676,9 @@
   <ItemGroup>
     <Content Include="Views\Widgets\ProductComparisonView\EmployeeProductComparison.cshtml" />
     <Content Include="Views\Pages\EmployeePDP.liquid" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widgets\ContactUsForm\EmployeeContactUs.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

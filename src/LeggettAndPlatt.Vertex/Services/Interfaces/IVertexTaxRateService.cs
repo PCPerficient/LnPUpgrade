@@ -6,6 +6,6 @@ namespace LeggettAndPlatt.Vertex.Services.Interfaces
 {
     public interface IVertexTaxRateService : IDependency
     {
-        VertexTaxRateResponseModel GetTaxRate(VertexTaxRateRequestModel taxRateRequestModel);
+        VertexTaxRateResponseModel GetTaxRate(VertexTaxRateRequestModel taxRateRequestModel,bool isVertexTestMode);
     }
 }

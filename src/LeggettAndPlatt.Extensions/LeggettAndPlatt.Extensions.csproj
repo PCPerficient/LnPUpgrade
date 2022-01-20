@@ -147,6 +147,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
@@ -229,13 +230,17 @@
     <Compile Include="Entities\LPEmployee.cs" />
     <Compile Include="Entities\LPEmployeeMapping.cs" />
     <Compile Include="Extensions\CustomStringHelperExtensions.cs" />
+    <Compile Include="Extensions\ValidateAntiForgeryAngular.cs" />
+    <Compile Include="Extensions\ValidateAntiForgeryAngularForContent.cs" />
     <Compile Include="Modules\Account\Content\CustomResetPasswordPageFilter.cs" />
     <Compile Include="Modules\Account\Services\Handlers\AddAccountHandler\SetAdditionalValues.cs" />
     <Compile Include="Modules\Account\Services\Handlers\UpdateSessionHandler\ChangePasswordWithToken.cs" />
+    <Compile Include="Modules\Account\WebApi\V2\SessionsV2Controller.cs" />
     <Compile Include="Modules\Cart\Services\ElavonService.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\AddElavonErrorLogHandler.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\CopyCustomPropertiesToResultDrift.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\DriftUpdateCartHandler.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\GetElavonTestSessionTokenHandler.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\GetElavonSessionTokenHandler.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\CreateOrderHistoryDrift.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\DriftProcessCreditCardTransactions.cs" />
@@ -270,6 +275,8 @@
     <Compile Include="Modules\Common\WebApi\V2\CustomPropertyV2Controller.cs" />
     <Compile Include="Modules\Common\WebApi\V2\Mappers\CustomPropertyPostMapper.cs" />
     <Compile Include="Modules\Common\WebApi\V2\Mappers\Interfaces\ICustomPropertyPostMapper.cs" />
+    <Compile Include="Modules\ContentLibrary\WebApi\V2\ContactUsControllerV2.cs" />
+    <Compile Include="Modules\ContentLibrary\WebApi\V2\EmailControllerV2.cs" />
     <Compile Include="Modules\EmployeeRegistration\Services\Handlers\Registration.cs" />
     <Compile Include="Modules\EmployeeRegistration\Services\IRegistrationService.cs" />
     <Compile Include="Modules\EmployeeRegistration\Services\Parameters\RegistrationParameter.cs" />
@@ -304,6 +311,8 @@
     <Compile Include="Plugins\Tax\TaxCalculatorVertex.cs" />
     <Compile Include="Plugins\Tax\VertexMessageLoggingInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\AntiForgeryTag.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\AntiForgeryTagContent.cs" />
     <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderEndScriptTags.cs" />
     <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderScripts.cs" />
     <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderStartScriptsTag.cs" />

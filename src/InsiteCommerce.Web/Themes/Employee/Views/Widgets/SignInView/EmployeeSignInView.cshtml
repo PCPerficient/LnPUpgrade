@@ -10,7 +10,7 @@
                     cart-url="[% urlForPage 'CartPage' %]"
                     order-confirmation-url="[% urlForPage 'OrderConfirmationPage' %]">
 
-    <div class="row">
+    <div class="row"  [% antiforgeryTag 'antiforgeryToken' %]>
         <div class="columns " ng-if="vm.session && !vm.session.isAuthenticated && vm.isFromReviewAndPay">
             <p style="color: red;">[% siteMessage 'SignIn_SessionExpiredOnCheckout' %]</p>
         </div>

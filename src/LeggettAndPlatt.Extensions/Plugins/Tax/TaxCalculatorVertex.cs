@@ -96,7 +96,7 @@ namespace LeggettAndPlatt.Extensions.Plugins.Tax
 
             try
             {
-                VertexTaxRateResponseModel vertexTaxRateResponseModel = VertexTaxRateService.GetTaxRate(vertexTaxRateRequestModel);
+                VertexTaxRateResponseModel vertexTaxRateResponseModel = VertexTaxRateService.GetTaxRate(vertexTaxRateRequestModel, VertexSettings.VertexTestMode);
 
                 AddVertexLog(vertexTaxRateResponseModel);
 

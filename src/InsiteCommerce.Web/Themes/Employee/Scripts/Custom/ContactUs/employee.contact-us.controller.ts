@@ -1,19 +1,15 @@
-﻿module insite.email {
+﻿module insite.contactus {
     "use strict";
 
-    export class EmployeeEmailSubscriptionController {
-        session: SessionModel;
+    export class EmployeeContactUsController {
         submitted = false;
         $form: JQuery;
 
-        static $inject = ["$element", "$scope", "sessionService"];
+        static $inject = ["$element", "$scope"];
 
         constructor(
             protected $element: ng.IRootElementService,
-            protected $scope: ng.IScope,
-            protected sessionService: account.ISessionService
-        ) {
-           
+            protected $scope: ng.IScope) {
         }
 
         $onInit(): void {
@@ -21,17 +17,6 @@
             this.$form.removeData("validator");
             this.$form.removeData("unobtrusiveValidation");
             $.validator.unobtrusive.parse(this.$form);
-
-            this.sessionService.getSession().then(
-                (session: SessionModel) => { this.getSessionCompleted(session); },
-                (error: any) => { this.getSessionFailed(error); });
-        }
-
-        protected getSessionCompleted(session: SessionModel): void {
-            this.session = session;
-        }
-
-        protected getSessionFailed(error: any): void {
         }
 
         submit($event): boolean {
@@ -47,6 +32,10 @@
             var that = this;
 
             var formData = {
+                'firstName': $('[name="FirstName"]').val(),
+                'lastName': $('[name="LastName"]').val(),
+                'message': $('[name="Message"]').val(),
+                'topic': $('[name="Topic"]').val(),
                 'emailAddress': $('[name="EmailAddress"]').val()
             }
 
@@ -60,15 +49,16 @@
 
                 data: formData,
                 success: function (data) {
-                    that.submitted = true;
+                    this.submitted = true;
                     that.$scope.$apply();
                 }
             });
+
             return false;
         }
     }
 
     angular
         .module("insite")
-        .controller("EmployeeEmailSubscriptionController", EmployeeEmailSubscriptionController);
+        .controller("EmployeeContactUsController", EmployeeContactUsController);
 }

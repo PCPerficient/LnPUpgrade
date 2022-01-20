@@ -1,5 +1,4 @@
-﻿import SessionModel = Insite.Account.WebApi.V1.ApiModels.SessionModel;
-import CurrentContextModel = insite.core.CurrentContextModel;
+﻿
 
 module insite.account {
     "use strict";
@@ -30,7 +29,7 @@ module insite.account {
         unsubscribeFromCartReminders(parameters: ICartRemindersUnsubscribeParameters): ng.IPromise<SessionModel>;
     }
 
-    export class SessionService implements ISessionService {
+    export class EmployeeSessionService implements ISessionService {
         isAuthenticatedOnServerUri = "/account/isauthenticated";
         serviceUri = "/api/v1/sessions";
 

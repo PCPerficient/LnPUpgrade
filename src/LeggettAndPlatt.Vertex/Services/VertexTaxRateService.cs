@@ -9,17 +9,18 @@ using System.Net.Security;
 using System.Xml.Serialization;
 using System.IO;
 using System.ServiceModel;
+using System.Configuration;
 
 namespace LeggettAndPlatt.Vertex.Services
 {
     public class VertexTaxRateService : IVertexTaxRateService, IDependency
     {
-        public VertexTaxRateResponseModel GetTaxRate(VertexTaxRateRequestModel taxRateRequestModel)
+        public VertexTaxRateResponseModel GetTaxRate(VertexTaxRateRequestModel taxRateRequestModel, bool isVertexTestMode)
         {
-            return GetTaxRateReponse(taxRateRequestModel);
+            return GetTaxRateReponse(taxRateRequestModel, isVertexTestMode);
         }
 
-        private VertexTaxRateResponseModel GetTaxRateReponse(VertexTaxRateRequestModel taxRateRequestModel)
+        private VertexTaxRateResponseModel GetTaxRateReponse(VertexTaxRateRequestModel taxRateRequestModel, bool isVertexTestMode)
         {
             VertexEnvelope vertexEnvelope = PrepareModel(taxRateRequestModel);
 
@@ -31,7 +32,14 @@ namespace LeggettAndPlatt.Vertex.Services
 
            
             BasicHttpBinding binding = new BasicHttpBinding();
-            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            if (isVertexTestMode)
+            {
+                binding.Security.Mode = BasicHttpSecurityMode.None;
+            }
+            else
+            {
+                binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            }
 
             if (!taxRateRequestModel.VertexEndPoint.EndsWith("/"))
             {

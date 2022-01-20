@@ -37,5 +37,13 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1
             ElavonSessionTokenModel elavonSessionTokenModel = new ElavonSessionTokenModel();
             return await this.ExecuteAsync<IElavonSessionTokenMapper, ElavonSessionTokenModel, ElavonSessionTokenParameter, ElavonSessionTokenResult, ElavonSessionTokenModel>(this.ElavonSessionTokenMapper, new Func<ElavonSessionTokenParameter, ElavonSessionTokenResult>(this.ElavonService.GetElavonSessionToken), elavonSessionTokenModel);
         }
+
+        [HttpPost]
+        [Route("{number}", Name = "ElavonTokenV2")]
+        public async Task<IHttpActionResult> Post(string number)
+        {
+            ElavonSessionTokenModel elavonSessionTokenModel = new ElavonSessionTokenModel();
+            return await this.ExecuteAsync<IElavonSessionTokenMapper, ElavonSessionTokenModel, ElavonSessionTokenParameter, ElavonSessionTokenResult, ElavonSessionTokenModel>(this.ElavonSessionTokenMapper, new Func<ElavonSessionTokenParameter, ElavonSessionTokenResult>(this.ElavonService.GetElavonSessionToken), elavonSessionTokenModel);
+        }
     }
 }

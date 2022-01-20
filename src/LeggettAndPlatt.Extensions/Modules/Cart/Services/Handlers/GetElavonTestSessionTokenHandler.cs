@@ -18,12 +18,11 @@ using Insite.Data.Entities;
 using Insite.Data.Repositories.Interfaces;
 using System.Linq;
 using Insite.Common.Logging;
-using System.Configuration;
 
 namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
 {
-    [DependencyName("GetElavonSessionTokenHandler")]
-    public class GetElavonSessionTokenHandler : HandlerBase<ElavonSessionTokenParameter, ElavonSessionTokenResult>
+    [DependencyName("GetElavonTestSessionTokenHandler")]
+    public class GetElavonTestSessionTokenHandler : HandlerBase<ElavonSessionTokenParameter, ElavonSessionTokenResult>
     {
         private readonly ElavonSettings ElavonSettings;
         private readonly IEmailService EmailService;
@@ -31,7 +30,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
         private readonly CustomPropertyHelper CustomPropertyHelper;
         private readonly ICartOrderProviderFactory CartOrderProviderFactory;
 
-        public GetElavonSessionTokenHandler(ElavonSettings elavonSettings, ICartService cartService, IEmailService emailService, CustomPropertyHelper customPropertyHelper, ICartOrderProviderFactory cartOrderProviderFactory)
+        public GetElavonTestSessionTokenHandler(ElavonSettings elavonSettings, ICartService cartService, IEmailService emailService, CustomPropertyHelper customPropertyHelper, ICartOrderProviderFactory cartOrderProviderFactory)
         {
             this.ElavonSettings = elavonSettings;
             this.CartService = cartService;
@@ -44,7 +43,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
         {
             get
             {
-                return 550;
+                return 560;
             }
         }
 
@@ -52,11 +51,6 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
         {
             try
             {
-                //AppContext setting - false
-                if(Convert.ToString(ConfigurationManager.AppSettings["ElavonTestApplication"]) == "true")
-                {
-                   return this.NextHandler.Execute(unitOfWork, parameter, result);
-                }
                 result.ElavonToken = GetElavonSessionToken(result);
 
                 this.GetSystemListResult(unitOfWork, parameter, result);
@@ -75,29 +69,59 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
 
         private string GetElavonSessionToken(ElavonSessionTokenResult result)
         {
-            string tokenUrl = ElavonSettings.ElavonTestMode ? ElavonSettings.ElavonDemoTokenUrl : ElavonSettings.ElavonProdTokenUrl;
+            //string tokenUrl = ElavonSettings.ElavonTestMode ? ElavonSettings.ElavonDemoTokenUrl : ElavonSettings.ElavonProdTokenUrl;
 
+            //WebClient client = new WebClient();
+            //var parameters = new NameValueCollection();
+
+            //decimal ssl_amount = 0;
+            //string ssl_transaction_type = "CCGETTOKEN";
+
+            //var orderTotal = this.GetOrderTotal();
+            //if (orderTotal == 0)
+            //{               
+            //    ssl_amount = orderTotal;
+            //}
+
+            //parameters.Add("ssl_merchant_id", ElavonSettings.ElavonSSLMerchantId);
+            //parameters.Add("ssl_user_id", ElavonSettings.ElavonSSLUserId);
+            //parameters.Add("ssl_pin", ElavonSettings.ElavonSSLPinId);
+            //parameters.Add("ssl_transaction_type", ssl_transaction_type);
+            //parameters.Add("ssl_amount", ssl_amount.ToString());
+            //parameters.Add("ssl_vendor_id", ElavonSettings.ElavonVendorId);
+            //parameters.Add("ssl_vendor_app_name", ElavonSettings.ElavonSSLVendorAppName);
+            //parameters.Add("ssl_vendor_app_version", ElavonSettings.ElavonSSLVendorAppVersion.ToString());
+
+            //string tokenUrl = ElavonSettings.ElavonTestMode ? ElavonSettings.ElavonDemoTokenUrl : ElavonSettings.ElavonProdTokenUrl;
+            string tokenUrl = "https://api.demo.convergepay.com/hosted-payments/transaction_token";
             WebClient client = new WebClient();
             var parameters = new NameValueCollection();
 
             decimal ssl_amount = 0;
-            string ssl_transaction_type = "CCGETTOKEN";
+            //string ssl_transaction_type = "CCGETTOKEN";
+            string ssl_transaction_type = "CCSALE";
 
-            var orderTotal = this.GetOrderTotal();
-            if (orderTotal == 0)
-            {               
-                ssl_amount = orderTotal;
-            }
-
-            parameters.Add("ssl_merchant_id", ElavonSettings.ElavonSSLMerchantId);
-            parameters.Add("ssl_user_id", ElavonSettings.ElavonSSLUserId);
-            parameters.Add("ssl_pin", ElavonSettings.ElavonSSLPinId);
+            //var orderTotal = this.GetOrderTotal();
+            //if (orderTotal == 0)
+            //{               
+            //    ssl_amount = orderTotal;
+            //}
+            ssl_amount = 100;
+            parameters.Add("ssl_merchant_id", "508933");
+            parameters.Add("ssl_user_id", "omsapiuser");
+            parameters.Add("ssl_pin", "QPQB2SZD1JC9ZMR4OKRADB40BHDWQLUFWL59AMB1VT5PS2Z96UPLQPK1647SDUTY");
             parameters.Add("ssl_transaction_type", ssl_transaction_type);
             parameters.Add("ssl_amount", ssl_amount.ToString());
-            parameters.Add("ssl_vendor_id", ElavonSettings.ElavonVendorId);
-            parameters.Add("ssl_vendor_app_name", ElavonSettings.ElavonSSLVendorAppName);
-            parameters.Add("ssl_vendor_app_version", ElavonSettings.ElavonSSLVendorAppVersion.ToString());
-          
+
+            //parameters.Add("ssl_merchant_id", ElavonSettings.ElavonSSLMerchantId);
+            //parameters.Add("ssl_user_id", ElavonSettings.ElavonSSLUserId);
+            //parameters.Add("ssl_pin", ElavonSettings.ElavonSSLPinId);
+            //parameters.Add("ssl_transaction_type", ssl_transaction_type);
+            //parameters.Add("ssl_amount", ssl_amount.ToString());
+            //parameters.Add("ssl_vendor_id", ElavonSettings.ElavonVendorId);
+            //parameters.Add("ssl_vendor_app_name", ElavonSettings.ElavonSSLVendorAppName);
+            //parameters.Add("ssl_vendor_app_version", ElavonSettings.ElavonSSLVendorAppVersion.ToString());
+
 
             ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;

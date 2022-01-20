@@ -10,17 +10,18 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System.ServiceModel;
+using System.Configuration;
 
 namespace LeggettAndPlatt.Vertex.Services
 {
     public class VertexAddressValidationService : IVertexAddressValidationService, IDependency
     {
-        public VertexAddressValidationResponseModel ValidateAddress(VertexAddressValidationRequestModel addressValidationRequestModel)
+        public VertexAddressValidationResponseModel ValidateAddress(VertexAddressValidationRequestModel addressValidationRequestModel, bool isVertexTestMode)
         {
-            return GetLookupTaxAreaReponseAddress(addressValidationRequestModel);
+            return GetLookupTaxAreaReponseAddress(addressValidationRequestModel, isVertexTestMode);
         }
 
-        private VertexAddressValidationResponseModel GetLookupTaxAreaReponseAddress(VertexAddressValidationRequestModel addressValidationRequestModel)
+        private VertexAddressValidationResponseModel GetLookupTaxAreaReponseAddress(VertexAddressValidationRequestModel addressValidationRequestModel, bool isVertexTestMode)
         {
 
             VertexEnvelope vertexEnvelope = PrepareModel(addressValidationRequestModel);
@@ -33,7 +34,14 @@ namespace LeggettAndPlatt.Vertex.Services
 
 
             BasicHttpBinding binding = new BasicHttpBinding();
-            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            if(isVertexTestMode)
+            {
+                binding.Security.Mode = BasicHttpSecurityMode.None;
+            }
+            else
+            {
+                binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            }
           
             if (!addressValidationRequestModel.VertexEndPoint.EndsWith("/"))
             {
