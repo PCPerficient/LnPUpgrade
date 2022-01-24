@@ -150,8 +150,8 @@
     "RelatedProducts": "EmployeeRelatedProducts",
     "HeaderView": "EmployeeHeaderView",
     "OrderConfirmationView": "EmployeeOrderConfirmationView",
-    "EmailSubscription": "EmployeeEmailSubscription"
-	"ContactUs": "EmployeeContactUs"
+    "EmailSubscription": "EmployeeEmailSubscription",
+	  "ContactUsForm": "EmployeeContactUs"
   },
   "Views": {
     // override the view for an alias by specifiying the file location. This will use MyCustomCartLines.cshtml when the the Cart-CartLines view is needed.

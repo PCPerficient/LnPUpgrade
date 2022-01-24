@@ -52,11 +52,15 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
         {
             try
             {
+             
+                LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler");
                 //AppContext setting - false
-                if(Convert.ToString(ConfigurationManager.AppSettings["ElavonTestApplication"]) == "true")
+                if (Convert.ToString(ConfigurationManager.AppSettings["ElavonTestApplication"]) == "true")
                 {
-                   return this.NextHandler.Execute(unitOfWork, parameter, result);
+                    LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Test handler");
+                    return this.NextHandler.Execute(unitOfWork, parameter, result);
                 }
+                LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Actual handler");
                 result.ElavonToken = GetElavonSessionToken(result);
 
                 this.GetSystemListResult(unitOfWork, parameter, result);

@@ -15,6 +15,8 @@ using LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels;
 using LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.Mappers.Interfaces;
 using System.Net.Http;
 using System.Net;
+using Insite.Common.Logging;
+using System.Configuration;
 
 namespace LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1
 {
@@ -39,9 +41,14 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1
         }
 
         [HttpPost]
-        [Route("{number}", Name = "ElavonTokenV2")]
+        [Route("{number}", Name = "ElavonTokenV2Post")]
         public async Task<IHttpActionResult> Post(string number)
         {
+            LogHelper.For((object)this).Info($"Test ElavonSessionTokenV1Controller - {number}" );
+
+            LogHelper.For((object)this).Info($"Test ElavonSessionTokenV1Controller - {Convert.ToString(ConfigurationManager.AppSettings["ElavonTestApplication"])}");
+
+
             ElavonSessionTokenModel elavonSessionTokenModel = new ElavonSessionTokenModel();
             return await this.ExecuteAsync<IElavonSessionTokenMapper, ElavonSessionTokenModel, ElavonSessionTokenParameter, ElavonSessionTokenResult, ElavonSessionTokenModel>(this.ElavonSessionTokenMapper, new Func<ElavonSessionTokenParameter, ElavonSessionTokenResult>(this.ElavonService.GetElavonSessionToken), elavonSessionTokenModel);
         }

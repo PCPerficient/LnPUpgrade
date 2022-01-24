@@ -62,6 +62,7 @@
                 console.log(response);
                 if (response.ssl_3ds2_token){
                     efsToken = response.ssl_3ds2_token;
+					console.log("efsToken " + efsToken);
                     $("#efsToken").html(efsToken);
                 } else {
                     efsToken ="";
@@ -76,16 +77,18 @@
             };
 			 var num = new Date();
             var number = num.getSeconds();
-            $.post("api/v2/getelavonsessiontoken", tokenRequest, function(data) {
-			console.log("Token"+JSON.stringify(data))
+            $.post("api/v2/getelavonsessiontoken/"+number, tokenRequest, function(data) {
+			
                 $("#token").html(data);
                 transactionToken = data;
+				console.log("transactionToken -"+ transactionToken);
                 //getEfsToken();
             });
             return false;
         }
 
         function getEfsToken() {
+		console.log("transactionToken "+ transactionToken);
             var paymentData = {
                 ssl_txn_auth_token: transactionToken
             };
