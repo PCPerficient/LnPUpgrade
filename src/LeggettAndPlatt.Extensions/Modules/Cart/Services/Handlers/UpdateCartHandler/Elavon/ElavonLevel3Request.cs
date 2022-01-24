@@ -36,6 +36,18 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
 
         [XmlElement(ElementName = "ssl_line_Item_total")]
         public string Ssl_Line_Item_Total { get; set; }
+        //Elavon 3DS Integration
+        public string Ssl_other_fees { get; set; }
+        [XmlElement(ElementName = "ssl_line_Item_tax_indicator")]
+        public string Ssl_line_Item_tax_indicator { get; set; }
+        [XmlElement(ElementName = "ssl_line_Item_tax_rate")]
+        public string Ssl_line_Item_tax_rate { get; set; }
+        [XmlElement(ElementName = "ssl_line_Item_tax_amount")]
+        public string Ssl_line_Item_tax_amount { get; set; }
+        [XmlElement(ElementName = "ssl_line_Item_tax_type")]
+        public string Ssl_line_Item_tax_type { get; set; }
+        [XmlElement(ElementName = "ssl_line_Item_alternative_tax")]
+        public string Ssl_line_Item_alternative_tax { get; set; }
 
 
     }
@@ -105,5 +117,41 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
         [XmlElement(ElementName = "ssl_freight_tax_amount")]
         public string Ssl_Freight_Tax_Amount { get; set; }
 
+        //Elavon 3DS Integration
+        [XmlElement(ElementName = "ssl_salestax_indicator")]
+        public string Ssl_Salestax_Indicator { get; set; }
+        [XmlElement(ElementName = "ssl_invoice_number")]
+        public string Ssl_Invoice_Number { get; set; }
+        [XmlElement(ElementName = "ssl_ship_to_zip")]
+        public string Ssl_Ship_To_Zip { get; set; }
+        [XmlElement(ElementName = "ssl_ship_to_country")]
+        public string Ssl_ship_to_country { get; set; }
+        [XmlElement(ElementName = "ssl_ship_from_postal_code")]
+        public string Ssl_ship_from_postal_code { get; set; }
+        [XmlElement(ElementName = "ssl_national_tax_indicator")]
+        public string Ssl_national_tax_indicator { get; set; }
+        [XmlElement(ElementName = "ssl_national_tax_amount")]
+        public string Ssl_national_tax_amount { get; set; }
+        [XmlElement(ElementName = "ssl_order_date")]
+        public string Ssl_order_date { get; set; }
+        [XmlElement(ElementName = "ssl_other_tax")]
+        public string Ssl_other_tax { get; set; }
+        [XmlElement(ElementName = "ssl_summary_commodity_code")]
+        public string Ssl_summary_commodity_code { get; set; }
+        [XmlElement(ElementName = "ssl_merchant_vat_number")]
+        public string Ssl_merchant_vat_number { get; set; }
+        [XmlElement(ElementName = "ssl_customer_vat_number")]
+        public string Ssl_customer_vat_number { get; set; }
+        [XmlElement(ElementName = "ssl_freight_tax_amount")]
+        public string Ssl_freight_tax_amount { get; set; }
+        [XmlElement(ElementName = "ssl_vat_invoice_number")]
+        public string Ssl_vat_invoice_number { get; set; }
+        [XmlElement(ElementName = "ssl_tracking_number")]
+        public string Ssl_tracking_number { get; set; }
+        [XmlElement(ElementName = "ssl_shipping_company")]
+        public string Ssl_shipping_company { get; set; }
+        [XmlElement(ElementName = "ssl_other_fees")]
+
+        public string Ssl_other_fees { get; set; }
     }
 }

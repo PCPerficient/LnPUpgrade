@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -47,7 +48,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
             }
         }
 
-        public ElavonPostLevel3Data(ICustomerOrderUtilities customerOrderUtilities, ElavonSettings elavonSettings, CustomPropertyHelper customPropertyHelper,IEmailService emailService, EmailHelper emailHelper)
+        public ElavonPostLevel3Data(ICustomerOrderUtilities customerOrderUtilities, ElavonSettings elavonSettings, CustomPropertyHelper customPropertyHelper, IEmailService emailService, EmailHelper emailHelper)
         {
             this.customerOrderUtilities = customerOrderUtilities;
             this.ElavonSettings = elavonSettings;
@@ -166,8 +167,56 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
             txn.Ssl_Freight_Tax_Amount = "0.00";
             txn.LineItemProducts = new LineItemProducts() { Product = GetProductData(cart) };
 
+            //Elavon 3DS Integration
+            txn.Ssl_Salestax_Indicator = "Y";
+            txn.Ssl_Invoice_Number = cart.OrderNumber;
+            txn.Ssl_Ship_To_Zip = cart.ShipTo?.PostalCode;
+            txn.Ssl_ship_to_country = cart.ShipTo?.Country?.IsoCode3;
+            //Gabriela to confirm.
+            txn.Ssl_ship_from_postal_code = cart.ShipTo?.PostalCode;
+            txn.Ssl_national_tax_indicator = GetNationalTaxIndicatorValue(cart);
+            txn.Ssl_national_tax_amount = NumberHelper.RoundCurrency(this.customerOrderUtilities.GetTotalTax(cart)).ToString();
+            txn.Ssl_order_date = cart.OrderDate.ToString("yymmdd");
+            txn.Ssl_other_tax = "0.00";
+            txn.Ssl_summary_commodity_code = "ToDo";
+            txn.Ssl_merchant_vat_number = "";
+            txn.Ssl_customer_vat_number = "";
+            txn.Ssl_freight_tax_amount = "0.00";
+            txn.Ssl_vat_invoice_number = "";
+            txn.Ssl_tracking_number = "";
+            txn.Ssl_shipping_company = "";
+            txn.Ssl_other_fees = "0.00";
+          
+
+
+
             return txn;
         }
+
+        private string GetNationalTaxIndicatorValue(CustomerOrder cart)
+        {
+            string nationalTaxIndicator = string.Empty;
+            if (cart.CreditCardTransactions?.Count > 0)
+            {
+                if (cart.CreditCardTransactions.ToList().First().CardType == "VISA")
+                {
+                    if (cart.TaxCalculated)
+                        nationalTaxIndicator= "1";
+                    else
+                        nationalTaxIndicator = "0";
+                }
+                else
+                {
+                    if (cart.TaxCalculated)
+                        nationalTaxIndicator = "Y";
+                    else
+                        nationalTaxIndicator = "N";
+                }
+                
+            }
+            return nationalTaxIndicator;
+        }
+
         private List<ElavonProduct> GetProductData(CustomerOrder cart)
         {
             List<ElavonProduct> products = new List<ElavonProduct>();
@@ -178,8 +227,8 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                     string shortDescription = ReplaceSpecialCharacter(orderLine.Product.ShortDescription);
 
                     ElavonProduct elavonProduct = new ElavonProduct();
-                    elavonProduct.Ssl_line_Item_commodity_code = CustomStringHelperExtensions.Truncate(orderLine.Product.ErpNumber,12);
-                    elavonProduct.Ssl_line_item_description = CustomStringHelperExtensions.Truncate(shortDescription,25);
+                    elavonProduct.Ssl_line_Item_commodity_code = CustomStringHelperExtensions.Truncate(orderLine.Product.ErpNumber, 12);
+                    elavonProduct.Ssl_line_item_description = CustomStringHelperExtensions.Truncate(shortDescription, 25);
                     elavonProduct.Ssl_line_item_discount_amount = NumberHelper.RoundCurrency(orderLine.TotalNetPrice - orderLine.TotalRegularPrice).ToString();
                     string discountIndicator = "N";
                     if (orderLine.TotalNetPrice < orderLine.TotalRegularPrice)
@@ -188,12 +237,17 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                     }
                     elavonProduct.Ssl_line_Item_discount_indicator = discountIndicator;
                     elavonProduct.Ssl_line_Item_extended_total = NumberHelper.RoundCurrency(orderLine.TotalNetPrice).ToString();
-                    elavonProduct.Ssl_line_Item_product_code = CustomStringHelperExtensions.Truncate(orderLine.Product.ErpNumber,12);
+                    elavonProduct.Ssl_line_Item_product_code = CustomStringHelperExtensions.Truncate(orderLine.Product.ErpNumber, 12);
                     elavonProduct.Ssl_line_Item_quantity = orderLine.QtyOrdered.ToString();
                     elavonProduct.Ssl_line_Item_unit_cost = NumberHelper.RoundCurrency(orderLine.UnitListPrice).ToString();
-                    elavonProduct.Ssl_line_Item_unit_of_measure = CustomStringHelperExtensions.Truncate(orderLine.UnitOfMeasure,2);
+                    elavonProduct.Ssl_line_Item_unit_of_measure = CustomStringHelperExtensions.Truncate(orderLine.UnitOfMeasure, 2);
                     elavonProduct.Ssl_Line_Item_Total = NumberHelper.RoundCurrency(orderLine.TotalNetPrice).ToString();
-
+                    //Elavon 3DS Integration
+                    elavonProduct.Ssl_line_Item_tax_indicator =  orderLine.TaxAmount >0 ? "Y":"N";
+                    elavonProduct.Ssl_line_Item_tax_rate = "";
+                    elavonProduct.Ssl_line_Item_tax_amount = Convert.ToString(orderLine.TaxAmount);
+                    elavonProduct.Ssl_line_Item_tax_type = "";
+                    elavonProduct.Ssl_line_Item_alternative_tax = "0.00";
                     products.Add(elavonProduct);
                 }
             }
