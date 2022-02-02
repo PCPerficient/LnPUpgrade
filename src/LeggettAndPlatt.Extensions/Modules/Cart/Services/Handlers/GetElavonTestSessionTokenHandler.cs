@@ -50,21 +50,28 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
 
         public override ElavonSessionTokenResult Execute(IUnitOfWork unitOfWork, ElavonSessionTokenParameter parameter, ElavonSessionTokenResult result)
         {
-            try
+            if (Convert.ToString(ConfigurationManager.AppSettings["ElavonTestApplication"]) == "true")
             {
-                LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Test handler call");
-                result.ElavonToken = GetElavonSessionToken(result);
+                try
+                {
+                    LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Test handler call");
+                    result.ElavonToken = GetElavonSessionToken(result);
 
-                this.GetSystemListResult(unitOfWork, parameter, result);
+                    this.GetSystemListResult(unitOfWork, parameter, result);
 
-                result.ElavonAcceptAVSResponseCode = ElavonSettings.ElavonAcceptAVSResponseCode;
-                result.ElavonAcceptCVVResponseCode = ElavonSettings.ElavonAcceptCVVResponseCode;
+                    result.ElavonAcceptAVSResponseCode = ElavonSettings.ElavonAcceptAVSResponseCode;
+                    result.ElavonAcceptCVVResponseCode = ElavonSettings.ElavonAcceptCVVResponseCode;
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Test handler call exception");
+                    LogHelper.For((object)this).Error((object)ex.Message, ex, (string)null, (object)null);
+                    result.ElavonToken = "";
+                }
             }
-            catch (Exception ex)
+            else
             {
-                LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Test handler call exception");
-                LogHelper.For((object)this).Error((object)ex.Message, ex, (string)null, (object)null);
-                result.ElavonToken = "";
+                return this.NextHandler.Execute(unitOfWork, parameter, result);
             }
 
             return result;

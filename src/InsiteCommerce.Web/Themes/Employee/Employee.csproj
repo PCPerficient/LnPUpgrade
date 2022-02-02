@@ -680,6 +680,9 @@
   <ItemGroup>
     <Content Include="Views\Widgets\ContactUsForm\EmployeeContactUs.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Directives\Account\EmployeeAddressEdit.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

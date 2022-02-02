@@ -77,7 +77,12 @@ module insite.account {
             this.defaultShipToAddress.postalCode = this.shipTo.postalCode;
         }
         save(): void {
-            const valid = angular.element("#addressForm").validate().form();
+            let valid = angular.element("#addressForm").validate().form();
+            if ($(`#ststate`).val() == "") {
+                $(`#ststateValidationMsg`).css('display', 'block');
+                valid = false;
+            }
+           
             if (!valid) {
                 angular.element("html, body").animate({
                     scrollTop: angular.element(".error:visible").offset().top
@@ -89,6 +94,16 @@ module insite.account {
             this.spinnerService.show();
             this.VerifyAddressByVertex();
             //PRFT code end
+        }
+        showHideStateValidationMessage(): void {
+          
+            if ($(`#ststate`).val() == "") {
+                $(`#ststateValidationMsg`).css('display', 'block');
+
+            }
+            else {
+                $(`#ststateValidationMsg`).css('display', 'none');
+            }
         }
 
         VerifyAddressByVertex(): void {
@@ -119,14 +134,19 @@ module insite.account {
             return result;
         }
         IsAddressModified(): boolean {
+            var shipToState = this.shipTo.state != null ? this.shipTo.state.name.toLowerCase() : "";
+            var defaultShipToState = this.defaultShipToAddress.state != null ? this.defaultShipToAddress.state.name.toLowerCase() : "";
+            var shipToCountry = this.shipTo.country != null ? this.shipTo.country.abbreviation.toLowerCase() : "";
+            var defaultShipToCountry = this.defaultShipToAddress.country != null ? this.defaultShipToAddress.country.abbreviation.toLowerCase() : "";
+
             var result = false;
             if (this.shipTo.address1.toLowerCase() != this.defaultShipToAddress.address1.toLowerCase())
                 return true;
             if (this.shipTo.city.toLowerCase() != this.defaultShipToAddress.city.toLowerCase())
                 return true;
-            if (this.shipTo.country.abbreviation.toLowerCase() != this.defaultShipToAddress.country.abbreviation.toLowerCase())
+            if (shipToCountry != defaultShipToCountry)
                 return true;
-            if (this.shipTo.state.name.toLowerCase() != this.defaultShipToAddress.state.name.toLowerCase())
+            if (shipToState !=defaultShipToState)
                 return true;
             if (this.shipTo.postalCode.toLowerCase() != this.defaultShipToAddress.postalCode.toLowerCase())
                 return true;
@@ -264,6 +284,7 @@ module insite.account {
 
         protected UpdateCustomerBillTo(): void {
             this.HideSpinner();
+            debugger;
             this.customerService.updateBillTo(this.billTo).then(
                 (billTo: BillToModel) => { this.updateBillToCompleted(billTo); },
                 (error: any) => { this.updateBillToFailed(error); });

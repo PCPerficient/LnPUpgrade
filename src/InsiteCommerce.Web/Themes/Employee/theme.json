@@ -165,7 +165,8 @@
     "Cart-CartTotalDisplay": "~/Themes/Employee/Views/Directives/Cart/EmployeeCartTotalDisplay.cshtml",
     "Catalog-CrossSellCarousel": "~/Themes/Employee/Views/Directives/Catalog/EmployeeCrossSellCarousel.cshtml",
     "Catalog-EmployeeProductImageCarousel": "~/Themes/Employee/Views/Directives/Catalog/EmployeeProductImageCarousel.cshtml",
-    "Catalog-EmployeeProductImages": "~/Themes/Employee/Views/Directives/Catalog/EmployeeProductImages.cshtml"
+    "Catalog-EmployeeProductImages": "~/Themes/Employee/Views/Directives/Catalog/EmployeeProductImages.cshtml",
+    "Account-AddressEdit": "~/Themes/Employee/Views/Directives/Account/EmployeeAddressEdit.cshtml"
   },
   // This is the default template used by pages that are flagged as "Use Default Template" in CMS
   // This setting is ignored by Header and Footer
