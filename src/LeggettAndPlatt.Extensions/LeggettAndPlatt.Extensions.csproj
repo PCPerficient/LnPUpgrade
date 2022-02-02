@@ -247,6 +247,7 @@
     <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\ElavonPostLevel3Data.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\Elavon\ElavonLevel3Request.cs" />
     <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\SendConfirmationEmailDrift.cs" />
+    <Compile Include="Modules\Cart\Services\Handlers\UpdateCartHandler\SubmitCart.cs" />
     <Compile Include="Modules\Cart\Services\IElavonService.cs" />
     <Compile Include="Modules\Cart\Services\Parameters\ElavonErrorLogParameter.cs" />
     <Compile Include="Modules\Cart\Services\Parameters\ElavonSessionTokenParameter.cs" />
@@ -410,7 +411,6 @@
   <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="ContentLibrary\Controllers\" />
-    <Folder Include="Modules\Account\WebApi\V2\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LeggettAndPlatt.PinPointe\LeggettAndPlatt.PinPointe.csproj">
