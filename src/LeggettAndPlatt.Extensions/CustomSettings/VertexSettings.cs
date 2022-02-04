@@ -43,6 +43,13 @@ namespace LeggettAndPlatt.Extensions.CustomSettings
                 return this.GetValue<bool>(true, nameof(VertexTestMode));
             }
         }
-
+        [SettingsField(ControlType = SystemSettingControlType.Toggle, Description = "If tax free, no call to vertex and tax return 0", DisplayName = "Vertex Tax Free Tax Code", IsGlobal = false)]
+        public virtual bool VertexTaxFreeTaxCode
+        {
+            get
+            {
+                return this.GetValue<bool>(true, nameof(VertexTaxFreeTaxCode));
+            }
+        }
     }
 }

@@ -460,7 +460,7 @@
             errorLog.customerNumber = this.cart.billTo.customerNumber;
 
             var request = {
-                purchaseAmount: parseFloat(this.cart.orderGrandTotal.toFixed(2)),
+                purchaseAmount: parseInt(this.cart.orderGrandTotal.toFixed(2)),
                 purchaseCurrency: "840",
                 purchaseExponent: "2",
                 acctNumber: this.cart.paymentOptions.creditCard.cardNumber,
