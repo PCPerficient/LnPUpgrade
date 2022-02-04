@@ -21,6 +21,7 @@ using LeggettAndPlatt.FTP.RequestModel;
 using Ionic.Zip;
 using System.Text;
 using System.Globalization;
+using Insite.Core.Interfaces.Dependency;
 
 namespace LeggettAndPlatt.IntegrationProcessor
 {
@@ -48,6 +49,7 @@ namespace LeggettAndPlatt.IntegrationProcessor
 
         public DataSet Execute(SiteConnection siteConnection, IntegrationJob integrationJob, JobDefinitionStep jobStep)
         {
+            //System.Diagnostics.Debugger.Launch();
             string path = AppDomain.CurrentDomain.BaseDirectory;
             this.JobLogger = new IntegrationJobLogger(siteConnection, integrationJob);
             this.IntegrationJob = integrationJob;
@@ -229,7 +231,8 @@ namespace LeggettAndPlatt.IntegrationProcessor
             var formatedOrderDate = this.GetFormatedOrderDate(this.GetsanitizedDataRowValue(dataRowCustomerOrder, Data.OrderDateColumn));
 
             Order order = new Order();
-            order.OtherCharges = this.GetsanitizedDataRowValue(dataRowOrderSetting, "OtherCharges");
+            //  order.OtherCharges = this.GetsanitizedDataRowValue(dataRowOrderSetting, "OtherCharges");
+            order.OtherCharges = this.GetsanitizedDataRowValue(dataRowCustomerOrder, "OtherCharges");
             order.AllocationRuleID = this.GetsanitizedDataRowValue(dataRowOrderSetting, "AllocationRuleID");
             order.DepartmentCode = this.GetsanitizedDataRowValue(dataRowOrderSetting, "DepartmentCode");
             order.ValidateItem = this.GetsanitizedDataRowValue(dataRowOrderSetting, "ValidateItem");

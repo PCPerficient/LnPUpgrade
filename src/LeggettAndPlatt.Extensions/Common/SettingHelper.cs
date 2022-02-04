@@ -22,6 +22,9 @@ namespace LeggettAndPlatt.Extensions.Common
 
             customProperty.Add("elavonSettingPaymentFailuerMail", elavonSetting.SentEmailEvalonPaymentFailuer.ToString());
             customProperty.Add("logEvalonPaymentResponse", elavonSetting.LogEvalonPaymentResponse.ToString());
+            customProperty.Add("elavonTestMode", elavonSetting.ElavonTestMode.ToString());
+            customProperty.Add("elavonDemo3DS2Gateway", elavonSetting.ElavonDemo3DS2Gateway.ToString());
+            customProperty.Add("elavonProd3DS2Gateway", elavonSetting.ElavonProd3DS2Gateway.ToString());
 
             return customProperty;
         }
