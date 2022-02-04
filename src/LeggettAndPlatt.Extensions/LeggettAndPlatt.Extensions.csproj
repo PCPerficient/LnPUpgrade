@@ -226,6 +226,7 @@
     <Compile Include="CustomSettings\PIMSettings.cs" />
     <Compile Include="CustomSettings\PinPointeSettings.cs" />
     <Compile Include="CustomSettings\SirvImagesSetting.cs" />
+    <Compile Include="CustomSettings\RecaptchaSetting.cs" />
     <Compile Include="CustomSettings\VertexSettings.cs" />
     <Compile Include="Entities\LPEmployee.cs" />
     <Compile Include="Entities\LPEmployeeMapping.cs" />
@@ -307,7 +308,10 @@
     <Compile Include="Plugins\PaymentGateway\PaymentGatewayElavon.cs" />
     <Compile Include="Plugins\Pipelines\CalculateMattressFee.cs" />
     <Compile Include="Plugins\Pipelines\TaxCalculator\Vertex\CalculateVertexTax.cs" />
+    <Compile Include="Plugins\ReCaptcha\IReCaptchaService.cs" />
     <Compile Include="Plugins\ReCaptcha\ReCaptcha.cs" />
+    <Compile Include="Plugins\ReCaptcha\ReCaptchaResponse.cs" />
+    <Compile Include="Plugins\ReCaptcha\ReCaptchaService.cs" />
     <Compile Include="Plugins\Tax\CreateVertexTaxProxyClient.cs" />
     <Compile Include="Plugins\Tax\TaxCalculatorVertex.cs" />
     <Compile Include="Plugins\Tax\VertexMessageLoggingInspector.cs" />
@@ -318,6 +322,7 @@
     <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderScripts.cs" />
     <Compile Include="WebFramework\Templating\DotLiquidTags\HeaderStartScriptsTag.cs" />
     <Compile Include="WebFramework\Templating\DotLiquidTags\ProductDetailPageScript.cs" />
+    <Compile Include="WebFramework\Templating\DotLiquidTags\ReCaptchaTag.cs" />
     <Compile Include="WebFramework\Templating\LeggettLoadTemplateExtensionsStartupTask\LeggettLoadTemplateExtensionsStartupTask.cs" />
     <Compile Include="Widgets\CaptchaContactUsForm.cs" />
   </ItemGroup>

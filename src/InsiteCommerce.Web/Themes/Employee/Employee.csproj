@@ -79,6 +79,7 @@
     <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-images.directive.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Catalog\employee.product-search.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Common\Employee.customproperty.service.ts" />
+    <TypeScriptCompile Include="Scripts\Custom\Common\Employee.recaptcha.service.ts" />
     <TypeScriptCompile Include="Scripts\Custom\ContactUs\employee.contact-us.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Email\employee.email-subscription.controller.ts" />
     <TypeScriptCompile Include="Scripts\Custom\Layout\employee.header.controller.ts" />
