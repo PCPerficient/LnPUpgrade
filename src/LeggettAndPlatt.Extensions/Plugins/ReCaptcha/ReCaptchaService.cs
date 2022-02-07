@@ -83,10 +83,11 @@ namespace LeggettAndPlatt.Extensions.Plugins.ReCaptcha
         public virtual bool NeedToCheckReCaptchaOnClientSideForLocation(string location)
         {
             if (!this.reCaptchSetting.EnableReCaptcha || this.reCaptchSetting.ReCaptchaSiteKey.IsBlank())
+            {
                 return false;
-            string name = "CheckReCaptchaFor" + location + "OnClientSide";
-            PropertyInfo property = this.reCaptchSetting.GetType().GetProperty(name);
-            return !(property == (PropertyInfo)null) && (bool)property.GetValue((object)this.reCaptchSetting);
+            }
+              
+            return true;
         }
 
         public virtual bool NeedToCheckReCaptchaOnServerSideForLocation(string location)

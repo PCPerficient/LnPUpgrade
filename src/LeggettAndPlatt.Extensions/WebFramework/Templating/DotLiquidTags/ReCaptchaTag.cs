@@ -32,8 +32,9 @@ namespace LeggettAndPlatt.Extensions.WebFramework.Templating.DotLiquidTags
       
       
         IReCaptchaService instance = DependencyLocator.Current.GetInstance<IReCaptchaService>();
-        if (instance.CheckVerified())
+        if (!instance.NeedToCheckReCaptchaOnClientSideForLocation(this.location) || instance.CheckVerified())
             return;
+
         TagBuilder tagBuilder1 = new TagBuilder("div")
         {
             Attributes = {
