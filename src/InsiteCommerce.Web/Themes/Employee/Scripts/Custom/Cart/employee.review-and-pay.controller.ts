@@ -2,6 +2,7 @@
     "use strict";
     declare var ConvergeEmbeddedPayment: any;
     import StateModel = Insite.Websites.WebApi.V1.ApiModels.StateModel;
+    import PaymentMethodDto = Insite.Cart.Services.Dtos.PaymentMethodDto;
     export class EmployeeReviewAndPayController extends ReviewAndPayController {
 
         promotionCodeFormDisplay: boolean = false;
@@ -19,7 +20,7 @@
         submitErrorMessage: string;
         elavonAcceptAVSResponseCode: string;
         elavonAcceptCVVResponseCode: string;
-
+      
         static $inject = [
             "elavonService",
             "$scope",
@@ -35,7 +36,8 @@
             "$localStorage",
             "websiteService",
             "deliveryMethodPopupService",
-            "selectPickUpLocationPopupService"
+            "selectPickUpLocationPopupService",
+            "reCaptcha"
         ];
 
         constructor(
@@ -53,11 +55,79 @@
             protected $localStorage: common.IWindowStorage,
             protected websiteService: websites.IWebsiteService,
             protected deliveryMethodPopupService: account.IDeliveryMethodPopupService,
-            protected selectPickUpLocationPopupService: account.ISelectPickUpLocationPopupService) {
+            protected selectPickUpLocationPopupService: account.ISelectPickUpLocationPopupService,
+            protected reCaptcha: common.IReCaptchaService
+
+        ) {
             super($scope, $window, cartService, promotionService, sessionService, coreService, spinnerService, $attrs, settingsService, queryString, $localStorage, websiteService, deliveryMethodPopupService, selectPickUpLocationPopupService)
         }
 
+        $onInit(): void {
+            this.$scope.$on("cartChanged", (event: ng.IAngularEvent) => this.onCartChanged(event));
 
+            this.cartUrl = this.$attrs.cartUrl;
+            this.cartId = this.queryString.get("cartId") || "current";
+
+            this.getCart(true);
+
+            $("#reviewAndPayForm").validate();
+
+            this.$scope.$watch("vm.cart.paymentMethod", (paymentMethod: PaymentMethodDto) => {
+                if (paymentMethod && paymentMethod.isPaymentProfile) {
+                    this.setUpPPTokenExGateway();
+                }
+            });
+            this.$scope.$watch("vm.cart.paymentOptions.creditCard.expirationYear", (year: number) => {
+                this.onExpirationYearChanged(year);
+            });
+            this.$scope.$watch("vm.cart.paymentOptions.creditCard.useBillingAddress", (useBillingAddress: boolean) => {
+                this.onUseBillingAddressChanged(useBillingAddress);
+            });
+            this.$scope.$watch("vm.creditCardBillingCountry", (country: CountryModel) => {
+                this.onCreditCardBillingCountryChanged(country);
+            });
+            this.$scope.$watch("vm.creditCardBillingState", (state: StateModel) => {
+                this.onCreditCardBillingStateChanged(state);
+            });
+
+            this.settingsService.getSettings().then(
+                (settings: core.SettingsCollection) => {
+                    this.getSettingsCompleted(settings);
+                },
+                (error: any) => {
+                    this.getSettingsFailed(error);
+                });
+
+            this.$scope.$on("sessionUpdated", (event, session) => {
+                this.onSessionUpdated(session);
+            });
+
+            jQuery.validator.addMethod("angularmin", (value, element, minValue) => {
+                const valueParts = value.split(":");
+                return valueParts.length === 2 && valueParts[1] > minValue;
+            });
+        
+            (window as any).addEventListener('load', (event) => {
+                this.reCaptcha.render("ReviewAndPay");
+            });
+        }
+        
+       
+        submit(submitSuccessUri: string, signInUri: string): void {
+            this.submitting = true;
+            this.submitErrorMessage = "";
+            if (!this.validateReviewAndPayForm()) {
+                this.submitting = false;             
+                return;
+            }
+            if (!this.reCaptcha.validate("ReviewAndPay")) {             
+                this.submitting = false;
+                return;
+            }
+            this.sessionService.getIsAuthenticated().then(
+                (isAuthenticated: boolean) => { this.getIsAuthenticatedForSubmitCompleted(isAuthenticated, submitSuccessUri, signInUri); },
+                (error: any) => { this.getIsAuthenticatedForSubmitFailed(error); });
+        }
         protected getIsAuthenticatedForSubmitCompleted(isAuthenticated: boolean, submitSuccessUri: string, signInUri: string): void {
             if (!isAuthenticated) {
                 this.coreService.redirectToPathAndRefreshPage(`${signInUri}?returnUrl=${this.coreService.getCurrentPath()}`);
@@ -101,6 +171,7 @@
         }
 
         protected getSettingsCompleted(settingsCollection: any): void {
+            console.log(settingsCollection);
             this.cartSettings = settingsCollection.cartSettings;
             this.SentEmailEvalonPaymentFailuer = settingsCollection.elavonSetting.elavonSettingPaymentFailuerMail;
             this.LogEvalonPaymentResponse = settingsCollection.elavonSetting.logEvalonPaymentResponse;
@@ -115,7 +186,7 @@
             this.customerSettings = settingsCollection.customerSettings;
             this.useTokenExGateway = settingsCollection.websiteSettings.useTokenExGateway;
             this.enableWarehousePickup = settingsCollection.accountSettings.enableWarehousePickup;
-
+           
             this.sessionService.getSession().then(
                 (session: SessionModel) => { this.getSessionCompleted(session); },
                 (error: any) => { this.getSessionFailed(error); });
