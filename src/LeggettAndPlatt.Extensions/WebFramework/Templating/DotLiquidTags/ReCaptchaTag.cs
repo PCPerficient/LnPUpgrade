@@ -75,7 +75,7 @@ namespace LeggettAndPlatt.Extensions.WebFramework.Templating.DotLiquidTags
             InnerHtml = CustomMessageProvider.Current.ReCaptcha_RequiredErrorMessage
         };
         result.Write(tagBuilder2.ToString((TagRenderMode)0));
-        string scripttag = "<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>";
+        string scripttag = "<script src='https://www.google.com/recaptcha/api.js?render=explicit' async defer></script>";
         result.Write(scripttag);
         
         }
