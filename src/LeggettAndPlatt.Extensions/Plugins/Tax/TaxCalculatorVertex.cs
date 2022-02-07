@@ -78,6 +78,12 @@ namespace LeggettAndPlatt.Extensions.Plugins.Tax
             //}
             #endregion
 
+            if(VertexSettings.VertexTaxFreeTaxCode)
+            {
+                customerOrder.StateTax = Decimal.Zero;
+                SetCustomerOrderProperty(customerOrder, CustomPropertyConstants.customPropertyNameIsTaxTBD, "false");
+                return;
+            }
             if (customerOrder.Website == null)
                 return;
 

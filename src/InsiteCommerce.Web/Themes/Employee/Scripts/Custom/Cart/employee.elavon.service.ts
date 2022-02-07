@@ -1,5 +1,6 @@
 ﻿import ElavonSessionTokenModel = LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels.ElavonSessionTokenModel;
 import ElavonErrorLogModel = LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels.ElavonErrorLogModel;
+import Elavon3DS2Model = LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels.Elavon3DS2Model;
 module insite.elavon {
     "use strict";
 
