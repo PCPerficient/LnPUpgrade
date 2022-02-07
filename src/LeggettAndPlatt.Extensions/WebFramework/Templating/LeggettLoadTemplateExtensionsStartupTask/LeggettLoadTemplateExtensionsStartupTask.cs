@@ -26,7 +26,9 @@ namespace LeggettAndPlatt.Extensions.WebFramework.Templating.LeggettLoadTemplate
             Template.RegisterTag<HeaderEndScriptTags>("headerEndScripts");
             Template.RegisterTag<HeaderScripts>("headerScripts");
             Template.RegisterTag<ProductDetailPageScript>("pdpScript");
-
+            Template.RegisterTag<AntiForgeryTag>("antiforgeryTag");
+            Template.RegisterTag<AntiForgeryTagContent>("antiforgeryTagContent");
+            Template.RegisterTag<ReCaptchaTag>("reCaptcha");
         }
     }
 }

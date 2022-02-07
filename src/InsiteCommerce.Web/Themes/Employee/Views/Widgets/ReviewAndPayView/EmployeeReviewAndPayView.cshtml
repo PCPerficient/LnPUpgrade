@@ -1,4 +1,5 @@
-﻿<div class="large-12 columns" ng-controller="ReviewAndPayController as vm" ng-cloak cart-url="[% urlForPage 'CartPage' %]">
+﻿
+<div class="large-12 columns" ng-controller="ReviewAndPayController as vm" ng-cloak cart-url="[% urlForPage 'CartPage' %]">
     <input type="hidden" id="tst_reviewAndPayPage_pageIsReady" value="{{vm.pageIsReady}}" />
 
     <div class="checkout-head">
@@ -347,11 +348,15 @@
                 [% siteMessage 'ReviewAndPay_InvalidAddress_CannotCalculateTax' %]
             </div>
             <div class="btns">
+
                 <a id="tst_submitForApproval_button" href="" class="btn primary btn-submit-for-approval" ng-show="vm.cart.requiresApproval && vm.cart.hasApprover && !vm.submitting" ng-click="vm.submit('[% urlForPage 'OrderApprovalDetailPage' %]')">[% translate 'Submit for approval' %]</a>
                 <a id="tst_placeOrder_button" href="" class="btn primary btn-place-order" ng-hide="vm.cart.requiresApproval || vm.submitting || vm.cart.paymentMethod.isPaymentProfileExpired"
                    ng-click="!vm.cart.hasInsufficientInventory && vm.submit('[% urlForPage 'OrderConfirmationPage' %]', '[% urlForPage 'SignInPage' %]')"
                    ng-class="{'disabled': vm.cart.hasInsufficientInventory}">[% translate 'Place Order' %]</a>
                 <div id="tst_submitErrorMessage" style="color: red;" ng-bind="vm.submitErrorMessage"></div>
+                <div class="cf-form-captcha">
+                    [% reCaptcha 'ReviewAndPay' %]
+                </div>
             </div>
         </div>
         <isc-spinner name="checkoutPage" show="true"></isc-spinner>
@@ -362,6 +367,7 @@
     <input id="elavonCvvErrorMessage" type="hidden" value="[% siteMessage 'LNP_Elavon_CVV_Error_Message' %]" />
     <input id="elavonPaymentErrorMessage" type="hidden" value="[% siteMessage 'LNP_Elavon_Payment_Error_Message' %]" />
 </div>
+
 
 <script type="text/ng-template" id="/PartialViews/Account-AddressDisplay">
     [% partialView 'Account-AddressDisplay' %]

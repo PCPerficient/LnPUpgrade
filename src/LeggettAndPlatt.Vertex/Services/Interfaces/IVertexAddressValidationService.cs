@@ -6,6 +6,6 @@ namespace LeggettAndPlatt.Vertex.Services.Interfaces
 {
     public interface IVertexAddressValidationService : IDependency
     {
-        VertexAddressValidationResponseModel ValidateAddress(VertexAddressValidationRequestModel addressValidationRequestModel);
+        VertexAddressValidationResponseModel ValidateAddress(VertexAddressValidationRequestModel addressValidationRequestModel,bool isVertexTestMode);
     }
 }

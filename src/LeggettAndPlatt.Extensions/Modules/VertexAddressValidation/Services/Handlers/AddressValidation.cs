@@ -59,7 +59,7 @@ namespace LeggettAndPlatt.Extensions.Modules.VertexAddressValidation.Services.Ha
             try
             {
                 VertexAddressValidationRequestModel request = GetVertexAddressValidationRequestModel(parameter);
-                VertexAddressValidationResponseModel vertexAddressResponseModel = this.addressValidationService.ValidateAddress(request);
+                VertexAddressValidationResponseModel vertexAddressResponseModel = this.addressValidationService.ValidateAddress(request,this.VertexSettings.VertexTestMode);
                 AddAddressLog(vertexAddressResponseModel);
                 return GetAddressValidationResult(vertexAddressResponseModel, parameter);
             }

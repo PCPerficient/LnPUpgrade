@@ -33,7 +33,16 @@ namespace LeggettAndPlatt.Extensions.CustomSettings
         public virtual string Branch => this.GetValue("0908", "Branch");
 
         [SettingsField(DisplayName = "Vertex Enable Log", Description = "Vertex Enable Log for debugging", IsGlobal = false)]
-        public virtual bool VertexEnableLog => this.GetValue(true, "VertexEnableLog");     
-        
+        public virtual bool VertexEnableLog => this.GetValue(true, "VertexEnableLog");
+
+        [SettingsField(ControlType = SystemSettingControlType.Toggle, Description = "If set to On, system will connet to Vertex demo url", DisplayName = "Vertex Test Mode", IsGlobal = false)]
+        public virtual bool VertexTestMode
+        {
+            get
+            {
+                return this.GetValue<bool>(true, nameof(VertexTestMode));
+            }
+        }
+
     }
 }

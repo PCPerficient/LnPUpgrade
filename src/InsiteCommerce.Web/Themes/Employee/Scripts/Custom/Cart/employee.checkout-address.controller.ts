@@ -125,7 +125,12 @@ module insite.cart {
             this.updateAddressFormValidation();
         }
         continueCheckout(continueUri: string, cartUri: string): void {
-            const valid = $("#addressForm").validate().form();
+            let valid = $("#addressForm").validate().form();
+            if ($(`#ststate`).val() == "") {
+                $(`#ststateValidationMsg`).css('display', 'block');
+                valid = false;
+            }
+
             if (!valid) {
                 angular.element("html, body").animate({
                     scrollTop: angular.element(".error:visible").offset().top
