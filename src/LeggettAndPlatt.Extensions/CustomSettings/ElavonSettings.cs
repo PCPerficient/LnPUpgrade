@@ -171,5 +171,41 @@ namespace LeggettAndPlatt.Extensions.CustomSettings
                 return this.GetValue<string>("®,™,©,&", nameof(SpecialCharacters));
             }
         }
+
+        [SettingsField(ControlType = SystemSettingControlType.Text, Description = "Elavon Demo 3DS2 JS URL", DisplayName = "Elavon Demo 3DS2 JS Url", IsGlobal = false)]
+        public virtual string ElavonDemo3DS2JSUrl
+        {
+            get
+            {
+                return this.GetValue<string>("https://dev.libs.fraud.eu.elavonaws.com/0.9.8/3ds2-web-sdk.min.js", nameof(ElavonDemo3DS2JSUrl));
+            }
+        }
+
+        [SettingsField(ControlType = SystemSettingControlType.Text, Description = "Elavon Prod 3DS2 JS URL", DisplayName = "Elavon Prod 3DS2 JS Url", IsGlobal = false)]
+        public virtual string ElavonProd3DS2JSUrl
+        {
+            get
+            {
+                return this.GetValue<string>("https://libs.fraud.elavongateway.com/sdk-web-js/1.0.5/3ds2-web-sdk.min.js", nameof(ElavonProd3DS2JSUrl));
+            }
+        }
+
+        [SettingsField(ControlType = SystemSettingControlType.Text, Description = "Elavon Demo 3DS2 Gateway", DisplayName = "Elavon Demo 3DS2 Gateway", IsGlobal = false)]
+        public virtual string ElavonDemo3DS2Gateway
+        {
+            get
+            {
+                return this.GetValue<string>("https://uat.gw.fraud.eu.elavonaws.com/3ds2", nameof(ElavonDemo3DS2Gateway));
+            }
+        }
+
+        [SettingsField(ControlType = SystemSettingControlType.Text, Description = "Elavon Prod 3DS2 Gateway", DisplayName = "Elavon Prod 3DS2 Gateway", IsGlobal = false)]
+        public virtual string ElavonProd3DS2Gateway
+        {
+            get
+            {
+                return this.GetValue<string>("https://gw.fraud.elavongateway.com/3ds2", nameof(ElavonProd3DS2Gateway));
+            }
+        }
     }
 }
