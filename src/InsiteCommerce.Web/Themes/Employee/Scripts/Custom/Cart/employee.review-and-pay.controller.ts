@@ -1,7 +1,10 @@
 ﻿module insite.cart {
     "use strict";
     declare var ConvergeEmbeddedPayment: any;
+    declare var Elavon3DSWebSDK: any;
+    declare var window: any;
     import StateModel = Insite.Websites.WebApi.V1.ApiModels.StateModel;
+    import PaymentMethodDto = Insite.Cart.Services.Dtos.PaymentMethodDto;
     export class EmployeeReviewAndPayController extends ReviewAndPayController {
 
         promotionCodeFormDisplay: boolean = false;
@@ -19,6 +22,8 @@
         submitErrorMessage: string;
         elavonAcceptAVSResponseCode: string;
         elavonAcceptCVVResponseCode: string;
+        efsToken: any;
+        efsUrl: any;
 
         static $inject = [
             "elavonService",
@@ -35,7 +40,8 @@
             "$localStorage",
             "websiteService",
             "deliveryMethodPopupService",
-            "selectPickUpLocationPopupService"
+            "selectPickUpLocationPopupService",
+            "reCaptcha"
         ];
 
         constructor(
@@ -53,11 +59,79 @@
             protected $localStorage: common.IWindowStorage,
             protected websiteService: websites.IWebsiteService,
             protected deliveryMethodPopupService: account.IDeliveryMethodPopupService,
-            protected selectPickUpLocationPopupService: account.ISelectPickUpLocationPopupService) {
+            protected selectPickUpLocationPopupService: account.ISelectPickUpLocationPopupService,
+            protected reCaptcha: common.IReCaptchaService
+
+        ) {
             super($scope, $window, cartService, promotionService, sessionService, coreService, spinnerService, $attrs, settingsService, queryString, $localStorage, websiteService, deliveryMethodPopupService, selectPickUpLocationPopupService)
         }
 
+        $onInit(): void {
+            this.$scope.$on("cartChanged", (event: ng.IAngularEvent) => this.onCartChanged(event));
 
+            this.cartUrl = this.$attrs.cartUrl;
+            this.cartId = this.queryString.get("cartId") || "current";
+
+            this.getCart(true);
+
+            $("#reviewAndPayForm").validate();
+
+            this.$scope.$watch("vm.cart.paymentMethod", (paymentMethod: PaymentMethodDto) => {
+                if (paymentMethod && paymentMethod.isPaymentProfile) {
+                    this.setUpPPTokenExGateway();
+                }
+            });
+            this.$scope.$watch("vm.cart.paymentOptions.creditCard.expirationYear", (year: number) => {
+                this.onExpirationYearChanged(year);
+            });
+            this.$scope.$watch("vm.cart.paymentOptions.creditCard.useBillingAddress", (useBillingAddress: boolean) => {
+                this.onUseBillingAddressChanged(useBillingAddress);
+            });
+            this.$scope.$watch("vm.creditCardBillingCountry", (country: CountryModel) => {
+                this.onCreditCardBillingCountryChanged(country);
+            });
+            this.$scope.$watch("vm.creditCardBillingState", (state: StateModel) => {
+                this.onCreditCardBillingStateChanged(state);
+            });
+
+            this.settingsService.getSettings().then(
+                (settings: core.SettingsCollection) => {
+                    this.getSettingsCompleted(settings);
+                },
+                (error: any) => {
+                    this.getSettingsFailed(error);
+                });
+
+            this.$scope.$on("sessionUpdated", (event, session) => {
+                this.onSessionUpdated(session);
+            });
+
+            jQuery.validator.addMethod("angularmin", (value, element, minValue) => {
+                const valueParts = value.split(":");
+                return valueParts.length === 2 && valueParts[1] > minValue;
+            });
+        
+            (window as any).addEventListener('load', (event) => {
+                this.reCaptcha.render("ReviewAndPay");
+            });
+        }
+        
+       
+        submit(submitSuccessUri: string, signInUri: string): void {
+            this.submitting = true;
+            this.submitErrorMessage = "";
+            if (!this.validateReviewAndPayForm()) {
+                this.submitting = false;             
+                return;
+            }
+            if (!this.reCaptcha.validate("ReviewAndPay")) {             
+                this.submitting = false;
+                return;
+            }
+            this.sessionService.getIsAuthenticated().then(
+                (isAuthenticated: boolean) => { this.getIsAuthenticatedForSubmitCompleted(isAuthenticated, submitSuccessUri, signInUri); },
+                (error: any) => { this.getIsAuthenticatedForSubmitFailed(error); });
+        }
         protected getIsAuthenticatedForSubmitCompleted(isAuthenticated: boolean, submitSuccessUri: string, signInUri: string): void {
             if (!isAuthenticated) {
                 this.coreService.redirectToPathAndRefreshPage(`${signInUri}?returnUrl=${this.coreService.getCurrentPath()}`);
@@ -101,9 +175,11 @@
         }
 
         protected getSettingsCompleted(settingsCollection: any): void {
+            console.log(settingsCollection);
             this.cartSettings = settingsCollection.cartSettings;
             this.SentEmailEvalonPaymentFailuer = settingsCollection.elavonSetting.elavonSettingPaymentFailuerMail;
             this.LogEvalonPaymentResponse = settingsCollection.elavonSetting.logEvalonPaymentResponse;
+            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
             var res = settingsCollection.shippingDisplay.shippingDisplay;
             if (res.toLowerCase() == 'true') {
                 this.shippingDisplay = true;
@@ -115,7 +191,7 @@
             this.customerSettings = settingsCollection.customerSettings;
             this.useTokenExGateway = settingsCollection.websiteSettings.useTokenExGateway;
             this.enableWarehousePickup = settingsCollection.accountSettings.enableWarehousePickup;
-
+           
             this.sessionService.getSession().then(
                 (session: SessionModel) => { this.getSessionCompleted(session); },
                 (error: any) => { this.getSessionFailed(error); });
@@ -128,7 +204,7 @@
             this.elavonAcceptCVVResponseCode = elavonDetails.elavonAcceptCVVResponseCode;
 
             if (typeof (this.elavonToken) !== "undefined" && this.elavonToken != "") {
-                this.payTransaction(elavonDetails, submitSuccessUri);
+              this.getEFSToken(elavonDetails, submitSuccessUri);
             }
             else {
                 const errorLog = {} as ElavonErrorLogModel;
@@ -174,8 +250,8 @@
             }
             return;
         }
-
-        private payTransaction(elavonDetails: ElavonSessionTokenModel, submitSuccessUri: string): any {
+               
+        private payTransaction(elavonDetails: ElavonSessionTokenModel, submitSuccessUri: string,elavon3DS2Model: Elavon3DS2Model): any {
             var that = this;
             const errorLog = {} as ElavonErrorLogModel;
             errorLog.customerNumber = this.cart.billTo.customerNumber;
@@ -205,10 +281,13 @@
                 ssl_first_name: this.cart.billTo.firstName.substring(0, 20),
                 ssl_last_name: this.cart.billTo.lastName.substring(0, 30),
                 ssl_verify: 'y',
-                ssl_transaction_type: 'CCGETTOKEN'
+                ssl_transaction_type: 'CCGETTOKEN',
+                ssl_program_protocol: elavon3DS2Model.programProtocol,
+                ssl_dir_server_tran_id: elavon3DS2Model.dsTransID,
+                ssl_eci_ind: elavon3DS2Model.eci,
+                ssl_3dsecure_value: elavon3DS2Model.authenticationValue
             };
-
-           
+            
             var callback = {
                 onError: function (error) {
                     that.ccElavonErrorMessage = elavonDetails.elavonErrorMessage;
@@ -312,10 +391,217 @@
             ConvergeEmbeddedPayment.pay(paymentData, callback);
         }
 
+        private getEFSToken(elavonDetails: ElavonSessionTokenModel, submitSuccessUri: string): any {
+            var that = this;
+            const errorLog = {} as ElavonErrorLogModel;
+            errorLog.customerNumber = this.cart.billTo.customerNumber;
+
+            var paymentData = {
+                ssl_txn_auth_token: elavonDetails.elavonToken
+            };
+            var callback = {
+                onError: function (error) {
+                    that.ccElavonErrorMessage = elavonDetails.elavonErrorMessage;
+                    that.spinnerService.hide();
+                    errorLog.elavonResponse = "";
+                    errorLog.elavonResponseFor = "Error";
+                    errorLog.errorMessage = error;
+                    if (that.LogEvalonPaymentResponse || that.SentEmailEvalonPaymentFailuer) {
+                        that.elavonService.elavonErrorLog(errorLog)
+                    }
+                    that.submitting = false;
+                    that.submitErrorMessage = angular.element("#elavonPaymentErrorMessage").val();
+
+                    that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
+
+                    if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
+                        that.$localStorage.remove("placeOrderAttempt");
+                        that.coreService.redirectToPath("/cart");
+                        return;
+                    }
+                    that.placeOrderAttempt++;
+                    that.$localStorage.set("placeOrderAttempt", that.placeOrderAttempt.toString());
+
+                    return true;
+                },
+                onDeclined: function (response) {
+                    that.ccElavonErrorMessage = response['ssl_result_message'];
+                    var replaced = that.ccElavonErrorMessage.split(' ').join('_');
+                    that.ccElavonErrorMessage = replaced.toLowerCase();
+                    that.spinnerService.hide();
+                    errorLog.elavonResponse = JSON.stringify(response);
+                    errorLog.elavonResponseFor = "Declined";
+                    errorLog.saveElavonResponse = false;
+                    that.submitErrorMessage = that.elavonResponseCodes[that.ccElavonErrorMessage];
+                    if (that.submitErrorMessage == null || typeof that.submitErrorMessage === 'undefined') {
+                        that.submitErrorMessage = response['ssl_result_message'];
+                        errorLog.saveElavonResponse = true;
+                    }
+                    if (that.LogEvalonPaymentResponse || that.SentEmailEvalonPaymentFailuer || errorLog.saveElavonResponse) {
+                        that.elavonService.elavonErrorLog(errorLog);
+                    }
+                    that.submitting = false;
+
+                    that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
+                    if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
+                        that.$localStorage.remove("placeOrderAttempt");
+                        that.coreService.redirectToPath("/cart");
+                        return;
+                    }
+                    that.placeOrderAttempt++;
+                    that.$localStorage.set("placeOrderAttempt", that.placeOrderAttempt.toString());
+                    return true;
+                },
+                onApproval: function (response) {
+                    var isValidAvsResponse = that.isValidElavonAVSResponse(response);
+                    if (!isValidAvsResponse) {
+                        that.submitErrorMessage = angular.element("#elavonAvsErrorMessage").val();
+                        that.submitting = false;
+                    }
+
+                    if (isValidAvsResponse) {
+                        var isValidCvvResponse = that.isValidElavonCVVResponse(response);
+                        if (!isValidCvvResponse) {
+                            that.submitErrorMessage = angular.element("#elavonCvvErrorMessage").val();
+                            that.submitting = false;
+                        }
+                    }
+                    if (isValidAvsResponse && isValidCvvResponse) {
+                        var isValidResponse = that.isValidElavonResponse(response);
+                        if (!isValidResponse) {
+                            that.submitErrorMessage = angular.element("#elavonResponseTokenNotPresentMessage").val();
+                            that.submitting = false;
+                        }
+                    }
+
+                    //code for log and mail elavon error response START
+                    errorLog.elavonResponse = JSON.stringify(response);
+                    if (!isValidAvsResponse || !isValidResponse || !isValidCvvResponse) {
+                        errorLog.elavonResponseFor = "Declined";
+                    }
+                    else {
+                        errorLog.elavonResponseFor = "Approval";
+                    }
+                    if (that.LogEvalonPaymentResponse || that.SentEmailEvalonPaymentFailuer || errorLog.saveElavonResponse) {
+                        that.elavonService.elavonErrorLog(errorLog);
+                    }
+                    //code for log and mail elavon error response END
+
+                    if (isValidAvsResponse && isValidResponse && isValidCvvResponse) {
+                        that.cart.properties["ElavonRespMessage"] = errorLog.elavonResponse;
+                        that.cartService.updateCart(that.cart, true).then(
+                            (cart: CartModel) => { that.submitCompleted(cart, submitSuccessUri); },
+                            (error: any) => { that.submitFailed(error); });
+                    }
+                    if (!isValidAvsResponse || !isValidResponse || !isValidCvvResponse) {
+                        that.spinnerService.hide();
+                    }
+                    return true;
+                },
+                onCancelled: function () {
+                   
+                },
+                onThreeDSecure2: function (response) {
+                    console.log("3ds2 token response:");
+                    console.log(response);
+                    if (response.ssl_3ds2_token) {
+                        that.efsToken = response.ssl_3ds2_token;
+                        console.log("efsToken " + that.efsToken);
+                        if (that.efsToken != undefined) {
+                           
+                            that.call3DS2Gateway(that.efsToken, elavonDetails, submitSuccessUri);
+                           
+                        }
+                      
+                    } else {
+                        that.efsToken = "";
+                    }
+                }
+            };
+            ConvergeEmbeddedPayment.getEFSToken(paymentData, callback);
+            
+        }
+
+        private call3DS2Gateway(efsToken: any, elavonDetails: ElavonSessionTokenModel, submitSuccessUri: string): void {
+            var that = this;
+            var sdk = new window.Elavon3DSWebSDK({ baseUrl: this.efsUrl, token: efsToken, el: 'holder' });
+            let elavon3DS2Model = {} as Elavon3DS2Model;
+
+            const errorLog = {} as ElavonErrorLogModel;
+            errorLog.customerNumber = this.cart.billTo.customerNumber;
+
+            var request = {
+                purchaseAmount: parseInt(this.cart.orderGrandTotal.toFixed(2)),
+                purchaseCurrency: "840",
+                purchaseExponent: "2",
+                acctNumber: this.cart.paymentOptions.creditCard.cardNumber,
+                cardExpiryDate: this.getEFSExpiry(),//this.getCCExpirationDate(),//getEFSExpiry(),
+                messageCategory: "01",
+                transType: "01",
+                threeDSRequestorAuthenticationInd: "01",
+                challengeWindowSize: "03",
+                displayMode: "lightbox"
+            };
+            console.log(request);
+
+            sdk.web3dsFlow(request).then(function success(response) {
+                console.log(response);
+                elavon3DS2Model.dsTransID = response.dsTransID;
+                elavon3DS2Model.eci = that.getEFSEci(response.eci);
+                elavon3DS2Model.authenticationValue = response.authenticationValue;
+                elavon3DS2Model.programProtocol = "2";
+                that.payTransaction(elavonDetails, submitSuccessUri, elavon3DS2Model);
+            }, function error(response) {
+                console.log("Error " + response);
+                    elavon3DS2Model.eci = "7";
+                    that.ccElavonErrorMessage = JSON.stringify(response);
+                    that.spinnerService.hide();
+                    errorLog.elavonResponse = JSON.stringify(response);
+                    errorLog.elavonResponseFor = "Error";
+                    errorLog.errorMessage = JSON.stringify(response);
+                    if (that.LogEvalonPaymentResponse || that.SentEmailEvalonPaymentFailuer) {
+                        that.elavonService.elavonErrorLog(errorLog)
+                    }
+                    that.submitting = false;
+                    that.submitErrorMessage = angular.element("#elavonTokenErrorMessage").val();
+
+                    that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
+
+                    if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
+                        that.$localStorage.remove("placeOrderAttempt");
+                        that.coreService.redirectToPath("/cart");
+                        return;
+                    }
+                    that.placeOrderAttempt++;
+                    that.$localStorage.set("placeOrderAttempt", that.placeOrderAttempt.toString());
+
+                    return true;
+               
+            });
+         
+
+        }
+
+        private getEFSEci(eci:any): string {
+            if (eci === '02' || eci === '05') {
+                return '5';
+            } else if (eci === '01' || eci === '06') {
+                return '6';
+            } else {
+                return '7';
+            }
+        }
 
         private getCCExpirationDate(): number {
             return this.pad(this.cart.paymentOptions.creditCard.expirationMonth, 2, "0") + (this.cart.paymentOptions.creditCard.expirationYear % 100);
         }
+
+        private getEFSExpiry():string {
+            var expMM = this.pad(this.cart.paymentOptions.creditCard.expirationMonth, 2, "0");
+            var expYY = this.cart.paymentOptions.creditCard.expirationYear.toString().substring(2, 4);
+          return expYY.concat(expMM);
+    };
+
 
         private pad(n, width, z) {
             z = z || '0';

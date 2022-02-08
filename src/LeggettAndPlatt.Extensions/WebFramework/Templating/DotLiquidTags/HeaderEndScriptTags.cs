@@ -26,8 +26,9 @@ namespace LeggettAndPlatt.Extensions.WebFramework.Templating.DotLiquidTags
             	    
                 var elavonSettings = SettingsGroupProvider.Current.Get<ElavonSettings>();
                 var elavonTransactionUrl = (elavonSettings.ElavonTestMode) ? elavonSettings.ElavonDemoTransactionUrl : elavonSettings.ElavonProdTransactionUrl;
-            
-            return $"<script type = 'text/javascript' src = '{elavonTransactionUrl}' ></script>";
+              var elavon3DS2JSUrl = (elavonSettings.ElavonTestMode) ? elavonSettings.ElavonDemo3DS2JSUrl : elavonSettings.ElavonProd3DS2JSUrl;
+           
+             return $"<script type = 'text/javascript' src = '{elavonTransactionUrl}' ></script><script type = 'text/javascript' src = '{elavon3DS2JSUrl}' ></script>";
         }
 
         public override void Render(Context context, TextWriter result)

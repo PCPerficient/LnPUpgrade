@@ -17,6 +17,16 @@
         elavonTransactionType: string;
     }
 
+    interface Elavon3DS2Model extends Insite.Core.WebApi.BaseModel {
+        elavon3DS2: LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels.Elavon3DS2Model[];
+    }
+
+    interface Elavon3DS2Model {
+        dsTransID: string;
+        eci: string;
+        authenticationValue: string;
+        programProtocol: string;
+    }
 
     interface ElavonErrorLogModel extends Insite.Core.WebApi.BaseModel {
         elavonErrorLogs: LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels.ElavonErrorLogModel[];
