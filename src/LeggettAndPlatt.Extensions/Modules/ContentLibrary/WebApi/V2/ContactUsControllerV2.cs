@@ -40,7 +40,17 @@ namespace LeggettAndPlatt.Extensions.Modules.ContentLibrary.WebApi.V2
             string[] strArrays = emailTo.Split(new char[] { ',' });
             IEntityTranslationService entityTranslationService = this.EntityTranslationService;
             ParameterExpression parameterExpression = Expression.Parameter(typeof(EmailList), "o");
-            emailService.SendEmailList(id, strArrays, expandoObjects, string.Format("{0}: {1}", entityTranslationService.TranslateProperty<EmailList>(orCreateByName, Expression.Lambda<Func<EmailList, string>>(Expression.Property(parameterExpression, (MethodInfo)MethodBase.GetMethodFromHandle(typeof(EmailList).GetMethod("get_Subject").MethodHandle)), new ParameterExpression[] { parameterExpression })), topic), this.UnitOfWork, SiteContext.Current.Website.Id);
+
+            SendEmailListParameter sendEmailListParameter = new SendEmailListParameter();
+            sendEmailListParameter.EmailListId = id;
+            sendEmailListParameter.ToAddresses = strArrays;
+            sendEmailListParameter.UnitOfWork = this.UnitOfWork;
+            sendEmailListParameter.Subject = string.Format("{0}: {1}", entityTranslationService.TranslateProperty<EmailList>(orCreateByName, Expression.Lambda<Func<EmailList, string>>(Expression.Property(parameterExpression, (MethodInfo)MethodBase.GetMethodFromHandle(typeof(EmailList).GetMethod("get_Subject").MethodHandle)), new ParameterExpression[] { parameterExpression })), topic);
+            sendEmailListParameter.TemplateWebsiteId = SiteContext.Current.WebsiteDto?.Id;
+            sendEmailListParameter.TemplateModel = expandoObjects;
+            sendEmailListParameter.Attachments = null;
+
+            emailService.SendEmailList(sendEmailListParameter);
         }
 
         [ValidateAntiForgeryForContent]

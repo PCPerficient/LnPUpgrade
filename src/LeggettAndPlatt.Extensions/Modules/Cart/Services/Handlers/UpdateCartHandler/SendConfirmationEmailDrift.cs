@@ -63,7 +63,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                         TemplateWebsiteId = SiteContext.Current.WebsiteDto?.Id
                     });
 
-                  //  this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_DRIFT_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
+                    //this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_DRIFT_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
                 }
                 else //employee email
                 {
@@ -77,7 +77,9 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                         UnitOfWork = unitOfWork,
                         TemplateWebsiteId = SiteContext.Current.WebsiteDto?.Id
                     });
-                    //  this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_EMP_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
+
+
+                      //this.emailService.Value.SendEmailList(unitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("LP_EMP_STORE_OrderConfirmation_List", "Order Confirmation", "").Id, (IList<string>)this.buildEmailValues.Value.BuildOrderConfirmationEmailToList(result.GetCartResult.Cart.Id), result.ConfirmationEmailModel, (string)null, unitOfWork, SiteContext.Current.WebsiteDto?.Id, (IList<Attachment>)null);
                 }
             }
             return this.NextHandler.Execute(unitOfWork, parameter, result);

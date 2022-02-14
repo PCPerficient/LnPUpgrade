@@ -31,7 +31,17 @@ namespace LeggettAndPlatt.Extensions.Common
             Guid? id = SiteContext.Current.WebsiteDto?.Id;
             List<string> emailList = new List<string>();
             emailList.Add(this.CommonSettings.ErrorEmailsSendTo);
-            emailService.SendEmailList(byName.Id, emailList, obj1, obj1.MailSubject, this.UnitOfWork, id, null);
+
+            SendEmailListParameter sendEmailListParameter = new SendEmailListParameter();
+            sendEmailListParameter.EmailListId = byName.Id;
+            sendEmailListParameter.ToAddresses = emailList;
+            sendEmailListParameter.UnitOfWork = this.UnitOfWork;
+            sendEmailListParameter.Subject = obj1.MailSubject;
+            sendEmailListParameter.TemplateWebsiteId = id;
+            sendEmailListParameter.TemplateModel = obj1;
+            sendEmailListParameter.Attachments = null;
+
+            emailService.SendEmailList(sendEmailListParameter);
         }
 
         /// <summary>
@@ -47,7 +57,17 @@ namespace LeggettAndPlatt.Extensions.Common
             EmailList emailListObj = this.UnitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName(emailListName, "Reset Password Success Email", "");
             List<string> emailList = new List<string>();
             emailList.Add(obj1.UserEmail);
-            emailService.SendEmailList(emailListObj.Id, emailList, obj1, emailListObj.Subject, this.UnitOfWork, id, null);
+
+            SendEmailListParameter sendEmailListParameter = new SendEmailListParameter();
+            sendEmailListParameter.EmailListId = emailListObj.Id;
+            sendEmailListParameter.ToAddresses = emailList;
+            sendEmailListParameter.UnitOfWork = this.UnitOfWork;
+            sendEmailListParameter.Subject = obj1.MailSubject;
+            sendEmailListParameter.TemplateWebsiteId = id;
+            sendEmailListParameter.TemplateModel = obj1;
+            sendEmailListParameter.Attachments = null;
+
+            emailService.SendEmailList(sendEmailListParameter);
         }
     }
 }

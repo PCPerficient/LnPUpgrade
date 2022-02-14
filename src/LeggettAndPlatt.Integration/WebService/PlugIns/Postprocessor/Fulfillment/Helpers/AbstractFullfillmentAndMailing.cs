@@ -115,7 +115,15 @@ namespace LeggettAndPlatt.Integration.WebService.PlugIns.Postprocessor.Fulfillme
                 var subject = string.Format(emailList.Subject, expandoObject.OrderNumber);
 
                 jobLogger.Info(string.Format("Sending email for Email List {0} of order number {1}", emailListName, expandoObject.OrderNumber));
-                emailService.SendEmailList(emailList.Id, toList, expandoObject, subject, unitOfWork, website.Id);
+
+                SendEmailListParameter sendEmailListParameter = new SendEmailListParameter();
+                sendEmailListParameter.EmailListId = emailList.Id;
+                sendEmailListParameter.ToAddresses = toList;
+                sendEmailListParameter.UnitOfWork = unitOfWork;
+                sendEmailListParameter.Subject = subject;
+                sendEmailListParameter.TemplateWebsiteId = website.Id;
+                sendEmailListParameter.TemplateModel = expandoObject;
+                emailService.SendEmailList(sendEmailListParameter);
             }
             catch (Exception ex)
             {

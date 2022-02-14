@@ -1,4 +1,5 @@
-﻿using Insite.Core.Interfaces.Data;
+﻿using Insite.Core.Context;
+using Insite.Core.Interfaces.Data;
 using Insite.Core.Interfaces.Plugins.Emails;
 using Insite.Data.Repositories.Interfaces;
 using Insite.WebFramework.Mvc;
@@ -43,7 +44,17 @@ namespace LeggettAndPlatt.Extensions.Controllers
             if (result.Result == RecaptchaResponse.Success)
             {
                 var emailList = this.UnitOfWork.GetTypedRepository<IEmailListRepository>().GetOrCreateByName("ContactUsTemplate", "Contact Us");
-                this.EmailService.SendEmailList(emailList.Id, emailTo.Split(','), emailModel, "Contact Us Submission: " + topic, this.UnitOfWork);
+
+                SendEmailListParameter sendEmailListParameter = new SendEmailListParameter();
+                sendEmailListParameter.EmailListId = emailList.Id;
+                sendEmailListParameter.ToAddresses = emailTo.Split(',');
+                sendEmailListParameter.UnitOfWork = this.UnitOfWork;
+                sendEmailListParameter.Subject = "Contact Us Submission: " + topic;
+                sendEmailListParameter.TemplateWebsiteId = SiteContext.Current.WebsiteDto?.Id;
+                sendEmailListParameter.TemplateModel = emailModel;
+                sendEmailListParameter.Attachments = null;
+
+                this.EmailService.SendEmailList(sendEmailListParameter);
                 return true;
             }
             else
