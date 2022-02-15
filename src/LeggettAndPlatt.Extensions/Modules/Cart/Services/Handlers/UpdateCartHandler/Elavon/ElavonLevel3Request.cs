@@ -64,6 +64,10 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
     {
         [XmlElement(ElementName = "ssl_merchant_ID")]
         public string Ssl_merchant_ID { get; set; }
+        [XmlElement(ElementName = "ssl_entry_mode")]
+        public int Ssl_entry_mode { get; set; }
+        [XmlElement(ElementName = "ssl_merchant_initiated_unscheduled")]
+        public string Ssl_merchant_initiated_unscheduled { get; set; }
         [XmlElement(ElementName = "ssl_user_id")]
         public string Ssl_user_id { get; set; }
         [XmlElement(ElementName = "ssl_pin")]

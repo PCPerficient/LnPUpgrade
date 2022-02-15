@@ -22,7 +22,7 @@ namespace LeggettAndPlatt.Integration.WebService.PlugIns.Postprocessor.Fulfillme
     {
         public static object GetColumnValue(DataRow row, string column)
         {
-            return row.Table.Columns.Contains(column) ? row[column] : string.Empty;
+            return row.Table.Columns.Contains(column) ? Convert.ToString(row[column]) : string.Empty;
         }
 
         public static List<string> GetEmailToList(dynamic toValue)

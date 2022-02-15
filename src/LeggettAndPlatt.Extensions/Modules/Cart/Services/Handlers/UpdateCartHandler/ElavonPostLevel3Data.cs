@@ -161,6 +161,8 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
         {
             Txn txn = new Txn();
             txn.Ssl_merchant_ID = ElavonSettings.ElavonSSLMerchantId;
+            txn.Ssl_entry_mode = 12;
+            txn.Ssl_merchant_initiated_unscheduled = "Y";
             txn.Ssl_user_id = ElavonSettings.ElavonSSLUserId;
             txn.Ssl_pin = ElavonSettings.ElavonSSLPinId;
             txn.Ssl_vendor_id = ElavonSettings.ElavonVendorId;
