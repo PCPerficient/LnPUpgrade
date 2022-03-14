@@ -111,9 +111,9 @@
                 return valueParts.length === 2 && valueParts[1] > minValue;
             });
         
-            (window as any).addEventListener('load', (event) => {
-                this.reCaptcha.render("ReviewAndPay");
-            });
+           
+            this.reCaptcha.render("ReviewAndPay");
+           
         }
         
        
@@ -175,11 +175,11 @@
         }
 
         protected getSettingsCompleted(settingsCollection: any): void {
-            console.log(settingsCollection);
+          
             this.cartSettings = settingsCollection.cartSettings;
             this.SentEmailEvalonPaymentFailuer = settingsCollection.elavonSetting.elavonSettingPaymentFailuerMail;
             this.LogEvalonPaymentResponse = settingsCollection.elavonSetting.logEvalonPaymentResponse;
-            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
+            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode.toLowerCase() == "false" ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
             var res = settingsCollection.shippingDisplay.shippingDisplay;
             if (res.toLowerCase() == 'true') {
                 this.shippingDisplay = true;
@@ -502,11 +502,10 @@
                    
                 },
                 onThreeDSecure2: function (response) {
-                    console.log("3ds2 token response:");
-                    console.log(response);
+                  
                     if (response.ssl_3ds2_token) {
                         that.efsToken = response.ssl_3ds2_token;
-                        console.log("efsToken " + that.efsToken);
+                      
                         if (that.efsToken != undefined) {
                            
                             that.call3DS2Gateway(that.efsToken, elavonDetails, submitSuccessUri);
@@ -542,17 +541,17 @@
                 challengeWindowSize: "03",
                 displayMode: "lightbox"
             };
-            console.log(request);
+           
 
             sdk.web3dsFlow(request).then(function success(response) {
-                console.log(response);
+           
                 elavon3DS2Model.dsTransID = response.dsTransID;
                 elavon3DS2Model.eci = that.getEFSEci(response.eci);
                 elavon3DS2Model.authenticationValue = response.authenticationValue;
                 elavon3DS2Model.programProtocol = "2";
                 that.payTransaction(elavonDetails, submitSuccessUri, elavon3DS2Model);
             }, function error(response) {
-                console.log("Error " + response);
+               
                     elavon3DS2Model.eci = "7";
                     that.ccElavonErrorMessage = JSON.stringify(response);
                     that.spinnerService.hide();

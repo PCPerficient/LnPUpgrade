@@ -88,7 +88,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
             string ssl_transaction_type = "CCGETTOKEN";
 
             var orderTotal = this.GetOrderTotal();
-            if (orderTotal == 0)
+            if (orderTotal > 0)
             {               
                 ssl_amount = orderTotal;
             }
