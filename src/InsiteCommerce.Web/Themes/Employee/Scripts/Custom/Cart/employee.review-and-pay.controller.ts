@@ -179,7 +179,7 @@
             this.cartSettings = settingsCollection.cartSettings;
             this.SentEmailEvalonPaymentFailuer = settingsCollection.elavonSetting.elavonSettingPaymentFailuerMail;
             this.LogEvalonPaymentResponse = settingsCollection.elavonSetting.logEvalonPaymentResponse;
-            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode.toLowerCase() == "false" ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
+            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode.toLowerCase() == "true" ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
             var res = settingsCollection.shippingDisplay.shippingDisplay;
             if (res.toLowerCase() == 'true') {
                 this.shippingDisplay = true;
