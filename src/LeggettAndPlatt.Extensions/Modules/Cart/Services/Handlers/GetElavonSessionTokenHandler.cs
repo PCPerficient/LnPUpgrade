@@ -53,14 +53,14 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
             try
             {
              
-                LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler");
+                LogHelper.For((object)this).Info($"GetElavonSessionTokenHandler");
                 //AppContext setting - false
                 if (Convert.ToString(ConfigurationManager.AppSettings["ElavonTestApplication"]) == "true")
                 {
-                    LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Test handler");
+                    LogHelper.For((object)this).Info($"GetElavonSessionTokenHandler Inside handler");
                     return this.NextHandler.Execute(unitOfWork, parameter, result);
                 }
-                LogHelper.For((object)this).Info($"Test GetElavonSessionTokenHandler Inside Actual handler");
+                LogHelper.For((object)this).Info($"GetElavonSessionTokenHandler Inside Actual handler");
                 result.ElavonToken = GetElavonSessionToken(result);
 
                 this.GetSystemListResult(unitOfWork, parameter, result);
