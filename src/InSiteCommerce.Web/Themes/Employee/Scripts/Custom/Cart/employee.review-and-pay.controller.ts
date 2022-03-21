@@ -179,7 +179,7 @@
             this.cartSettings = settingsCollection.cartSettings;
             this.SentEmailEvalonPaymentFailuer = settingsCollection.elavonSetting.elavonSettingPaymentFailuerMail;
             this.LogEvalonPaymentResponse = settingsCollection.elavonSetting.logEvalonPaymentResponse;
-            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
+            this.efsUrl = settingsCollection.elavonSetting.elavonTestMode.toLowerCase() == "true" ? settingsCollection.elavonSetting.elavonDemo3DS2Gateway : settingsCollection.elavonSetting.elavonProd3DS2Gateway;
             var res = settingsCollection.shippingDisplay.shippingDisplay;
             if (res.toLowerCase() == 'true') {
                 this.shippingDisplay = true;
@@ -530,26 +530,56 @@
             errorLog.customerNumber = this.cart.billTo.customerNumber;
 
             var request = {
-                purchaseAmount: parseInt(this.cart.orderGrandTotal.toFixed(2)),
+                purchaseAmount: this.cart.orderGrandTotal * 100,
                 purchaseCurrency: "840",
                 purchaseExponent: "2",
                 acctNumber: this.cart.paymentOptions.creditCard.cardNumber,
-                cardExpiryDate: this.getEFSExpiry(),//this.getCCExpirationDate(),//getEFSExpiry(),
+                cardExpiryDate: this.getEFSExpiry(),
                 messageCategory: "01",
                 transType: "01",
                 threeDSRequestorAuthenticationInd: "01",
                 challengeWindowSize: "03",
-                displayMode: "lightbox"
+                displayMode: "lightbox",
+                threeDSRequestorChallengeInd: "04"
             };
            
-
+          
             sdk.web3dsFlow(request).then(function success(response) {
            
                 elavon3DS2Model.dsTransID = response.dsTransID;
                 elavon3DS2Model.eci = that.getEFSEci(response.eci);
                 elavon3DS2Model.authenticationValue = response.authenticationValue;
                 elavon3DS2Model.programProtocol = "2";
-                that.payTransaction(elavonDetails, submitSuccessUri, elavon3DS2Model);
+                if (response.transStatus.toLowerCase() == "y" || response.transStatus.toLowerCase() == "a") {
+                    that.payTransaction(elavonDetails, submitSuccessUri, elavon3DS2Model);
+                }
+                else {
+                    that.ccElavonErrorMessage = JSON.stringify(response.message);
+                    that.spinnerService.hide();
+                    errorLog.elavonResponse = JSON.stringify(response);
+                    errorLog.elavonResponseFor = "Error";
+                    errorLog.errorMessage = JSON.stringify(response);
+                    if (that.LogEvalonPaymentResponse || that.SentEmailEvalonPaymentFailuer) {
+                        that.elavonService.elavonErrorLog(errorLog)
+                    }
+                    that.submitting = false;
+                    that.submitErrorMessage = JSON.stringify(response.message);
+
+                    that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
+
+                    if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
+                        that.$localStorage.remove("placeOrderAttempt");
+                        that.coreService.redirectToPath("/cart");
+                        return;
+                    }
+                    that.placeOrderAttempt++;
+                    that.$localStorage.set("placeOrderAttempt", that.placeOrderAttempt.toString());
+
+                    return true;
+                }
+
+
+               
             }, function error(response) {
                
                     elavon3DS2Model.eci = "7";
