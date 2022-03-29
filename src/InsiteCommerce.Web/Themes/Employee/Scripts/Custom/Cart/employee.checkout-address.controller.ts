@@ -81,7 +81,7 @@ module insite.cart {
 
             this.settingsService.getSettings().then(
                 (settingsCollection: core.SettingsCollection) => {
-                    console.log(settingsCollection);
+                   
                     this.getSettingsCompleted(settingsCollection);
                 },
                 (error: any) => { this.getSettingsFailed(error); });
