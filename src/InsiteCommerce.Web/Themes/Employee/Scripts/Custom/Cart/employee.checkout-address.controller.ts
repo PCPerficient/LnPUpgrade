@@ -139,7 +139,7 @@ module insite.cart {
                 $(`#ststateValidationMsg`).css('display', 'block');
                 valid = false;
             }
-            if (this.validateCrossSiteScripting()) {
+            if (this.notValidateCrossSiteScripting()) {
                 valid = false;
                 this.coreService.displayModal(angular.element("#invalidAddressErrorPopup"));
             }
@@ -377,8 +377,8 @@ module insite.cart {
                 }
             }
         }
-        validateCrossSiteScripting(): boolean{    
-                      
+        notValidateCrossSiteScripting(): boolean{    
+                       
             return (this.containsSpecialChars(this.cart.billTo.firstName)
                 || this.containsSpecialChars(this.cart.billTo.lastName)
                 || this.containsSpecialChars(this.cart.billTo.address1)

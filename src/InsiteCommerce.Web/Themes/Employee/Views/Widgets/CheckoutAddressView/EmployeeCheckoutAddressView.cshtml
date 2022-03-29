@@ -77,12 +77,7 @@
             <a id="genericPopupCloseButton" class="close-reveal-modal">&#215;</a>
         </div>
     </div>
-    <div id="invalidAddressErrorPopup" class="reveal-modal pop-allpurpose confirmation-Popup" data-reveal data-reveal-init>
-        <div class="modal-wrap ">
-            <div class="row message "><span class="messaging--error">[% siteMessage 'LNP_AddressValidationPopup_InvalidInputFound' 'Address Format Is Invalid. Following special characters are not allowed:  < > “ ‘ % ; ) ( & +' %]</span></div>
-            <a id="genericPopupCloseButton" class="close-reveal-modal">&#215;</a>
-        </div>
-    </div>
+    
     <isc-address-validation-popup-template title="Suggested Address" selected-address="vm.selectedAddress(selectedAddressModel)" suggested-model="vm.suggestedAddressList" container-id="addressValidationPopup">
     </isc-address-validation-popup-template>
     <isc-popup-template container-id="insufficientInventoryAtCheckout">
