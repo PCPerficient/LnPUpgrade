@@ -19,8 +19,10 @@
                         <div class="required-msg" style="height: 53px; margin: 0">
                             <span class="redTxt">*</span>[% translate 'Required' %]
                         </div>
+
                         <isc-address-edit prefix="bt" show-email="true" address="vm.cart.billTo" countries="vm.countries" address-fields="vm.addressFields.billToAddressFields"
                                           set-state-required-rule="vm.setStateRequiredRule('bt', vm.cart.billTo)"></isc-address-edit>
+
                         <div class="newsletter-signup" ng-show="vm.cart.showNewsletterSignup">
                             <label class="input-lbl">
                                 <input class="tst_checkoutAddress_isSubscribed" type="checkbox" ng-model="vm.account.isSubscribed">
@@ -72,6 +74,12 @@
                 <button id="btnSubmit" class="btn primary" ng-click="vm.ContinueWithAddress()">Ok</button>
                 <button id="btnCancel" class="btn primary cancel" ng-click="vm.CancelAddress()">Cancel</button>
             </div>
+            <a id="genericPopupCloseButton" class="close-reveal-modal">&#215;</a>
+        </div>
+    </div>
+    <div id="invalidAddressErrorPopup" class="reveal-modal pop-allpurpose confirmation-Popup" data-reveal data-reveal-init>
+        <div class="modal-wrap ">
+            <div class="row message "><span class="messaging--error">[% siteMessage 'LNP_AddressValidationPopup_InvalidInputFound' 'Address Format Is Invalid. Following special characters are not allowed:  < > “ ‘ % ; ) ( & +' %]</span></div>
             <a id="genericPopupCloseButton" class="close-reveal-modal">&#215;</a>
         </div>
     </div>
