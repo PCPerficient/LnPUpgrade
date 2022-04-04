@@ -4,17 +4,17 @@
             <div class="required-msg"><span class="redTxt">*</span> [% translate 'Required' %]</div>
             <div class="cf-form-firstname">
                 <label for="firstName[[Model.ContentKey]]">[% translate 'First Name' %]</label>
-                <input type="text" name="FirstName" id="firstName[[Model.ContentKey]]"/>
+                <input type="text" name="FirstName" id="firstName[[Model.ContentKey]]" />
             </div>
             <div class="cf-form-lastname">
                 <label for="lastName[[Model.ContentKey]]">[% translate 'Last Name' %]</label>
-                <input type="text" name="LastName" id="lastName[[Model.ContentKey]]"/>
+                <input type="text" name="LastName" id="lastName[[Model.ContentKey]]" />
             </div>
             <div class="cf-form-email">
                 <label for="emailAddress[[Model.ContentKey]]">[% translate 'Email Address' %] <span class="redTxt">*</span></label>
                 <input type="text" name="EmailAddress" id="emailAddress[[Model.ContentKey]]" data-val-required="[[Model.EmailIsRequiredErrorMessage]]" data-val="true"
                        data-val-regex-pattern="[[Model.EmailAddressRegexPattern]]"
-                       data-val-regex="[[Model.EmailIsInvalidErrorMessage]]"/>
+                       data-val-regex="[[Model.EmailIsInvalidErrorMessage]]" />
                 <span data-valmsg-replace="true" data-valmsg-for="EmailAddress"></span>
             </div>
             <div class="cf-form-topic">
@@ -22,7 +22,7 @@
                 <select id="topic[[Model.ContentKey]]" name="Topic" data-val-required="[[Model.TopicIsRequiredErrorMessage]]" data-val="true">
                     <option value="">[% translate 'Select Topic' %]</option>
                     [% for topic in Model.Topics -%]
-                        <option>[[topic]]</option>
+                    <option>[[topic]]</option>
                     [% endfor -%]
                 </select>
                 <span data-valmsg-replace="true" data-valmsg-for="Topic"></span>
@@ -35,8 +35,18 @@
             <div ng-show="!vm.submitted" class="btns">
                 <button id="tst_contactUsPage_send" type="submit" ng-click="vm.submit($event)" class="btn primary btn-send">[% translate 'Send' %]</button>
             </div>
-            <div ng-show="vm.submitted" id="tst_contactUsPage_successMessage" class="successMessage">
+            <div ng-show="vm.submitted" id="tst_contactUsPage_successMessage" class="successMessage success-message">
                 [[Model.SuccessMessage]]
+            </div>
+            <div id="requestSucessPopupPopup" class="reveal-modal pop-allpurpose confirmation-Popup" data-reveal="" data-reveal-init="">
+                <div class="modal-wrap ">
+                    <div class="row message ">
+                        <span class="success-message">
+                            [[Model.SuccessMessage]]
+                        </span>
+                    </div>
+                    <a id="genericPopupCloseButton" class="close-reveal-modal">&#215;</a>
+                </div>
             </div>
         </form>
     </div>

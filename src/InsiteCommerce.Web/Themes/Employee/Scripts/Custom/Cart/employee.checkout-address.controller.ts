@@ -19,7 +19,7 @@ module insite.cart {
         continueUri: string;
         isAddressValid: boolean = true;
         defaultShipToAddress = {} as Insite.Customers.WebApi.V1.ApiModels.ShipToModel;
-
+        vaidationSetting: any;
         static $inject = [
             "$scope",
             "$window",
@@ -64,7 +64,7 @@ module insite.cart {
         }
 
 
-        $onInit(): void {
+        $onInit(): void {         
             this.$localStorage.remove("placeOrderAttempt");
 
             this.cartId = this.queryString.get("cartId");
@@ -80,7 +80,10 @@ module insite.cart {
                 (error: any) => { this.getAccountFailed(error); });
 
             this.settingsService.getSettings().then(
-                (settingsCollection: core.SettingsCollection) => { this.getSettingsCompleted(settingsCollection); },
+                (settingsCollection: core.SettingsCollection) => {
+                   
+                    this.getSettingsCompleted(settingsCollection);
+                },
                 (error: any) => { this.getSettingsFailed(error); });
 
             this.sessionService.getSession().then(
@@ -90,6 +93,11 @@ module insite.cart {
             this.$scope.$on("sessionUpdated", (event, session) => {
                 this.onSessionUpdated(session);
             });
+        }
+        protected getSettingsCompleted(settingsCollection: any): void {
+            this.customerSettings = settingsCollection.customerSettings;
+            this.enableWarehousePickup = settingsCollection.accountSettings.enableWarehousePickup;
+            this.vaidationSetting = settingsCollection.validationSetting;
         }
         protected getCartCompleted(cart: CartModel): void {
             this.cartService.expand = "";
@@ -126,11 +134,15 @@ module insite.cart {
         }
         continueCheckout(continueUri: string, cartUri: string): void {
             let valid = $("#addressForm").validate().form();
+            
             if ($(`#ststate`).val() == "") {
                 $(`#ststateValidationMsg`).css('display', 'block');
                 valid = false;
             }
-
+            if (this.notValidateCrossSiteScripting()) {
+                valid = false;
+                this.coreService.displayModal(angular.element("#invalidAddressErrorPopup"));
+            }
             if (!valid) {
                 angular.element("html, body").animate({
                     scrollTop: angular.element(".error:visible").offset().top
@@ -161,6 +173,7 @@ module insite.cart {
         }
         protected GetCustomerVertexCheckedStatus(): string {
             var result = "";
+            
             if (this.selectedShipTo && this.selectedShipTo.properties["vertexChecked"])
                 result = this.selectedShipTo.properties["vertexChecked"];
             return result;
@@ -220,6 +233,7 @@ module insite.cart {
         }
 
         CallToVertex(continueUri: string): void {
+            
             const addressRequestModel = {} as AddressValidationRequestModel;
             addressRequestModel.streetAddress1 = this.selectedShipTo.address1;
             addressRequestModel.streetAddress2 = "";
@@ -229,7 +243,7 @@ module insite.cart {
             if (this.selectedShipTo.state && this.selectedShipTo.state.id)
                 addressRequestModel.stateId = this.selectedShipTo.state.id;
             addressRequestModel.postalCode = this.selectedShipTo.postalCode;
-
+           
             this.addressValidationService.validateAddress(addressRequestModel).then(
                 (addressValidationResponseModel: AddressValidationResponseModel) => {
                     this.AddressValidationCompleted(addressValidationResponseModel);
@@ -320,6 +334,7 @@ module insite.cart {
                 (error: any) => { this.CustomPropertyFailed(error); });
         }
         protected UpdateBillToAddress(): void {
+           
             this.HideSpinner();
             this.customerService.updateBillTo(this.cart.billTo).then(
                 (billTo: BillToModel) => { this.updateBillToCompleted(billTo, this.continueUri); },
@@ -362,6 +377,32 @@ module insite.cart {
                 }
             }
         }
+        notValidateCrossSiteScripting(): boolean{    
+                       
+            return (this.containsSpecialChars(this.cart.billTo.firstName)
+                || this.containsSpecialChars(this.cart.billTo.lastName)
+                || this.containsSpecialChars(this.cart.billTo.address1)
+                || this.containsSpecialChars(this.cart.billTo.address2)
+                || this.containsSpecialChars(this.cart.billTo.city)
+                || this.containsSpecialChars(this.cart.billTo.postalCode)
+                || this.containsSpecialChars(this.cart.billTo.phone)
+                || this.containsSpecialChars(this.cart.billTo.email)
+                || this.containsSpecialChars(this.selectedShipTo.firstName)
+                || this.containsSpecialChars(this.selectedShipTo.lastName)
+                || this.containsSpecialChars(this.selectedShipTo.address1)
+                || this.containsSpecialChars(this.selectedShipTo.address2)
+                || this.containsSpecialChars(this.selectedShipTo.city)
+                || this.containsSpecialChars(this.selectedShipTo.postalCode)
+                || this.containsSpecialChars(this.selectedShipTo.phone)
+                || this.containsSpecialChars(this.selectedShipTo.email)
+            );
+
+        }
+        containsSpecialChars(str) {    
+            const specialChars = new RegExp(`[${this.vaidationSetting.specialCharecters}]`);         
+            return specialChars.test(str);
+        }
+
     }
 
     angular

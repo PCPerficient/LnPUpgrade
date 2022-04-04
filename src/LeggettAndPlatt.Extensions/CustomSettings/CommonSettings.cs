@@ -54,5 +54,13 @@ namespace LeggettAndPlatt.Extensions.CustomSettings
                 return this.GetValue<bool>(false, nameof(DebugMode));
             }
         }
+        [SettingsField(DisplayName = "Cross Site Scripting Validation Charecters", Description = "Validate the special charecters", IsGlobal = true)]
+        public virtual string CrossSiteScriptingValidationCharecters
+        {
+            get
+            {
+                return this.GetValue<string>("/[<>“‘%;)(&+]/", nameof(CrossSiteScriptingValidationCharecters));
+            }
+        }
     }
 }
