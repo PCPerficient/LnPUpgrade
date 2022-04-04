@@ -19,8 +19,10 @@
                         <div class="required-msg" style="height: 53px; margin: 0">
                             <span class="redTxt">*</span>[% translate 'Required' %]
                         </div>
+
                         <isc-address-edit prefix="bt" show-email="true" address="vm.cart.billTo" countries="vm.countries" address-fields="vm.addressFields.billToAddressFields"
                                           set-state-required-rule="vm.setStateRequiredRule('bt', vm.cart.billTo)"></isc-address-edit>
+
                         <div class="newsletter-signup" ng-show="vm.cart.showNewsletterSignup">
                             <label class="input-lbl">
                                 <input class="tst_checkoutAddress_isSubscribed" type="checkbox" ng-model="vm.account.isSubscribed">
@@ -75,6 +77,7 @@
             <a id="genericPopupCloseButton" class="close-reveal-modal">&#215;</a>
         </div>
     </div>
+    
     <isc-address-validation-popup-template title="Suggested Address" selected-address="vm.selectedAddress(selectedAddressModel)" suggested-model="vm.suggestedAddressList" container-id="addressValidationPopup">
     </isc-address-validation-popup-template>
     <isc-popup-template container-id="insufficientInventoryAtCheckout">
