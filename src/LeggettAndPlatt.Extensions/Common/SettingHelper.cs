@@ -62,5 +62,15 @@ namespace LeggettAndPlatt.Extensions.Common
                   
             return elavonMaskedPin;
         }
+        public static Dictionary<string, string> GetSpecialCharecters()
+        {
+            CommonSettings commonSetting = new CustomSettings.CommonSettings();
+            Dictionary<string, string> customProperty = new Dictionary<string, string>();
+
+            customProperty.Add("specialCharecters", commonSetting.CrossSiteScriptingValidationCharecters.ToString());
+           
+
+            return customProperty;
+        }
     }
 }
