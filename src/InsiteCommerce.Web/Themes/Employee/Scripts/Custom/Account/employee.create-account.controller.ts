@@ -18,13 +18,7 @@ module insite.account {
         clockOrUnique: string;
         clockOrUniqueError: boolean = false;
         isUserRegistered: boolean = false;
-        account = {
-            firstName: "",
-            lastName: "",
-            email: "",
-            uniqueOrClock: ""
-        } as RegistrationModel;
-        vaidationSetting: any;
+
         static $inject = [
             "accountService",
             "sessionService",
@@ -47,7 +41,7 @@ module insite.account {
             protected spinnerService: core.SpinnerService,
             protected $q: ng.IQService,
             protected registrationService: IRegistrationService) {
-
+            
         }
 
         $onInit(): void {
@@ -69,9 +63,8 @@ module insite.account {
         protected getSessionFailed(error: any): void {
         }
 
-        protected getSettingsCompleted(settingsCollection: any): void {
+        protected getSettingsCompleted(settingsCollection: core.SettingsCollection): void {
             this.settings = settingsCollection.accountSettings;
-            this.vaidationSetting = settingsCollection.validationSetting;
         }
 
         protected getSettingsFailed(error: any): void {
@@ -81,26 +74,21 @@ module insite.account {
             this.createError = "";
             this.clockOrUniqueError = false;
             this.isUserRegistered = false;
-            let valid = $("#createAccountForm").validate().form();
-            this.account = {
-                firstName: this.firstName,
-                lastName: this.lastName,
-                email: this.email,
-                uniqueOrClock: this.clockOrUnique
-            } as RegistrationModel;
-            if (this.notValidateCrossSiteScripting()) {
-                valid = false;
-                this.coreService.displayModal(angular.element("#invalidAddressErrorPopup"));
-            }
 
+            const valid = $("#createAccountForm").validate().form();
             if (!valid) {
                 return;
             }
             if (this.validateUniqueOrClock()) {
                 this.spinnerService.show("mainLayout", true);
-
-                this.registrationService.createAccount(this.account).then(
-                    (registrationResultModel: RegistrationResultModel) => {
+                const account = {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    uniqueOrClock: this.clockOrUnique
+                } as RegistrationModel;
+                this.registrationService.createAccount(account).then(
+                    (registrationResultModel: RegistrationResultModel ) => {
                         if (registrationResultModel.isRegistered) {
                             this.isUserRegistered = true;
                             this.clearField();
@@ -157,17 +145,6 @@ module insite.account {
         }
         isNumber(n): boolean {
             return !isNaN(n - n);
-        }
-        notValidateCrossSiteScripting(): boolean {
-
-            return (this.containsSpecialChars(this.account.firstName)
-                || this.containsSpecialChars(this.account.lastName)
-            );
-
-        }
-        containsSpecialChars(str) {
-            const specialChars = new RegExp(`[${this.vaidationSetting.specialCharecters}]`);
-            return specialChars.test(str);
         }
     }
 

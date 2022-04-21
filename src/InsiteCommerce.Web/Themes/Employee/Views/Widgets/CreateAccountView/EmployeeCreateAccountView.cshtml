@@ -11,6 +11,7 @@
                     </div>
                     <div class="medium-7 large-7 columns">
                         <input type="text" id="CreateNewAccountInfo_FirstName" name="CreateNewAccountInfo.FirstName"
+                               class="validateCrossSiteScripting"
                                data-rule-required="true"
                                data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'First Name' EscapeSingleQuotes %]') }}"
                                ng-model="vm.firstName">
