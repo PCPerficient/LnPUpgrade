@@ -284,7 +284,7 @@ module insite.account {
 
         protected UpdateCustomerBillTo(): void {
             this.HideSpinner();
-            debugger;
+         
             this.customerService.updateBillTo(this.billTo).then(
                 (billTo: BillToModel) => { this.updateBillToCompleted(billTo); },
                 (error: any) => { this.updateBillToFailed(error); });
