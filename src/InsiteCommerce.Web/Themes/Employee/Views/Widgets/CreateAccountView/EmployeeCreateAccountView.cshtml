@@ -12,7 +12,7 @@
                     <div class="medium-7 large-7 columns">
                         <input type="text" id="CreateNewAccountInfo_FirstName" name="CreateNewAccountInfo.FirstName"
                                class="validateCrossSiteScripting"
-                               data-rule-required="true"
+                               data-rule-required="true"                    
                                data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'First Name' EscapeSingleQuotes %]') }}"
                                ng-model="vm.firstName">
                         <span class="field-validation-valid" data-valmsg-for="CreateNewAccountInfo.FirstName" data-valmsg-replace="true"></span>
@@ -25,6 +25,7 @@
                     <div class="medium-7 large-7 columns">
                         <input type="text" id="CreateNewAccountInfo_LastName" name="CreateNewAccountInfo.LastName"
                                data-rule-required="true"
+                               class="validateCrossSiteScripting"
                                data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Last Name' EscapeSingleQuotes %]') }}"
                                ng-model="vm.lastName">
                         <span class="field-validation-valid" data-valmsg-for="CreateNewAccountInfo.LastName" data-valmsg-replace="true"></span>
@@ -37,6 +38,7 @@
                     <div class="medium-7 large-7 columns">
                         <input type="text" id="CreateNewAccountInfo_EmailAddress" name="CreateNewAccountInfo.EmailAddress"
                                data-rule-required="true"
+
                                data-msg-required="{{ '[% siteMessage 'Field_Required' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Email Address' EscapeSingleQuotes %]') }}"
                                data-rule-email="true"
                                data-msg-email="{{ '[% siteMessage 'Field_Invalid' EscapeSingleQuotes %]'.replace('{0}', '[% translate 'Email Address' EscapeSingleQuotes %]') }}"
@@ -62,6 +64,7 @@
                     <div class="medium-7 large-7 columns">
                         <input type="text" id="CreateNewAccountInfo_ClockOrUnique" name="CreateNewAccountInfo.ClockOrUnique"
                                data-rule-required="true"
+                               class="validateCrossSiteScripting"
                                maxlength="7"
                                ng-trim="false"
                                pattern="[a-zA-Z0-9]+"

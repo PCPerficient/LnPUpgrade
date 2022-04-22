@@ -170,37 +170,45 @@
                 }
             }
         });
-        $(document).on("keydown", ".validateCrossSiteScripting", event => {
-            let inputIsValid = false;
 
+       
+        $(document).on("keydown", ".validateCrossSiteScripting", event => {
+
+            let inputValid = false;
             // ignore the shift keydown event, the actual key pressed with shift issues another event when it is pressed
             if (event.keyCode === 16) {
                 return;
             }
+            let spChars = /([®™©"'<>"'%;)(&+])+/;
 
             // this works for qwerty and azerty keyboard layouts (azerty you have to hit the Shift key to press a number)
             if (event.key !== undefined) {
+                const input = [event.currentTarget.value.slice(0, event.currentTarget.selectionStart), event.key, event.currentTarget.value.slice(event.currentTarget.selectionStart)].join("");
+               
                 const allowedNonNumericKeys = ["Delete", "Backspace", "Enter", "Tab", "ArrowRight", "ArrowLeft"];
-                const allowedNumericKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ",", "."];
+
                 if (allowedNonNumericKeys.indexOf(event.key) >= 0) {
                     // let it happen, don't do anything
-                } else if (allowedNumericKeys.indexOf(event.key) >= 0) {
-                    inputIsValid = true;
-                } else {
+                }
+                else if (!spChars.test(input)) {
+                     // let it happen, don't do anything
+                     inputValid = true;
+                }   else {
                     event.preventDefault();
                 }
-            }
+            }         
 
-            // allow 6 numbers above 0 and 5 decimal places
-            // in the future we probably need to setup better validation after input with messaging, etc
-            if (inputIsValid) {
-                const input = [event.currentTarget.value.slice(0, event.currentTarget.selectionStart), event.key, event.currentTarget.value.slice(event.currentTarget.selectionStart)].join("");
-                if (!/^\d{0,6}(\.\d{0,5})?$/.test(input) && !/^\d{0,6}(\,\d{0,5})?$/.test(input)) {
-                    event.preventDefault();
-                }
-            }
         });
-
+        $(".validateCrossSiteScripting").blur(function (event) {
+            const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");          
+            var inputField = $(this);
+            var newInput = input.replace(/([®™©"'><"'%;)(&+])+/g, '');
+            inputField.val(newInput);
+            console.log("newInput =>",newInput);
+ 
+        }); 
+     
+        
         // Select text inside text box for all Quantity
         // Add this behavior to all text fields
         $("input:text.qty").focus(function () {
