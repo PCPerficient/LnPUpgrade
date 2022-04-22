@@ -172,7 +172,7 @@
         });
 
        
-        $(document).on("keydown", ".validateCrossSiteScripting", event => {
+        $(document).on("keydown", ".validateCrossSiteScripting,input[class!=numerictextbox],textarea[class!=numerictextbox]", event => {
 
             let inputValid = false;
             // ignore the shift keydown event, the actual key pressed with shift issues another event when it is pressed
@@ -199,10 +199,14 @@
             }         
 
         });
-        $(".validateCrossSiteScripting").blur(function (event) {
-            const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");          
-            var inputField = $(this);
-            var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');          
+        $(".validateCrossSiteScripting,input[class!=numerictextbox],textarea[class!=numerictextbox]").blur(function (event) {
+            setTimeout(() => {
+                const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");
+                var inputField = $(this);
+                var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');
+                inputField.val(newInput);
+            }, 100);
+            return;
  
         }); 
      
