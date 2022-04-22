@@ -199,14 +199,22 @@
             }         
 
         });
-        $("input:text[class!=numerictextbox],textarea[class!=numerictextbox]").blur(function (event) {          
-                const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");
-                var inputField = $(this);
-                var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');
-            inputField.val(newInput);
-            //console.log(inputField);
-        }).bind("change", function(event) {
-           // console.log(event.target);
+        $(document).on("paste", "input:text[class!=numerictextbox],textarea[class!=numerictextbox]", event => {
+            console.log(event);
+            const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");                
+            var text = event.originalEvent.clipboardData ? event.originalEvent.clipboardData.getData("text/plain") : input;
+            let spChars = /([®™©"'<>”“"‘'%;)(&+])+/;
+            if (spChars.test(text)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        $("input:text[class!=numerictextbox],textarea[class!=numerictextbox]").blur(function (event) {
+            const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");
+            var inputField = $(this);
+            var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');
+            inputField.val(newInput);         
         }); 
       
 
