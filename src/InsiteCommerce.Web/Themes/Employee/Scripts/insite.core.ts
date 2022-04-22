@@ -200,7 +200,7 @@
 
         });
         $(document).on("paste", "input:text[class!=numerictextbox],textarea[class!=numerictextbox]", event => {
-            console.log(event);
+           
             const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");                
             var text = event.originalEvent.clipboardData ? event.originalEvent.clipboardData.getData("text/plain") : input;
             let spChars = /([®™©"'<>”“"‘'%;)(&+])+/;
