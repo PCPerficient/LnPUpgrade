@@ -202,9 +202,7 @@
         $(".validateCrossSiteScripting").blur(function (event) {
             const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");          
             var inputField = $(this);
-            var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');
-            inputField.val(newInput);
-            //console.log("newInput =>",newInput);
+            var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');          
  
         }); 
      
