@@ -11,7 +11,7 @@ module insite.account {
 
         suggestedAddressList: AddressValidationResponseModel;
         defaultShipToAddress = {} as Insite.Customers.WebApi.V1.ApiModels.ShipToModel;
-        vaidationSetting: any;
+
         static $inject = ["$location",
             "$localStorage",
             "customerService",
@@ -22,8 +22,7 @@ module insite.account {
             "addressValidationService",
             "coreService",
             "custompropertyservice",
-            "$rootScope",
-            "settingsService"];
+            "$rootScope"];
 
         constructor(
             protected $location: ng.ILocaleService,
@@ -36,21 +35,8 @@ module insite.account {
             protected addressValidationService: addressvalidation.IAddressValidationService,
             protected coreService: core.ICoreService,
             protected custompropertyservice: customproperty.ICustomPropertyService,
-            protected $rootScope: ng.IRootScopeService,
-            protected settingsService: core.ISettingsService) {
+            protected $rootScope: ng.IRootScopeService) {
             super($location, $localStorage, customerService, websiteService, sessionService, queryString, $rootScope);
-            this.settingsService.getSettings().then(
-                (settingsCollection: core.SettingsCollection) => {
-
-                    this.getSettingsCompleted(settingsCollection);
-                },
-                (error: any) => { this.getSettingsFailed(error); });
-        }
-        protected getSettingsCompleted(settingsCollection: any): void {
-          
-            this.vaidationSetting = settingsCollection.validationSetting;
-        }
-        protected getSettingsFailed(error: any): void {
         }
 
         checkSelectedShipTo(): void {
@@ -92,10 +78,6 @@ module insite.account {
         }
         save(): void {
             let valid = angular.element("#addressForm").validate().form();
-            if (this.notValidateCrossSiteScripting()) {
-                valid = false;
-                this.coreService.displayModal(angular.element("#invalidAddressErrorPopup"));
-            }
             if ($(`#ststate`).val() == "") {
                 $(`#ststateValidationMsg`).css('display', 'block');
                 valid = false;
@@ -302,36 +284,12 @@ module insite.account {
 
         protected UpdateCustomerBillTo(): void {
             this.HideSpinner();
-            
+            debugger;
             this.customerService.updateBillTo(this.billTo).then(
                 (billTo: BillToModel) => { this.updateBillToCompleted(billTo); },
                 (error: any) => { this.updateBillToFailed(error); });
         }
-        notValidateCrossSiteScripting(): boolean {
 
-            return (this.containsSpecialChars(this.billTo.firstName)
-                || this.containsSpecialChars(this.billTo.lastName)
-                || this.containsSpecialChars(this.billTo.address1)
-                || this.containsSpecialChars(this.billTo.address2)
-                || this.containsSpecialChars(this.billTo.city)
-                || this.containsSpecialChars(this.billTo.postalCode)
-                || this.containsSpecialChars(this.billTo.phone)
-                || this.containsSpecialChars(this.billTo.email)
-                || this.containsSpecialChars(this.shipTo.firstName)
-                || this.containsSpecialChars(this.shipTo.lastName)
-                || this.containsSpecialChars(this.shipTo.address1)
-                || this.containsSpecialChars(this.shipTo.address2)
-                || this.containsSpecialChars(this.shipTo.city)
-                || this.containsSpecialChars(this.shipTo.postalCode)
-                || this.containsSpecialChars(this.shipTo.phone)
-                || this.containsSpecialChars(this.shipTo.email)
-            );
-
-        }
-        containsSpecialChars(str) {
-            const specialChars = new RegExp(`[${this.vaidationSetting.specialCharecters}]`);
-            return specialChars.test(str);
-        }
     }
     angular
         .module("insite")

@@ -171,6 +171,42 @@
             }
         });
 
+       
+        $(document).on("keydown", ".validateCrossSiteScripting", event => {
+
+            let inputValid = false;
+            // ignore the shift keydown event, the actual key pressed with shift issues another event when it is pressed
+            if (event.keyCode === 16) {
+                return;
+            }
+            let spChars = /([®™©"'<>”“"‘'%;)(&+])+/;
+
+            // this works for qwerty and azerty keyboard layouts (azerty you have to hit the Shift key to press a number)
+            if (event.key !== undefined) {
+                const input = [event.currentTarget.value.slice(0, event.currentTarget.selectionStart), event.key, event.currentTarget.value.slice(event.currentTarget.selectionStart)].join("");
+               
+                const allowedNonNumericKeys = ["Delete", "Backspace", "Enter", "Tab", "ArrowRight", "ArrowLeft"];
+
+                if (allowedNonNumericKeys.indexOf(event.key) >= 0) {
+                    // let it happen, don't do anything
+                }
+                else if (!spChars.test(input)) {
+                     // let it happen, don't do anything
+                     inputValid = true;
+                }   else {
+                    event.preventDefault();
+                }
+            }         
+
+        });
+        $(".validateCrossSiteScripting").blur(function (event) {
+            const input = [event.target.value.slice(0, event.target.selectionStart), event.key, event.target.value.slice(event.target.selectionStart)].join("");          
+            var inputField = $(this);
+            var newInput = input.replace(/([®™©"'<>”“"‘'%;)(&+])+/g, '');          
+ 
+        }); 
+     
+        
         // Select text inside text box for all Quantity
         // Add this behavior to all text fields
         $("input:text.qty").focus(function () {

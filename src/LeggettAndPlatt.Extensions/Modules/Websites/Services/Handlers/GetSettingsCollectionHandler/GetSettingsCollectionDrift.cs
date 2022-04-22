@@ -52,7 +52,6 @@ namespace LeggettAndPlatt.Extensions.Modules.Websites.Services.Handlers.GetSetti
             result.SettingsCollection.Add("elavonSetting", SettingHelper.GetElavonSetting());
             result.SettingsCollection.Add("AbandonedCartSetting", SettingHelper.GetAbandonedCartSetting());
             result.SettingsCollection.Add("shippingDisplay", SettingHelper.GetShippingDisplay());
-            result.SettingsCollection.Add("validationSetting", SettingHelper.GetSpecialCharecters());
             //PRFT Custom code END
             return result;
         }

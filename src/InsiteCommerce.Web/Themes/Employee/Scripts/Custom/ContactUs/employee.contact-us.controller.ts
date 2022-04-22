@@ -4,38 +4,19 @@
     export class EmployeeContactUsController {
         submitted = false;
         $form: JQuery;
-        vaidationSetting: any;
-        formData:{
-            firstName: "",
-            lastName: "",
-            message: "",
-            topic: "",
-            emailAddress:""};
-        static $inject = ["$element", "$scope", "coreService","settingsService"];
+
+        static $inject = ["$element", "$scope"];
 
         constructor(
             protected $element: ng.IRootElementService,
-            protected $scope: ng.IScope,
-            protected coreService: core.ICoreService,
-            protected settingsService: core.ISettingsService) {
+            protected $scope: ng.IScope) {
         }
 
         $onInit(): void {
             this.$form = this.$element.find("form");
             this.$form.removeData("validator");
             this.$form.removeData("unobtrusiveValidation");
-            this.settingsService.getSettings().then(
-                (settingsCollection: core.SettingsCollection) => {
-                    
-                    this.getSettingsCompleted(settingsCollection);
-                },
-                (error: any) => { this.getSettingsFailed(error); });
             $.validator.unobtrusive.parse(this.$form);
-        }
-        protected getSettingsCompleted(settingsCollection: any): void {          
-            this.vaidationSetting = settingsCollection.validationSetting;
-        }
-        protected getSettingsFailed(error: any): void {
         }
 
         submit($event): boolean {
@@ -43,19 +24,19 @@
             if (!this.$form.valid()) {
                 return false;
             }
-            
+
+            //(this.$form as any).ajaxPost(() => {
+            //    this.submitted = true;
+            //    this.$scope.$apply();
+            //});
             var that = this;
 
-            this.formData = {
-                firstName: $('[name="FirstName"]').val(),
-                lastName: $('[name="LastName"]').val(),
-                message: $('[name="Message"]').val(),
-                topic: $('[name="Topic"]').val(),
-                emailAddress: $('[name="EmailAddress"]').val()
-            }
-            if (this.notValidateCrossSiteScripting()) {
-                this.coreService.displayModal(angular.element("#invalidAddressErrorPopup"));
-                return false;
+            var formData = {
+                'firstName': $('[name="FirstName"]').val(),
+                'lastName': $('[name="LastName"]').val(),
+                'message': $('[name="Message"]').val(),
+                'topic': $('[name="Topic"]').val(),
+                'emailAddress': $('[name="EmailAddress"]').val()
             }
 
             $.ajax({
@@ -66,30 +47,14 @@
                     xhr.setRequestHeader("RequestVerificationToken", $('.cf-form').attr('antiforgerytokencontent'));
                 },
 
-                data: this.formData,
+                data: formData,
                 success: function (data) {
-                    that.submitted = true;
-                    that.coreService.displayModal(angular.element("#requestSucessPopupPopup"));
+                    this.submitted = true;
                     that.$scope.$apply();
-                   
-                    
                 }
             });
 
             return false;
-        }
-        notValidateCrossSiteScripting(): boolean {
-
-            return (this.containsSpecialChars(this.formData.firstName)
-                || this.containsSpecialChars(this.formData.lastName)            
-                || this.containsSpecialChars(this.formData.message)
-                || this.containsSpecialChars(this.formData.topic)    
-            );
-
-        }
-        containsSpecialChars(str) {
-            const specialChars = new RegExp(`[${this.vaidationSetting.specialCharecters}]`);
-            return specialChars.test(str);
         }
     }
 
