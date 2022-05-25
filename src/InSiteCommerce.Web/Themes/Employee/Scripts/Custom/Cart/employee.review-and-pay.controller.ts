@@ -13,7 +13,8 @@
         elavonResponseCodes: string[];
         SentEmailEvalonPaymentFailuer: boolean;
         LogEvalonPaymentResponse: boolean;
-
+        elavon3DS2ErrorCodes: string[];
+        elavonAVSResponseCodes: string[];
         elavonSettings: any;
         ccTransactionSucceeded: boolean;
         ccElavonErrorMessage: string;
@@ -200,6 +201,8 @@
         protected getElavonSessionTokenCompleted(elavonDetails: ElavonSessionTokenModel, submitSuccessUri: string): void {
             this.elavonToken = elavonDetails.elavonToken;
             this.elavonResponseCodes = elavonDetails.elavonResponseCodes;
+            this.elavon3DS2ErrorCodes = elavonDetails.elavon3DS2ErrorCodes;
+            this.elavonAVSResponseCodes = elavonDetails.elavonAVSResponseCodes;
             this.elavonAcceptAVSResponseCode = elavonDetails.elavonAcceptAVSResponseCode;
             this.elavonAcceptCVVResponseCode = elavonDetails.elavonAcceptCVVResponseCode;
 
@@ -216,7 +219,7 @@
                 }
                 this.spinnerService.hide();
                 this.submitting = false;
-                this.submitErrorMessage = angular.element("#elavonTokenErrorMessage").val();
+                this.submitErrorMessage = errorLog.elavonResponseFor + " : " + errorLog.elavonResponse;
 
                 this.placeOrderAttempt = Number(this.$localStorage.get("placeOrderAttempt"));
                 if (this.placeOrderAttempt == 3 || this.placeOrderAttempt > 3) {
@@ -300,7 +303,7 @@
                     }
                     that.submitting = false;
                     that.submitErrorMessage = angular.element("#elavonPaymentErrorMessage").val();
-
+                    
                     that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
 
                     if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
@@ -329,6 +332,14 @@
                     if (that.LogEvalonPaymentResponse || that.SentEmailEvalonPaymentFailuer || errorLog.saveElavonResponse) {
                         that.elavonService.elavonErrorLog(errorLog);
                     }
+                    var elavonAVSResponseCodes = that.elavonAVSResponseCodes;
+                    var avsErrorCode = response.ssl_avs_response;
+                    if (elavonAVSResponseCodes != undefined && elavonAVSResponseCodes[avsErrorCode] != undefined && elavonAVSResponseCodes[avsErrorCode] != "") {
+                        that.submitErrorMessage = elavonAVSResponseCodes[avsErrorCode];
+                    }
+                    else {
+                        that.submitErrorMessage = angular.element("#elavonTokenErrorMessage").val();
+                    }
                     that.submitting = false;
 
                     that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
@@ -344,7 +355,14 @@
                 onApproval: function (response) {
                     var isValidAvsResponse = that.isValidElavonAVSResponse(response);
                     if (!isValidAvsResponse) {
-                        that.submitErrorMessage = angular.element("#elavonAvsErrorMessage").val();
+                        var elavonAVSResponseCodes = that.elavonAVSResponseCodes;
+                        var avsErrorCode = response.ssl_avs_response;
+                        if (elavonAVSResponseCodes != undefined && elavonAVSResponseCodes[avsErrorCode] != undefined && elavonAVSResponseCodes[avsErrorCode] != "") {
+                            that.submitErrorMessage = elavonAVSResponseCodes[avsErrorCode];
+                        }
+                        else {
+                            that.submitErrorMessage = angular.element("#elavonAvsErrorMessage").val();
+                        }
                         that.submitting = false;
                     }
 
@@ -411,7 +429,7 @@
                     }
                     that.submitting = false;
                     that.submitErrorMessage = angular.element("#elavonPaymentErrorMessage").val();
-
+                    
                     that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
 
                     if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
@@ -455,7 +473,14 @@
                 onApproval: function (response) {
                     var isValidAvsResponse = that.isValidElavonAVSResponse(response);
                     if (!isValidAvsResponse) {
-                        that.submitErrorMessage = angular.element("#elavonAvsErrorMessage").val();
+                        var elavonAVSResponseCodes = that.elavonAVSResponseCodes;
+                        var avsErrorCode = response.ssl_avs_response;
+                        if (elavonAVSResponseCodes != undefined && elavonAVSResponseCodes[avsErrorCode] != undefined && elavonAVSResponseCodes[avsErrorCode] != "") {
+                            that.submitErrorMessage = elavonAVSResponseCodes[avsErrorCode];
+                        }
+                        else {
+                            that.submitErrorMessage = angular.element("#elavonAvsErrorMessage").val();
+                        }
                         that.submitting = false;
                     }
 
@@ -530,7 +555,7 @@
             errorLog.customerNumber = this.cart.billTo.customerNumber;
 
             var request = {
-                purchaseAmount: this.cart.orderGrandTotal * 100,
+                purchaseAmount: Math.round(this.cart.orderGrandTotal * 100),
                 purchaseCurrency: "840",
                 purchaseExponent: "2",
                 acctNumber: this.cart.paymentOptions.creditCard.cardNumber,
@@ -543,7 +568,7 @@
                 threeDSRequestorChallengeInd: "04"
             };
            
-          
+
             sdk.web3dsFlow(request).then(function success(response) {
            
                 elavon3DS2Model.dsTransID = response.dsTransID;
@@ -564,9 +589,7 @@
                     }
                     that.submitting = false;
                     that.submitErrorMessage = JSON.stringify(response.message);
-
                     that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
-
                     if (that.placeOrderAttempt == 3 || that.placeOrderAttempt > 3) {
                         that.$localStorage.remove("placeOrderAttempt");
                         that.coreService.redirectToPath("/cart");
@@ -574,12 +597,8 @@
                     }
                     that.placeOrderAttempt++;
                     that.$localStorage.set("placeOrderAttempt", that.placeOrderAttempt.toString());
-
                     return true;
                 }
-
-
-               
             }, function error(response) {
                
                     elavon3DS2Model.eci = "7";
@@ -592,7 +611,15 @@
                         that.elavonService.elavonErrorLog(errorLog)
                     }
                     that.submitting = false;
-                    that.submitErrorMessage = angular.element("#elavonTokenErrorMessage").val();
+
+                    var elavon3DS2ErrorCodes = that.elavon3DS2ErrorCodes;
+                    var elavonApiErrorCode = JSON.parse(JSON.stringify(response)).error.errorCode;
+                    if (elavon3DS2ErrorCodes != undefined && elavon3DS2ErrorCodes[elavonApiErrorCode] != undefined && elavon3DS2ErrorCodes[elavonApiErrorCode] != "") {
+                        that.submitErrorMessage = elavon3DS2ErrorCodes[elavonApiErrorCode];
+                    }
+                    else {
+                        that.submitErrorMessage = angular.element("#elavonTokenErrorMessage").val();
+                    }
 
                     that.placeOrderAttempt = Number(that.$localStorage.get("placeOrderAttempt"));
 

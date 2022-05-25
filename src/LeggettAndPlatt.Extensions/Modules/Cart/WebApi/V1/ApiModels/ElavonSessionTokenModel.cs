@@ -18,7 +18,11 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.ApiModels
 
         public string ElavonAcceptCVVResponseCode { get; set; }
 
-        public string ElavonTransactionType { get; set; }     
+        public string ElavonTransactionType { get; set; }
+
+        public Dictionary<string, string> Elavon3DS2ErrorCodes { get; set; }
+        public Dictionary<string, string> ElavonAVSResponseCodes { get; set; }
+
 
     }
 }

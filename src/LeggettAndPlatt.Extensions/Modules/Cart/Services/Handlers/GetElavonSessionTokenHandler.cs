@@ -152,6 +152,15 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers
             var systemList = unitOfWork.GetTypedRepository<ISystemListRepository>().GetActiveSystemListValues("ElavonErrorMessageList").Select(s => new { s.Name, s.Description }).ToList();
             var dictionary = systemList.ToDictionary(x => x.Name.Replace(" ", "_").ToLower(), x => x.Description);
             result.ElavonResponseCodes = dictionary;
+
+            var elavon3DS2ErrorCodesSystemList = unitOfWork.GetTypedRepository<ISystemListRepository>().GetActiveSystemListValues("Elavon3DS2ErrorCodes").Select(s => new { s.Name, s.Description }).ToList();
+            var elavon3DS2ErrorCodesDictionary = elavon3DS2ErrorCodesSystemList.ToDictionary(x => x.Name.Replace(" ", "_").ToLower(), x => x.Description);
+            result.Elavon3DS2ErrorCodes = elavon3DS2ErrorCodesDictionary;
+
+            var elavonAVSResponseCodesSystemList = unitOfWork.GetTypedRepository<ISystemListRepository>().GetActiveSystemListValues("ElavonAVSResponseCodes").Select(s => new { s.Name, s.Description }).ToList();
+            var elavonAVSResponseCodesDictionary = elavonAVSResponseCodesSystemList.ToDictionary(x => x.Name.Replace(" ", "_").ToLower(), x => x.Description);
+            result.ElavonAVSResponseCodes = elavonAVSResponseCodesDictionary;
+
             this.NextHandler.Execute(unitOfWork, parameter, result);
         }
     }
