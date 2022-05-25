@@ -448,6 +448,7 @@
     <Content Include="DatabaseScripts\2019.24.01.3.Delete_Elavon_ElavonEnableLevel3Data_Setting.sql" />
     <Content Include="DatabaseScripts\2019.30.01.Add_Or_Update_Employee_EmployeeWebsiteName_Setting_Value.sql" />
     <EmbeddedResource Include="DatabaseScripts\2022.25.03.Add_URL_Redirects_for_Unused_DefaultPages.sql" />
+    <EmbeddedResource Include="DatabaseScripts\2022.25.05.Add_SystemList_Elavon_AVS_Error_Codes.sql" />
     <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.03.12.1.Insert_Update_SystemSetting_PIM_VariantAttributeName.sql" />
     <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.04.12.1.Create_PIM_Temp_Tables.sql" />
     <Content Include="DatabaseScripts\PIMIntegrationScripts\2018.07.12.1.Create_PIM_Data_Import_Jobs.sql" />

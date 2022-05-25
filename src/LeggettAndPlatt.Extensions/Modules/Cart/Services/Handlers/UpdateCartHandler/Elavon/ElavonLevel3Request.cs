@@ -100,7 +100,8 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
         [XmlElement(ElementName = "ssl_level3_indicator")]
         public string Ssl_level3_indicator { get; set; }
 
-       
+        [XmlElement(ElementName = "ssl_result_message")]
+        public string ssl_result_message { get; set; }
 
         [XmlElement(ElementName = "errorCode")]
         public string ErrorCode { get; set; }

@@ -31,6 +31,8 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.WebApi.V1.Mappers
             result.ElavonAcceptAVSResponseCode = serviceResult.ElavonAcceptAVSResponseCode;
             result.ElavonAcceptCVVResponseCode = serviceResult.ElavonAcceptCVVResponseCode;
             result.ElavonTransactionType = serviceResult.ElavonTransactionType;
+            result.Elavon3DS2ErrorCodes = serviceResult.Elavon3DS2ErrorCodes;
+            result.ElavonAVSResponseCodes = serviceResult.ElavonAVSResponseCodes;
             return result;
         }
     }

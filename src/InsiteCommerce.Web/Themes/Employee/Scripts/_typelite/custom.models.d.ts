@@ -15,6 +15,8 @@
         elavonAcceptAVSResponseCode: string;
         elavonAcceptCVVResponseCode: string;
         elavonTransactionType: string;
+        elavon3DS2ErrorCodes: string[];
+        elavonAVSResponseCodes: string[];
     }
 
     interface Elavon3DS2Model extends Insite.Core.WebApi.BaseModel {

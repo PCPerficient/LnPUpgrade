@@ -79,7 +79,8 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                     if (string.IsNullOrEmpty(isTaxTBD) || isTaxTBD.Equals("false", StringComparison.InvariantCultureIgnoreCase))
                     {
                         string level3Response = PostElavonLevel3Data(result.Properties["ElavonRespMessage"], cart, unitOfWork);
-                        bool isValidResponse = CheckElavonResponseIsValid(level3Response);
+                        string ssl_result_message = string.Empty;
+                        bool isValidResponse = CheckElavonResponseIsValid(level3Response, out ssl_result_message);
                         if (isValidResponse)
                         {
                             result.Properties.Remove("ElavonRespMessage");
@@ -89,7 +90,7 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
                         else
                         {
                             result.Properties.Add("ElavonResponseType", "GETTOKEN");
-                            return this.CreateErrorServiceResult<UpdateCartResult>(result, SubCode.CreditCardFailed, CustomMessageProvider.Current.ElavonLevel3APiErrorMessage);
+                            return this.CreateErrorServiceResult<UpdateCartResult>(result, SubCode.CreditCardFailed, ssl_result_message);
                         }
                     }
                     else
@@ -142,10 +143,11 @@ namespace LeggettAndPlatt.Extensions.Modules.Cart.Services.Handlers.UpdateCartHa
 
         
 
-        private bool CheckElavonResponseIsValid(string elavonResponse)
+        private bool CheckElavonResponseIsValid(string elavonResponse, out string ssl_result_message)
         {
             bool result = false;
             Txn txn = Deserialize<Txn>(elavonResponse);
+            ssl_result_message = txn.ssl_result_message;
             if (txn != null && string.IsNullOrEmpty(txn.ErrorCode) && !string.IsNullOrEmpty(txn.Ssl_Result) && txn.Ssl_Result.Equals("0") && !string.IsNullOrWhiteSpace(txn.Ssl_Approval_Code))
             {
                 result = true;
