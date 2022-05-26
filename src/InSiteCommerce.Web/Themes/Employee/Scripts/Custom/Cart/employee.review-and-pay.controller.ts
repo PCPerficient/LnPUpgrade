@@ -333,7 +333,7 @@
                         that.elavonService.elavonErrorLog(errorLog);
                     }
                     var elavonAVSResponseCodes = that.elavonAVSResponseCodes;
-                    var avsErrorCode = response.ssl_avs_response;
+                    var avsErrorCode = (response.ssl_avs_response).toLowerCase();
                     if (elavonAVSResponseCodes != undefined && elavonAVSResponseCodes[avsErrorCode] != undefined && elavonAVSResponseCodes[avsErrorCode] != "") {
                         that.submitErrorMessage = elavonAVSResponseCodes[avsErrorCode];
                     }
@@ -356,7 +356,7 @@
                     var isValidAvsResponse = that.isValidElavonAVSResponse(response);
                     if (!isValidAvsResponse) {
                         var elavonAVSResponseCodes = that.elavonAVSResponseCodes;
-                        var avsErrorCode = response.ssl_avs_response;
+                        var avsErrorCode = (response.ssl_avs_response).toLowerCase();
                         if (elavonAVSResponseCodes != undefined && elavonAVSResponseCodes[avsErrorCode] != undefined && elavonAVSResponseCodes[avsErrorCode] != "") {
                             that.submitErrorMessage = elavonAVSResponseCodes[avsErrorCode];
                         }
@@ -474,7 +474,7 @@
                     var isValidAvsResponse = that.isValidElavonAVSResponse(response);
                     if (!isValidAvsResponse) {
                         var elavonAVSResponseCodes = that.elavonAVSResponseCodes;
-                        var avsErrorCode = response.ssl_avs_response;
+                        var avsErrorCode = (response.ssl_avs_response).toLowerCase();
                         if (elavonAVSResponseCodes != undefined && elavonAVSResponseCodes[avsErrorCode] != undefined && elavonAVSResponseCodes[avsErrorCode] != "") {
                             that.submitErrorMessage = elavonAVSResponseCodes[avsErrorCode];
                         }
